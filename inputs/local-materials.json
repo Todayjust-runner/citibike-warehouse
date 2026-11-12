@@ -1,0 +1,97 @@
+{
+  "checked_on": "2026-11-12",
+  "timezone": "Asia/Shanghai",
+  "notes": "Hashes identify local course materials only; they are not hashes of missing A data attachments.",
+  "materials": [
+    {
+      "id": "A-01",
+      "path_from_repo": "../共享单车_A部分立项与需求分析v1.0.pdf",
+      "bytes": 196455,
+      "sha256": "83f438b53c67d68273cfe122e32836ccd3d7ceb33a3155316c7b7d74e4e7dada",
+      "role": "primary_requirement",
+      "read_scope": "全文 1-9 页，渲染抽查 1、2、9 页",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "COURSE-01",
+      "path_from_repo": "../期末大作业要求.pdf",
+      "bytes": 177172,
+      "sha256": "7151589699bd6e70445bd42d007afa161abed1d83aeb19fe83a3da62109c8c7f",
+      "role": "course_authority",
+      "read_scope": "全文 1-2 页；渲染检查两页",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "COURSE-02",
+      "path_from_repo": "../期末大作业文档模版.docx",
+      "bytes": 18730,
+      "sha256": "68cac96bdc9813a0ccc8cebb51bede29d2e5510161c6d69fe7718467f4ce924d",
+      "role": "report_template",
+      "read_scope": "读取段落及分工表",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "COURSE-03",
+      "path_from_repo": "../答辩PPT模版.txt",
+      "bytes": 210,
+      "sha256": "1c9d3fbf44ce3f3a0e0272e8df20e1cc278a0d7e3425b2068fcbaec6ef652e90",
+      "role": "presentation_outline",
+      "read_scope": "全文",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "REF-01",
+      "path_from_repo": "../参考书/数仓期末大作业_参考方法与实施指南.md",
+      "bytes": 19524,
+      "sha256": "ebda2d415297160490e993a27ced6a373d803e94cc849c09547030a88e49fb86",
+      "role": "local_guidance_not_course_rule",
+      "read_scope": "全文",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "REF-02",
+      "path_from_repo": "../参考书/The Data Warehouse Toolkit, 3rd Edition - Ralph Kimball.pdf",
+      "bytes": 16029102,
+      "sha256": "084d9daccbcd671e7b181d2a52c9d8a740575c9ddcde1122df4566611e47e642",
+      "role": "reference_book",
+      "read_scope": "仅核实存在及哈希；未通读",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "REF-03",
+      "path_from_repo": "../参考书/大数据之路：阿里巴巴大数据实践.pdf",
+      "bytes": 102279626,
+      "sha256": "7bebcab38ba6aeb0640829e5bae4b8d97ee506d63750168c5e656fa1456f7a32",
+      "role": "reference_book",
+      "read_scope": "仅核实存在及哈希；未通读",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "REF-04",
+      "path_from_repo": "../学长作业参考/大作业文档.pdf",
+      "bytes": 2284063,
+      "sha256": "68af927e8a8539861770852c9ae1c0beaa12c4863d3b73eff0006b4619fa701e",
+      "role": "example_not_course_rule",
+      "read_scope": "抽读 1-2 页标题、目录及背景；不继承技术栈或个人信息",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "REF-05",
+      "path_from_repo": "../学长作业参考/大作业演示PPT 图片压坏了谅解（.pdf",
+      "bytes": 2087282,
+      "sha256": "c14ceec5bb0abca62801b65cef9a426470775e852970a06f8faab1a18947d302",
+      "role": "example_not_course_rule",
+      "read_scope": "抽读 1-2 页标题及目录",
+      "preservation": "original_in_place_not_copied_to_repository"
+    },
+    {
+      "id": "COURSE-04",
+      "path_from_repo": "../../ch2 数仓模型与建立过程.pdf",
+      "bytes": 5167680,
+      "sha256": "a23d52c8337c1bd099f92d85c46b20ca6047e9c5aee78a566d6afa5180597521",
+      "role": "course_model_reference",
+      "read_scope": "抽读 PDF 9、15、16 页：三级模型及信息包图",
+      "preservation": "original_in_place_not_copied_to_repository"
+    }
+  ]
+}

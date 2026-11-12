@@ -1,0 +1,83 @@
+{
+  "evidence_status": "a_claimed_not_reproduced",
+  "source": "A v1.0 PDF 2026-11-06, PDF pages 2, 3, 8; see local-materials.json A-01",
+  "transcribed_on": "2026-11-12",
+  "warning": "These are claims transcribed from the PDF, not outputs of a reproduced data pipeline or verified source snapshot. Never report them as passed tests.",
+  "window": {
+    "start_inclusive": "2024-07-01T00:00:00",
+    "end_exclusive": "2024-10-01T00:00:00",
+    "time_semantics": "source timestamps without offset; no timezone conversion"
+  },
+  "claimed_source_rows": {
+    "202406": 111115,
+    "202407": 112443,
+    "202408": 106451,
+    "202409": 115558,
+    "202410": 118307,
+    "main_month_files_total": 334452,
+    "all_five_files_total": 563874
+  },
+  "claimed_quality_five_files": {
+    "duplicate_ride_ids": 0,
+    "conflicting_ride_ids": 0,
+    "duration_over_24h": 206,
+    "duration_under_60s_or_nonpositive": 0,
+    "missing_start_station_id": 3,
+    "missing_end_station_id": 1877,
+    "invalid_or_missing_end_coordinates": 197
+  },
+  "claimed_default_window_metrics": {
+    "M01_ride_count": 334332,
+    "M02_avg_duration_minutes_display": "10.82",
+    "M02_duration_us": "216990044333000",
+    "M03_member_count": 242927,
+    "M03_claimed_denominator": 334332,
+    "M03_member_share_display": "72.66%",
+    "M04_departures_including_unknown": 334332,
+    "M05_arrivals_including_unknown": 334331,
+    "M06_net_outflow": 1
+  },
+  "claimed_departure_months": [
+    {
+      "month": "2024-07",
+      "ride_count": 112385,
+      "avg_duration_minutes_display": "11.37",
+      "member_share_display": "71.27%"
+    },
+    {
+      "month": "2024-08",
+      "ride_count": 106420,
+      "avg_duration_minutes_display": "11.03",
+      "member_share_display": "72.89%"
+    },
+    {
+      "month": "2024-09",
+      "ride_count": 115527,
+      "avg_duration_minutes_display": "10.08",
+      "member_share_display": "73.81%"
+    }
+  ],
+  "claimed_boundary_valid_rides": {
+    "june_start_july_end": 10,
+    "september_start_october_end": 11
+  },
+  "claimed_station_example": {
+    "station_id": "HB102",
+    "departures": 17171,
+    "arrivals": 16708,
+    "net_outflow": 463
+  },
+  "claimed_unknown_end_station_arrivals_in_window": 1026,
+  "missing_reproduction_materials": [
+    "all five original ZIPs and every CSV member",
+    "数据核验结果.json",
+    "prepare_bike_a_evidence.py and dependencies",
+    "verify_bike_a_source.py and logs",
+    "full monthly and station baseline CSVs"
+  ],
+  "acceptance_notes": [
+    "Reproduce exact counts and duration_us before checking rounded display metrics.",
+    "M03 denominator is known member/casual rides; do not assume total rides equals known type count without verification.",
+    "Quality counts over all five source files and window-specific metrics have different scopes."
+  ]
+}

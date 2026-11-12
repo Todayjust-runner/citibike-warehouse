@@ -1,0 +1,73 @@
+{
+  "checked_on": "2026-11-12",
+  "timezone": "Asia/Shanghai",
+  "objects": [
+    {
+      "month": "202406",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202406-citibike-tripdata.csv.zip",
+      "http_status": 200,
+      "content_length": "4413867",
+      "last_modified": "Mon, 08 Jul 2024 18:18:21 GMT",
+      "etag": "\"2d719fe85e9ddfaaad85d9d5ed84d2fa\"",
+      "check_scope": "remote_metadata_only_not_A_snapshot"
+    },
+    {
+      "month": "202407",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202407-citibike-tripdata.csv.zip",
+      "http_status": 200,
+      "content_length": "4198201",
+      "last_modified": "Thu, 08 Aug 2024 15:40:05 GMT",
+      "etag": "\"a7238085605ab1983a7d7b34a88d4cfc\"",
+      "check_scope": "remote_metadata_only_not_A_snapshot"
+    },
+    {
+      "month": "202408",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202408-citibike-tripdata.csv.zip",
+      "http_status": 200,
+      "content_length": "3530848",
+      "last_modified": "Thu, 05 Sep 2024 00:48:02 GMT",
+      "etag": "\"c7278f83fe588737bf692dad566cfc7f\"",
+      "check_scope": "remote_metadata_only_not_A_snapshot"
+    },
+    {
+      "month": "202409",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202409-citibike-tripdata.csv.zip",
+      "http_status": 200,
+      "content_length": "4140046",
+      "last_modified": "Tue, 08 Oct 2024 00:36:38 GMT",
+      "etag": "\"f69acbe890d87d3f2318ec896c9b72ac\"",
+      "check_scope": "remote_metadata_only_not_A_snapshot"
+    },
+    {
+      "month": "202410",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202410-citibike-tripdata.csv.zip",
+      "http_status": 200,
+      "content_length": "4028203",
+      "last_modified": "Mon, 04 Nov 2024 19:48:14 GMT",
+      "etag": "\"3bddc389be440bba6955a0fd87c0ee47\"",
+      "check_scope": "remote_metadata_only_not_A_snapshot"
+    }
+  ],
+  "partial_header_check": {
+    "url": "https://s3.amazonaws.com/tripdata/JC-202407-citibike-tripdata.csv.zip",
+    "http_status": 206,
+    "bytes_read": 65536,
+    "zip_member": "JC-202407-citibike-tripdata.csv",
+    "csv_header": [
+      "ride_id",
+      "rideable_type",
+      "started_at",
+      "ended_at",
+      "start_station_name",
+      "start_station_id",
+      "end_station_name",
+      "end_station_id",
+      "start_lat",
+      "start_lng",
+      "end_lat",
+      "end_lng",
+      "member_casual"
+    ],
+    "scope": "Only first 65536 ZIP bytes read; no complete archive, SHA-256, row counts, month attribution or A baselines verified."
+  }
+}
