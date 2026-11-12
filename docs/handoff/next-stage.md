@@ -2,6 +2,8 @@
 
 本阶段工程根目录已建立，课程原件仍在父目录原位。先读 [STATUS](../../STATUS.md)、[A 审查](../review/a-delivery-review.md)、[输入清单](../../inputs/README.md)、[决定记录](../decisions/README.md) 和 [交接契约](../contracts/b-c-d-contract.md)。不要再次创建同名工程。
 
+工程基础已发布到私有仓库 [Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，本地 `main` 跟踪 `origin/main`；接续时先检查本地改动与远程差异，不重新初始化仓库。
+
 ## 接续步骤与具体交付
 
 | 顺序 | 负责人 | 动作与产物 | 完成门槛 |

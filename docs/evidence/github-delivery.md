@@ -1,13 +1,19 @@
 # GitHub 交付记录
 
-目标：当前连接账户 `klzyd`（GitHub ID `184755525`）的 `citibike-warehouse`，必须为 private。用户已授权在待提交文件检查后创建并提交工程基础。
+当前目标：[Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，GitHub 仓库 ID `1455379867`，必须为 private。用户在后续消息提供该地址并确认已创建，授权用此目标完成工程基础发布；取代最初的 klzyd 目标。
 
-2026-11-12 核验：
+## 2026-11-12 实际发布核验
 
-- GitHub 连接器 `get_user_login` 返回 `klzyd` / `184755525`；公共 GitHub 用户 API 与之吻合。
-- 连接器读取 `klzyd/citibike-warehouse` 返回 404。此结果不足以单独证明不存在，也可能是连接器未获该仓库权限。
-- 同名仓库检索未能进一步确认用途；如果后续发现已存在，需先读取描述、README、分支与历史，确认是本项目，再决定接续，不能覆盖。
-- 当前连接器提供文件/Git 对象提交能力，但未暴露创建仓库工具。浏览器核验在创建操作前因无法可靠确认 Windows 当前 URL 被工具停止，未观察到仓库创建成功。
-- 本机 Git Credential Manager 列出的账户为 `Todayjust-runner`（GitHub ID `241897350`），与 `klzyd` 不同；未使用该账户创建目标仓库或切换所有者，未读取或输出其令牌。
+- 连接器读到目标描述为“数据仓库期末大作业”，默认分支 `main`，初始为 public、size=0；连接器对它只有读取权限。
+- 使用本机已保存的 Git 认证调用 GitHub API `/user`，确认账户为 `Todayjust-runner` / `241897350`；该账户对目标具有 admin/push 权限。认证信息仅在进程内用于请求，未输出或写入项目文件、远程 URL。
+- 上传前读取仓库分支与内容：分支为空，内容接口返回 404；没有 README 或既有提交。结合用户明确提供的地址与描述，确认这是本项目新建空仓库，不存在需接续的其他工程。
+- 按用户原先的私有要求，将 `private` 设为 `true`；随后再次读取，确认 `private=true`、`visibility=private`，之后才上传工程。
+- 本地 `origin` 为 `https://github.com/Todayjust-runner/citibike-warehouse.git`，`main` 跟踪 `origin/main`。首次基础提交 `0fca37c8435e9fe705911c0edc1e5e453649d44f` 已成功推送；保留原提交，不重写历史。
+- 本次后续记录提交使用仓库级 `Todayjust-runner` 及其 GitHub noreply 邮箱；未更改全局 Git 身份。Git 原代理配置失效，发布命令使用与当前会话一致的临时代理参数；未更改全局代理或关闭 TLS 验证。
+- 发布仅涉及经过检查的 28 个工程文本文件，未上传课程原件、实际骑行数据、数据库备份或凭据。下一阶段和证据边界保持原约定。
 
-**状态：本地工程可交付；远程仓库创建与上传待完成。** 当前不宣称存在私有远程或已推送。若账户持有人在 `klzyd` 下创建目标 private 仓库，或为当前连接提供可访问的已存在同项目仓库，可由连接器提交工程文件后再核对远程提交、private 属性及本地一致性。此项需要外部账户状态变化。
+**状态：私有仓库已有工程基础提交，原远程阻塞已解决。** 本记录随发布说明更新；最新提交号可在 `git log -1 --oneline` 和仓库 `main` 查看。最终同步需核对本地 HEAD、远程 main 和完整文件树相同，工作区干净。
+
+## 初始阻塞的历史
+
+最初连接账户为 `klzyd` / `184755525`，其同名仓库读取返回 404；连接器没有建仓接口，浏览器因无法可靠识别当前 Windows URL 停止。本机另有 Todayjust-runner 账户，当时未获用户指定，因此未擅自切换。用户后续明确给出当前仓库后，依据新授权完成上述发布，详见 ADR-013/014。
