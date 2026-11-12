@@ -1,0 +1,3987 @@
+{
+  "physical_version": "B2-1.0",
+  "logical_version": "1.0",
+  "schemas": [
+    {
+      "name": "ads"
+    },
+    {
+      "name": "dim"
+    },
+    {
+      "name": "dwd"
+    },
+    {
+      "name": "dws"
+    },
+    {
+      "name": "meta"
+    },
+    {
+      "name": "ods"
+    }
+  ],
+  "tables": [
+    {
+      "name": "meta.source_member",
+      "columns": [
+        {
+          "name": "source_member_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "zip_sha256",
+          "sql_type": "char(64)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "zip_url",
+          "sql_type": "nvarchar(2048)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "zip_bytes",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "zip_month_label",
+          "sql_type": "char(6)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "zip_csv_member_count",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "archive_inventory_verified",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_path",
+          "sql_type": "nvarchar(512)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_path_identity",
+          "sql_type": "varbinary(1024)",
+          "nullable": false,
+          "computed": true,
+          "identity": false,
+          "definition": "CONVERT(varbinary(1024),[member_path])"
+        },
+        {
+          "name": "csv_sha256",
+          "sql_type": "char(64)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "csv_header",
+          "sql_type": "nvarchar(max)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "csv_data_record_count",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "acquired_at_utc",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "source_member_id"
+      ],
+      "unique_keys": [
+        [
+          "zip_sha256",
+          "member_path_identity"
+        ]
+      ]
+    },
+    {
+      "name": "meta.load_run",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "data_scope",
+          "sql_type": "nvarchar(64)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "input_set_sha256",
+          "sql_type": "char(64)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "model_version",
+          "sql_type": "varchar(32)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "metric_rule_version",
+          "sql_type": "varchar(32)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "processing_policy_version",
+          "sql_type": "varchar(32)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "code_revision",
+          "sql_type": "nvarchar(128)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "status",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_current",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "started_at_utc",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "finished_at_utc",
+          "sql_type": "datetime2(7)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id"
+      ],
+      "unique_keys": []
+    },
+    {
+      "name": "meta.run_source",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "source_member_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "read_record_count",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "read_status",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "source_member_id"
+      ],
+      "unique_keys": []
+    },
+    {
+      "name": "ods.trip_raw",
+      "columns": [
+        {
+          "name": "source_row_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "source_member_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "csv_record_number",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "field_count",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "raw_values",
+          "sql_type": "nvarchar(max)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "ride_id_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "rideable_type_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "started_at_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "ended_at_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_station_name_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_station_id_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_station_name_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_station_id_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_lat_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_lng_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_lat_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_lng_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_casual_raw",
+          "sql_type": "nvarchar(max)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "source_row_id"
+      ],
+      "unique_keys": [
+        [
+          "source_member_id",
+          "csv_record_number"
+        ]
+      ]
+    },
+    {
+      "name": "meta.row_disposition",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "source_row_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "outcome",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "primary_reason",
+          "sql_type": "varchar(32)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "trip_key",
+          "sql_type": "bigint",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "representative_source_row_id",
+          "sql_type": "bigint",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "warning_codes",
+          "sql_type": "nvarchar(max)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "source_row_id"
+      ],
+      "unique_keys": []
+    },
+    {
+      "name": "meta.coverage",
+      "columns": [
+        {
+          "name": "coverage_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "time_role",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "coverage_start",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "coverage_end_exclusive",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "coverage_status",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "proof_ref",
+          "sql_type": "nvarchar(2048)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "coverage_id"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "time_role",
+          "coverage_start"
+        ]
+      ]
+    },
+    {
+      "name": "dim.date",
+      "columns": [
+        {
+          "name": "date_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "calendar_date",
+          "sql_type": "date",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "calendar_year",
+          "sql_type": "smallint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "calendar_quarter",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "calendar_month",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "year_month",
+          "sql_type": "char(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "day_of_month",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "iso_weekday",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "weekday_name",
+          "sql_type": "nvarchar(8)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "date_key"
+      ],
+      "unique_keys": [
+        [
+          "calendar_date"
+        ]
+      ]
+    },
+    {
+      "name": "dim.hour",
+      "columns": [
+        {
+          "name": "hour_key",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "hour_label",
+          "sql_type": "varchar(5)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "hour_key"
+      ],
+      "unique_keys": []
+    },
+    {
+      "name": "dim.station",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "station_key",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "station_id",
+          "sql_type": "nvarchar(200)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "station_id_identity",
+          "sql_type": "varbinary(400)",
+          "nullable": true,
+          "computed": true,
+          "identity": false,
+          "definition": "CONVERT(varbinary(400),[station_id])"
+        },
+        {
+          "name": "station_name",
+          "sql_type": "nvarchar(512)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_unknown",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "name_is_fallback",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "name_source_row_id",
+          "sql_type": "bigint",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "reference_lat",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "reference_lng",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "coordinate_source_row_id",
+          "sql_type": "bigint",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "coordinate_role",
+          "sql_type": "varchar(20)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "station_key"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "station_id_identity"
+        ]
+      ]
+    },
+    {
+      "name": "dim.bike_type",
+      "columns": [
+        {
+          "name": "bike_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "bike_type_code",
+          "sql_type": "nvarchar(200)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "bike_type_identity",
+          "sql_type": "varbinary(400)",
+          "nullable": true,
+          "computed": true,
+          "identity": false,
+          "definition": "CONVERT(varbinary(400),[bike_type_code])"
+        },
+        {
+          "name": "bike_type_label",
+          "sql_type": "nvarchar(256)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_unknown",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_recognized",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "bike_type_key"
+      ],
+      "unique_keys": [
+        [
+          "bike_type_identity"
+        ]
+      ]
+    },
+    {
+      "name": "dim.member_type",
+      "columns": [
+        {
+          "name": "member_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "member_type_code",
+          "sql_type": "nvarchar(200)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_type_identity",
+          "sql_type": "varbinary(400)",
+          "nullable": true,
+          "computed": true,
+          "identity": false,
+          "definition": "CONVERT(varbinary(400),[member_type_code])"
+        },
+        {
+          "name": "member_type_label",
+          "sql_type": "nvarchar(256)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_unknown",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "is_recognized",
+          "sql_type": "bit",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "member_type_key"
+      ],
+      "unique_keys": [
+        [
+          "member_type_identity"
+        ]
+      ]
+    },
+    {
+      "name": "dwd.fact_trip",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "trip_key",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": true,
+          "definition": null
+        },
+        {
+          "name": "ride_id",
+          "sql_type": "nvarchar(200)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "ride_id_identity",
+          "sql_type": "varbinary(400)",
+          "nullable": false,
+          "computed": true,
+          "identity": false,
+          "definition": "CONVERT(varbinary(400),[ride_id])"
+        },
+        {
+          "name": "representative_source_row_id",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "started_at",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "ended_at",
+          "sql_type": "datetime2(7)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "duration_us",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "trip_count",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_date_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_hour_key",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_date_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_hour_key",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_station_key",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_station_key",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "bike_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_lat",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_lng",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_lat",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_lng",
+          "sql_type": "decimal(20,15)",
+          "nullable": true,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_coordinate_status",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "end_coordinate_status",
+          "sql_type": "varchar(20)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "trip_key"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "ride_id_identity"
+        ]
+      ]
+    },
+    {
+      "name": "dws.trip_hourly",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_date_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "start_hour_key",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "bike_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "member_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "ride_count",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "duration_us",
+          "sql_type": "decimal(38,0)",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "start_date_key",
+        "start_hour_key",
+        "bike_type_key",
+        "member_type_key"
+      ],
+      "unique_keys": []
+    },
+    {
+      "name": "dws.station_hourly",
+      "columns": [
+        {
+          "name": "run_id",
+          "sql_type": "uniqueidentifier",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "event_date_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "event_hour_key",
+          "sql_type": "tinyint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "station_key",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "bike_type_key",
+          "sql_type": "int",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "departures",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        },
+        {
+          "name": "arrivals",
+          "sql_type": "bigint",
+          "nullable": false,
+          "computed": false,
+          "identity": false,
+          "definition": null
+        }
+      ],
+      "primary_key": [
+        "run_id",
+        "event_date_key",
+        "event_hour_key",
+        "station_key",
+        "bike_type_key"
+      ],
+      "unique_keys": []
+    }
+  ],
+  "deployment_files": [
+    "sql/ddl/010_schemas.sql",
+    "sql/ddl/020_tables.sql",
+    "sql/ddl/030_foreign_keys.sql",
+    "sql/ddl/040_indexes.sql",
+    "sql/ddl/050_integrity.sql",
+    "sql/ddl/060_seeds.sql"
+  ],
+  "catalog": {
+    "schemas": [
+      {
+        "name": "ads"
+      },
+      {
+        "name": "dim"
+      },
+      {
+        "name": "dwd"
+      },
+      {
+        "name": "dws"
+      },
+      {
+        "name": "meta"
+      },
+      {
+        "name": "ods"
+      }
+    ],
+    "columns": [
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "bike_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "bike_type_code",
+        "sql_type": "nvarchar(200)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "bike_type_identity",
+        "sql_type": "varbinary(400)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": true,
+        "is_persisted": true,
+        "definition": "(CONVERT([varbinary](400),[bike_type_code]))",
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "bike_type_label",
+        "sql_type": "nvarchar(256)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "is_unknown",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.bike_type",
+        "column_name": "is_recognized",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "date_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "calendar_date",
+        "sql_type": "date",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "calendar_year",
+        "sql_type": "smallint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "calendar_quarter",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "calendar_month",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "year_month",
+        "sql_type": "char(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "day_of_month",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "iso_weekday",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.date",
+        "column_name": "weekday_name",
+        "sql_type": "nvarchar(8)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.hour",
+        "column_name": "hour_key",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.hour",
+        "column_name": "hour_label",
+        "sql_type": "varchar(5)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "member_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "member_type_code",
+        "sql_type": "nvarchar(200)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "member_type_identity",
+        "sql_type": "varbinary(400)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": true,
+        "is_persisted": true,
+        "definition": "(CONVERT([varbinary](400),[member_type_code]))",
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "member_type_label",
+        "sql_type": "nvarchar(256)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "is_unknown",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.member_type",
+        "column_name": "is_recognized",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "station_key",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "station_id",
+        "sql_type": "nvarchar(200)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "station_id_identity",
+        "sql_type": "varbinary(400)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": true,
+        "is_persisted": true,
+        "definition": "(CONVERT([varbinary](400),[station_id]))",
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "station_name",
+        "sql_type": "nvarchar(512)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "is_unknown",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "name_is_fallback",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "name_source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "reference_lat",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "reference_lng",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "coordinate_source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dim.station",
+        "column_name": "coordinate_role",
+        "sql_type": "varchar(20)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "trip_key",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "ride_id",
+        "sql_type": "nvarchar(200)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "ride_id_identity",
+        "sql_type": "varbinary(400)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": true,
+        "is_persisted": true,
+        "definition": "(CONVERT([varbinary](400),[ride_id]))",
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "representative_source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "started_at",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "ended_at",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "duration_us",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "trip_count",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_date_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_hour_key",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_date_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_hour_key",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_station_key",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_station_key",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "bike_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "member_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_lat",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_lng",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_lat",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_lng",
+        "sql_type": "decimal(20,15)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "start_coordinate_status",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "column_name": "end_coordinate_status",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "event_date_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "event_hour_key",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "station_key",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "bike_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "departures",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "column_name": "arrivals",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "start_date_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "start_hour_key",
+        "sql_type": "tinyint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "bike_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "member_type_key",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "ride_count",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "column_name": "duration_us",
+        "sql_type": "decimal(38,0)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "coverage_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "time_role",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "coverage_start",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "coverage_end_exclusive",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "coverage_status",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.coverage",
+        "column_name": "proof_ref",
+        "sql_type": "nvarchar(2048)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "data_scope",
+        "sql_type": "nvarchar(64)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "input_set_sha256",
+        "sql_type": "char(64)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "model_version",
+        "sql_type": "varchar(32)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "metric_rule_version",
+        "sql_type": "varchar(32)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "processing_policy_version",
+        "sql_type": "varchar(32)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "code_revision",
+        "sql_type": "nvarchar(128)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "status",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "is_current",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "started_at_utc",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.load_run",
+        "column_name": "finished_at_utc",
+        "sql_type": "datetime2(7)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "outcome",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "primary_reason",
+        "sql_type": "varchar(32)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "trip_key",
+        "sql_type": "bigint",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "representative_source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "column_name": "warning_codes",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.run_source",
+        "column_name": "run_id",
+        "sql_type": "uniqueidentifier",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.run_source",
+        "column_name": "source_member_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.run_source",
+        "column_name": "read_record_count",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.run_source",
+        "column_name": "read_status",
+        "sql_type": "varchar(20)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "source_member_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "zip_sha256",
+        "sql_type": "char(64)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "zip_url",
+        "sql_type": "nvarchar(2048)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "zip_bytes",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "zip_month_label",
+        "sql_type": "char(6)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "zip_csv_member_count",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "archive_inventory_verified",
+        "sql_type": "bit",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "member_path",
+        "sql_type": "nvarchar(512)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "member_path_identity",
+        "sql_type": "varbinary(1024)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": true,
+        "is_persisted": true,
+        "definition": "(CONVERT([varbinary](1024),[member_path]))",
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "csv_sha256",
+        "sql_type": "char(64)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "csv_header",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "csv_data_record_count",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "meta.source_member",
+        "column_name": "acquired_at_utc",
+        "sql_type": "datetime2(7)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "source_row_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": true,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "source_member_id",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "csv_record_number",
+        "sql_type": "bigint",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "field_count",
+        "sql_type": "int",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": null
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "raw_values",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": false,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "ride_id_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "rideable_type_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "started_at_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "ended_at_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "start_station_name_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "start_station_id_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "end_station_name_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "end_station_id_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "start_lat_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "start_lng_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "end_lat_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "end_lng_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "column_name": "member_casual_raw",
+        "sql_type": "nvarchar(max)",
+        "is_nullable": true,
+        "is_identity": false,
+        "is_computed": false,
+        "is_persisted": false,
+        "definition": null,
+        "collation_name": "Latin1_General_100_BIN2"
+      }
+    ],
+    "keys": [
+      {
+        "table_name": "meta.source_member",
+        "name": "PK_meta_source_member",
+        "kind": "PK",
+        "key_columns": "source_member_id"
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "UQ_meta_source_member_1",
+        "kind": "UQ",
+        "key_columns": "zip_sha256,member_path_identity"
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "PK_meta_load_run",
+        "kind": "PK",
+        "key_columns": "run_id"
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "PK_meta_run_source",
+        "kind": "PK",
+        "key_columns": "run_id,source_member_id"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "PK_ods_trip_raw",
+        "kind": "PK",
+        "key_columns": "source_row_id"
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "UQ_ods_trip_raw_1",
+        "kind": "UQ",
+        "key_columns": "source_member_id,csv_record_number"
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "PK_meta_row_disposition",
+        "kind": "PK",
+        "key_columns": "run_id,source_row_id"
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "PK_meta_coverage",
+        "kind": "PK",
+        "key_columns": "coverage_id"
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "UQ_meta_coverage_1",
+        "kind": "UQ",
+        "key_columns": "run_id,time_role,coverage_start"
+      },
+      {
+        "table_name": "dim.date",
+        "name": "PK_dim_date",
+        "kind": "PK",
+        "key_columns": "date_key"
+      },
+      {
+        "table_name": "dim.date",
+        "name": "UQ_dim_date_1",
+        "kind": "UQ",
+        "key_columns": "calendar_date"
+      },
+      {
+        "table_name": "dim.hour",
+        "name": "PK_dim_hour",
+        "kind": "PK",
+        "key_columns": "hour_key"
+      },
+      {
+        "table_name": "dim.station",
+        "name": "PK_dim_station",
+        "kind": "PK",
+        "key_columns": "run_id,station_key"
+      },
+      {
+        "table_name": "dim.station",
+        "name": "UQ_dim_station_1",
+        "kind": "UQ",
+        "key_columns": "run_id,station_id_identity"
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "PK_dim_bike_type",
+        "kind": "PK",
+        "key_columns": "bike_type_key"
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "UQ_dim_bike_type_1",
+        "kind": "UQ",
+        "key_columns": "bike_type_identity"
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "PK_dim_member_type",
+        "kind": "PK",
+        "key_columns": "member_type_key"
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "UQ_dim_member_type_1",
+        "kind": "UQ",
+        "key_columns": "member_type_identity"
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "PK_dwd_fact_trip",
+        "kind": "PK",
+        "key_columns": "run_id,trip_key"
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "UQ_dwd_fact_trip_1",
+        "kind": "UQ",
+        "key_columns": "run_id,ride_id_identity"
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "PK_dws_trip_hourly",
+        "kind": "PK",
+        "key_columns": "run_id,start_date_key,start_hour_key,bike_type_key,member_type_key"
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "PK_dws_station_hourly",
+        "kind": "PK",
+        "key_columns": "run_id,event_date_key,event_hour_key,station_key,bike_type_key"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "table_name": "meta.row_disposition",
+        "name": "FK_meta_row_disposition_12",
+        "key_columns": "run_id,trip_key",
+        "reference_table": "dwd.fact_trip",
+        "reference_columns": "run_id,trip_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "FK_dim_station_13",
+        "key_columns": "name_source_row_id",
+        "reference_table": "ods.trip_raw",
+        "reference_columns": "source_row_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "FK_dim_station_14",
+        "key_columns": "coordinate_source_row_id",
+        "reference_table": "ods.trip_raw",
+        "reference_columns": "source_row_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_15",
+        "key_columns": "representative_source_row_id",
+        "reference_table": "ods.trip_raw",
+        "reference_columns": "source_row_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_16",
+        "key_columns": "start_date_key",
+        "reference_table": "dim.date",
+        "reference_columns": "date_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_17",
+        "key_columns": "start_hour_key",
+        "reference_table": "dim.hour",
+        "reference_columns": "hour_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_18",
+        "key_columns": "run_id,start_station_key",
+        "reference_table": "dim.station",
+        "reference_columns": "run_id,station_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_19",
+        "key_columns": "end_date_key",
+        "reference_table": "dim.date",
+        "reference_columns": "date_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_20",
+        "key_columns": "end_hour_key",
+        "reference_table": "dim.hour",
+        "reference_columns": "hour_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_21",
+        "key_columns": "run_id,end_station_key",
+        "reference_table": "dim.station",
+        "reference_columns": "run_id,station_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_22",
+        "key_columns": "bike_type_key",
+        "reference_table": "dim.bike_type",
+        "reference_columns": "bike_type_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_23",
+        "key_columns": "member_type_key",
+        "reference_table": "dim.member_type",
+        "reference_columns": "member_type_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "FK_dws_trip_hourly_24",
+        "key_columns": "start_date_key",
+        "reference_table": "dim.date",
+        "reference_columns": "date_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "FK_dws_trip_hourly_25",
+        "key_columns": "start_hour_key",
+        "reference_table": "dim.hour",
+        "reference_columns": "hour_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "FK_dws_trip_hourly_26",
+        "key_columns": "bike_type_key",
+        "reference_table": "dim.bike_type",
+        "reference_columns": "bike_type_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "FK_dws_station_hourly_27",
+        "key_columns": "event_date_key",
+        "reference_table": "dim.date",
+        "reference_columns": "date_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "FK_dws_station_hourly_28",
+        "key_columns": "event_hour_key",
+        "reference_table": "dim.hour",
+        "reference_columns": "hour_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "FK_dws_station_hourly_29",
+        "key_columns": "bike_type_key",
+        "reference_table": "dim.bike_type",
+        "reference_columns": "bike_type_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "FK_dws_trip_hourly_30",
+        "key_columns": "member_type_key",
+        "reference_table": "dim.member_type",
+        "reference_columns": "member_type_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "FK_dws_station_hourly_31",
+        "key_columns": "run_id,station_key",
+        "reference_table": "dim.station",
+        "reference_columns": "run_id,station_key",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "FK_meta_run_source_01",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "FK_meta_run_source_02",
+        "key_columns": "source_member_id",
+        "reference_table": "meta.source_member",
+        "reference_columns": "source_member_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "FK_ods_trip_raw_03",
+        "key_columns": "source_member_id",
+        "reference_table": "meta.source_member",
+        "reference_columns": "source_member_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "FK_meta_row_disposition_04",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "FK_meta_coverage_05",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "FK_dim_station_06",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "FK_dwd_fact_trip_07",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "FK_dws_trip_hourly_08",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "FK_dws_station_hourly_09",
+        "key_columns": "run_id",
+        "reference_table": "meta.load_run",
+        "reference_columns": "run_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "FK_meta_row_disposition_10",
+        "key_columns": "source_row_id",
+        "reference_table": "ods.trip_raw",
+        "reference_columns": "source_row_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "FK_meta_row_disposition_11",
+        "key_columns": "representative_source_row_id",
+        "reference_table": "ods.trip_raw",
+        "reference_columns": "source_row_id",
+        "delete_action": "NO_ACTION",
+        "update_action": "NO_ACTION",
+        "is_disabled": false,
+        "is_not_trusted": false
+      }
+    ],
+    "checks": [
+      {
+        "table_name": "meta.row_disposition",
+        "name": "CK_meta_row_disposition_shape",
+        "definition": "([outcome]='REJECTED' AND [primary_reason]<>'NONE' AND [trip_key] IS NULL AND [representative_source_row_id] IS NULL OR [outcome]='ACCEPTED' AND [primary_reason]='NONE' AND [trip_key] IS NOT NULL AND [representative_source_row_id] IS NOT NULL AND [representative_source_row_id]=[source_row_id] OR [outcome]='DUPLICATE_EXACT' AND [primary_reason]='NONE' AND [trip_key] IS NOT NULL AND [representative_source_row_id] IS NOT NULL AND [representative_source_row_id]<>[source_row_id])",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "CK_meta_coverage_precision",
+        "definition": "(datepart(nanosecond,[coverage_start])%(1000)=(0) AND datepart(nanosecond,[coverage_end_exclusive])%(1000)=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_zip_sha256",
+        "definition": "(datalength([zip_sha256])=(64) AND NOT [zip_sha256] like '%[^0-9a-f]%')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_zip_bytes",
+        "definition": "([zip_bytes]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_zip_csv_member_count",
+        "definition": "([zip_csv_member_count]>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_csv_sha256",
+        "definition": "(datalength([csv_sha256])=(64) AND NOT [csv_sha256] like '%[^0-9a-f]%')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_csv_header",
+        "definition": "(isjson([csv_header])=(1) AND left(ltrim([csv_header]),(1))=N'[')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_csv_data_record_count",
+        "definition": "([csv_data_record_count]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_member_path",
+        "definition": "(len(replace(replace(replace(replace([member_path],nchar((9)),N''),nchar((10)),N''),nchar((13)),N''),N' ',N''))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "CK_meta_source_member_month",
+        "definition": "(TRY_CONVERT([date],[zip_month_label]+'01',(112)) IS NOT NULL AND datalength([zip_month_label])=(6))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_input_set_sha256",
+        "definition": "(datalength([input_set_sha256])=(64) AND NOT [input_set_sha256] like '%[^0-9a-f]%')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_scope",
+        "definition": "(CONVERT([varbinary](128),[data_scope])=CONVERT([varbinary](400),N'JC_official_snapshot'))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_status",
+        "definition": "(([status]='FAILED' OR [status]='PUBLISHED' OR [status]='VALIDATED' OR [status]='RUNNING' OR [status]='CREATED') AND datalength([status])=len([status]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_current",
+        "definition": "([is_current]=(0) OR [status]='PUBLISHED')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_finished",
+        "definition": "((NOT ([status]='FAILED' OR [status]='PUBLISHED' OR [status]='VALIDATED') OR [finished_at_utc] IS NOT NULL) AND ([finished_at_utc] IS NULL OR [finished_at_utc]>=[started_at_utc]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "CK_meta_load_run_versions",
+        "definition": "([model_version]='1.0' AND datalength([model_version])=(3) AND [metric_rule_version]='A-1.0' AND datalength([metric_rule_version])=(5) AND [processing_policy_version]='B1-1.0' AND datalength([processing_policy_version])=(6))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "CK_meta_run_source_read_record_count",
+        "definition": "([read_record_count]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "CK_meta_run_source_read_status",
+        "definition": "(([read_status]='FAILED' OR [read_status]='COMPLETE' OR [read_status]='PENDING') AND datalength([read_status])=len([read_status]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "CK_ods_trip_raw_csv_record_number",
+        "definition": "([csv_record_number]>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "CK_ods_trip_raw_field_count",
+        "definition": "([field_count]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "CK_ods_trip_raw_raw_values",
+        "definition": "(isjson([raw_values])=(1) AND left(ltrim([raw_values]),(1))=N'[')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "CK_ods_trip_raw_record_number",
+        "definition": "([csv_record_number]>=(2))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "CK_meta_row_disposition_warning_codes",
+        "definition": "(isjson([warning_codes])=(1) AND left(ltrim([warning_codes]),(1))=N'[')",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "CK_meta_row_disposition_outcome",
+        "definition": "(([outcome]='REJECTED' OR [outcome]='DUPLICATE_EXACT' OR [outcome]='ACCEPTED') AND datalength([outcome])=len([outcome]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "CK_meta_row_disposition_reason",
+        "definition": "(([primary_reason]='DURATION_GT_24H' OR [primary_reason]='DURATION_LT_60S' OR [primary_reason]='NONPOSITIVE_DURATION' OR [primary_reason]='TIME_PARSE_ERROR' OR [primary_reason]='CONFLICTING_RIDE_ID' OR [primary_reason]='MISSING_RIDE_ID' OR [primary_reason]='NONE') AND datalength([primary_reason])=len([primary_reason]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "CK_meta_coverage_role",
+        "definition": "(([time_role]='arrival' OR [time_role]='departure') AND datalength([time_role])=len([time_role]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "CK_meta_coverage_state",
+        "definition": "(([coverage_status]='unknown' OR [coverage_status]='partial' OR [coverage_status]='complete') AND datalength([coverage_status])=len([coverage_status]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "CK_meta_coverage_range",
+        "definition": "([coverage_start]<[coverage_end_exclusive])",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "CK_meta_coverage_proof",
+        "definition": "([coverage_status]<>'complete' OR [proof_ref] IS NOT NULL AND len(ltrim(rtrim([proof_ref])))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.date",
+        "name": "CK_dim_date_calendar",
+        "definition": "([date_key]=((datepart(year,[calendar_date])*(10000)+datepart(month,[calendar_date])*(100))+datepart(day,[calendar_date])) AND [calendar_year]=datepart(year,[calendar_date]) AND [calendar_quarter]=datepart(quarter,[calendar_date]) AND [calendar_month]=datepart(month,[calendar_date]) AND [year_month]=CONVERT([char](7),[calendar_date],(126)) AND [day_of_month]=datepart(day,[calendar_date]) AND [iso_weekday]=((datediff(day,CONVERT([date],'19000101',(112)),[calendar_date])%(7)+(7))%(7)+(1)))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.date",
+        "name": "CK_dim_date_weekday_name",
+        "definition": "([weekday_name]=case [iso_weekday] when (1) then N'星期一' when (2) then N'星期二' when (3) then N'星期三' when (4) then N'星期四' when (5) then N'星期五' when (6) then N'星期六' when (7) then N'星期日'  end)",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.hour",
+        "name": "CK_dim_hour_hour",
+        "definition": "([hour_key]<=(23) AND [hour_label]=(right('0'+CONVERT([varchar](2),[hour_key]),(2))+':00') AND datalength([hour_label])=(5))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "CK_dim_station_unknown",
+        "definition": "([station_key]=(0) AND [is_unknown]=(1) AND [station_id] IS NULL AND [station_name]=N'未知站点' AND [name_is_fallback]=(1) AND [name_source_row_id] IS NULL AND [reference_lat] IS NULL AND [reference_lng] IS NULL AND [coordinate_source_row_id] IS NULL AND [coordinate_role] IS NULL OR [station_key]>(0) AND [is_unknown]=(0) AND [station_id] IS NOT NULL AND len(replace(replace(replace(replace([station_id],nchar((9)),N''),nchar((10)),N''),nchar((13)),N''),N' ',N''))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "CK_dim_station_name_source",
+        "definition": "([name_is_fallback]=(1) AND [name_source_row_id] IS NULL OR [name_is_fallback]=(0) AND [name_source_row_id] IS NOT NULL)",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "CK_dim_station_coordinates",
+        "definition": "([reference_lat] IS NULL AND [reference_lng] IS NULL AND [coordinate_source_row_id] IS NULL AND [coordinate_role] IS NULL OR [reference_lat] IS NOT NULL AND [reference_lng] IS NOT NULL AND [reference_lat]>=(-90) AND [reference_lat]<=(90) AND [reference_lng]>=(-180) AND [reference_lng]<=(180) AND [coordinate_source_row_id] IS NOT NULL AND [coordinate_role] IS NOT NULL AND ([coordinate_role]='end' OR [coordinate_role]='start') AND datalength([coordinate_role])=len([coordinate_role]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "CK_dim_bike_type_unknown",
+        "definition": "([bike_type_key]=(0) AND [is_unknown]=(1) AND [bike_type_code] IS NULL OR [bike_type_key]>(0) AND [is_unknown]=(0) AND [bike_type_code] IS NOT NULL AND len(replace(replace(replace(replace([bike_type_code],nchar((9)),N''),nchar((10)),N''),nchar((13)),N''),N' ',N''))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "CK_dim_bike_type_recognized",
+        "definition": "([is_recognized]=case when [bike_type_identity]=CONVERT([varbinary](400),N'electric_bike') OR [bike_type_identity]=CONVERT([varbinary](400),N'classic_bike') then (1) else (0) end)",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "CK_dim_member_type_unknown",
+        "definition": "([member_type_key]=(0) AND [is_unknown]=(1) AND [member_type_code] IS NULL OR [member_type_key]>(0) AND [is_unknown]=(0) AND [member_type_code] IS NOT NULL AND len(replace(replace(replace(replace([member_type_code],nchar((9)),N''),nchar((10)),N''),nchar((13)),N''),N' ',N''))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "CK_dim_member_type_recognized",
+        "definition": "([is_recognized]=case when [member_type_identity]=CONVERT([varbinary](400),N'casual') OR [member_type_identity]=CONVERT([varbinary](400),N'member') then (1) else (0) end)",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_duration_us",
+        "definition": "([duration_us]>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_trip_count",
+        "definition": "([trip_count]>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_ride_id",
+        "definition": "(len(replace(replace(replace(replace([ride_id],nchar((9)),N''),nchar((10)),N''),nchar((13)),N''),N' ',N''))>(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_duration",
+        "definition": "([trip_count]=(1) AND [duration_us]>=(60000000) AND [duration_us]<=(86400000000.) AND [duration_us]=datediff_big(microsecond,[started_at],[ended_at]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_precision",
+        "definition": "(datepart(nanosecond,[started_at])%(1000)=(0) AND datepart(nanosecond,[ended_at])%(1000)=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_time_roles",
+        "definition": "([start_date_key]=((datepart(year,[started_at])*(10000)+datepart(month,[started_at])*(100))+datepart(day,[started_at])) AND [end_date_key]=((datepart(year,[ended_at])*(10000)+datepart(month,[ended_at])*(100))+datepart(day,[ended_at])) AND [start_hour_key]=datepart(hour,[started_at]) AND [end_hour_key]=datepart(hour,[ended_at]))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_start_coordinates",
+        "definition": "(([start_coordinate_status]='out_of_range' OR [start_coordinate_status]='nonnumeric' OR [start_coordinate_status]='missing' OR [start_coordinate_status]='valid') AND datalength([start_coordinate_status])=len([start_coordinate_status]) AND ([start_coordinate_status]='valid' AND [start_lat] IS NOT NULL AND [start_lng] IS NOT NULL AND [start_lat]>=(-90) AND [start_lat]<=(90) AND [start_lng]>=(-180) AND [start_lng]<=(180) OR [start_coordinate_status]<>'valid' AND [start_lat] IS NULL AND [start_lng] IS NULL))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "CK_dwd_fact_trip_end_coordinates",
+        "definition": "(([end_coordinate_status]='out_of_range' OR [end_coordinate_status]='nonnumeric' OR [end_coordinate_status]='missing' OR [end_coordinate_status]='valid') AND datalength([end_coordinate_status])=len([end_coordinate_status]) AND ([end_coordinate_status]='valid' AND [end_lat] IS NOT NULL AND [end_lng] IS NOT NULL AND [end_lat]>=(-90) AND [end_lat]<=(90) AND [end_lng]>=(-180) AND [end_lng]<=(180) OR [end_coordinate_status]<>'valid' AND [end_lat] IS NULL AND [end_lng] IS NULL))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "CK_dws_trip_hourly_ride_count",
+        "definition": "([ride_count]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "CK_dws_trip_hourly_duration_us",
+        "definition": "([duration_us]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "CK_dws_trip_hourly_duration_bounds",
+        "definition": "([duration_us]>=CONVERT([decimal](20,0),[ride_count])*(60000000) AND [duration_us]<=CONVERT([decimal](20,0),[ride_count])*(86400000000.))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "CK_dws_station_hourly_departures",
+        "definition": "([departures]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "CK_dws_station_hourly_arrivals",
+        "definition": "([arrivals]>=(0))",
+        "is_disabled": false,
+        "is_not_trusted": false
+      }
+    ],
+    "indexes": [
+      {
+        "table_name": "meta.source_member",
+        "name": "PK_meta_source_member",
+        "key_columns": "source_member_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.source_member",
+        "name": "UQ_meta_source_member_1",
+        "key_columns": "zip_sha256,member_path_identity",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "PK_meta_load_run",
+        "key_columns": "run_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.load_run",
+        "name": "UX_meta_load_run_current",
+        "key_columns": "data_scope",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": "([is_current]=(1))",
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.run_source",
+        "name": "PK_meta_run_source",
+        "key_columns": "run_id,source_member_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "PK_ods_trip_raw",
+        "key_columns": "source_row_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "name": "UQ_ods_trip_raw_1",
+        "key_columns": "source_member_id,csv_record_number",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "PK_meta_row_disposition",
+        "key_columns": "run_id,source_row_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "name": "IX_disposition_trip",
+        "key_columns": "run_id,trip_key",
+        "include_columns": "outcome,representative_source_row_id",
+        "is_unique": false,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "PK_meta_coverage",
+        "key_columns": "coverage_id",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "meta.coverage",
+        "name": "UQ_meta_coverage_1",
+        "key_columns": "run_id,time_role,coverage_start",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.date",
+        "name": "PK_dim_date",
+        "key_columns": "date_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.date",
+        "name": "UQ_dim_date_1",
+        "key_columns": "calendar_date",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.hour",
+        "name": "PK_dim_hour",
+        "key_columns": "hour_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "PK_dim_station",
+        "key_columns": "run_id,station_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.station",
+        "name": "UQ_dim_station_1",
+        "key_columns": "run_id,station_id_identity",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "PK_dim_bike_type",
+        "key_columns": "bike_type_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.bike_type",
+        "name": "UQ_dim_bike_type_1",
+        "key_columns": "bike_type_identity",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "PK_dim_member_type",
+        "key_columns": "member_type_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dim.member_type",
+        "name": "UQ_dim_member_type_1",
+        "key_columns": "member_type_identity",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "PK_dwd_fact_trip",
+        "key_columns": "run_id,trip_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "UQ_dwd_fact_trip_1",
+        "key_columns": "run_id,ride_id_identity",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "IX_fact_departure",
+        "key_columns": "run_id,started_at,bike_type_key",
+        "include_columns": "duration_us,trip_count,member_type_key,start_station_key",
+        "is_unique": false,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "name": "IX_fact_arrival",
+        "key_columns": "run_id,ended_at,bike_type_key",
+        "include_columns": "trip_count,end_station_key",
+        "is_unique": false,
+        "is_primary_key": false,
+        "type_desc": "NONCLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "name": "PK_dws_trip_hourly",
+        "key_columns": "run_id,start_date_key,start_hour_key,bike_type_key,member_type_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "name": "PK_dws_station_hourly",
+        "key_columns": "run_id,event_date_key,event_hour_key,station_key,bike_type_key",
+        "include_columns": "",
+        "is_unique": true,
+        "is_primary_key": true,
+        "type_desc": "CLUSTERED",
+        "filter_definition": null,
+        "is_disabled": false
+      }
+    ],
+    "modules": [
+      {
+        "name": "meta.usp_assert_run_ready",
+        "type": "P",
+        "definition": "CREATE   PROCEDURE meta.usp_assert_run_ready @run_id uniqueidentifier\nAS\nBEGIN\n SET NOCOUNT ON;\n -- These are consistency gates, not an ETL implementation or proof of real input.\n IF NOT EXISTS(SELECT 1 FROM meta.run_source WHERE run_id=@run_id)\n  THROW 51040,'A validated run needs an explicit nonempty member inventory.',1;\n IF EXISTS(SELECT 1 FROM meta.run_source r JOIN meta.source_member m ON m.source_member_id=r.source_member_id\n  WHERE r.run_id=@run_id AND (SELECT COUNT(*) FROM OPENJSON(m.csv_header))<>13)\n  THROW 51040,'The source member header must have thirteen columns.',1;\n IF EXISTS(SELECT 1 FROM meta.run_source r JOIN meta.source_member m ON m.source_member_id=r.source_member_id\n  CROSS APPLY OPENJSON(m.csv_header) j\n  LEFT JOIN (VALUES(0,N'ride_id'),(1,N'rideable_type'),(2,N'started_at'),(3,N'ended_at'),\n   (4,N'start_station_name'),(5,N'start_station_id'),(6,N'end_station_name'),(7,N'end_station_id'),\n   (8,N'start_lat'),(9,N'start_lng'),(10,N'end_lat'),(11,N'end_lng'),(12,N'member_casual')) e(ordinal,field_name)\n   ON e.ordinal=TRY_CONVERT(int,j.[key])\n  WHERE r.run_id=@run_id AND (j.type<>1 OR e.field_name IS NULL OR CONVERT(varbinary(max),j.value)<>CONVERT(varbinary(max),e.field_name)))\n  THROW 51040,'The member header fields or order do not match the source contract.',1;\n IF EXISTS(SELECT 1 FROM meta.run_source r JOIN meta.source_member m ON m.source_member_id=r.source_member_id\n  WHERE r.run_id=@run_id AND (r.read_status<>'COMPLETE' OR m.archive_inventory_verified=0\n   OR r.read_record_count<>m.csv_data_record_count\n   OR r.read_record_count<>(SELECT COUNT_BIG(*) FROM ods.trip_raw x WHERE x.source_member_id=r.source_member_id)))\n  THROW 51040,'Member reading or full raw-row counts differ.',1;\n IF EXISTS(SELECT m.zip_sha256 FROM meta.run_source r JOIN meta.source_member m ON m.source_member_id=r.source_member_id\n  WHERE r.run_id=@run_id GROUP BY m.zip_sha256\n  HAVING COUNT_BIG(*)<>MIN(m.zip_csv_member_count) OR MIN(m.zip_csv_member_count)<>MAX(m.zip_csv_member_count))\n  THROW 51040,'The selected archive does not include every CSV member.',1;\n IF EXISTS(SELECT 1 FROM ods.trip_raw x JOIN meta.run_source r ON r.source_member_id=x.source_member_id\n  WHERE r.run_id=@run_id AND (x.field_count<>13 OR (SELECT COUNT(*) FROM OPENJSON(x.raw_values))<>13\n   OR EXISTS(SELECT 1 FROM OPENJSON(x.raw_values) j WHERE j.type<>1)))\n  THROW 51040,'A publishable source row must contain thirteen string cells.',1;\n IF EXISTS(SELECT 1 FROM ods.trip_raw x JOIN meta.run_source r ON r.source_member_id=x.source_member_id\n  WHERE r.run_id=@run_id AND (x.ride_id_raw IS NULL OR x.rideable_type_raw IS NULL OR x.started_at_raw IS NULL\n   OR x.ended_at_raw IS NULL OR x.start_station_name_raw IS NULL OR x.start_station_id_raw IS NULL\n   OR x.end_station_name_raw IS NULL OR x.end_station_id_raw IS NULL OR x.start_lat_raw IS NULL\n   OR x.start_lng_raw IS NULL OR x.end_lat_raw IS NULL OR x.end_lng_raw IS NULL OR x.member_casual_raw IS NULL))\n  THROW 51040,'CSV empty cells must be retained as empty strings; unsafe NULL parsing blocks publication.',1;\n IF EXISTS(SELECT 1 FROM meta.run_source r JOIN ods.trip_raw x ON x.source_member_id=r.source_member_id\n  LEFT JOIN meta.row_disposition d ON d.run_id=r.run_id AND d.source_row_id=x.source_row_id\n  WHERE r.run_id=@run_id AND d.source_row_id IS NULL)\n  THROW 51040,'Some selected source rows have no primary disposition.',1;\n IF EXISTS(SELECT 1 FROM meta.row_disposition d JOIN ods.trip_raw x ON x.source_row_id=d.source_row_id\n  LEFT JOIN meta.run_source r ON r.run_id=d.run_id AND r.source_member_id=x.source_member_id\n  WHERE d.run_id=@run_id AND r.source_member_id IS NULL)\n  THROW 51040,'A disposition refers to a source outside the run inventory.',1;\n IF EXISTS(SELECT f.trip_key FROM dwd.fact_trip f LEFT JOIN meta.row_disposition d\n  ON d.run_id=f.run_id AND d.trip_key=f.trip_key AND d.outcome='ACCEPTED'\n  WHERE f.run_id=@run_id GROUP BY f.trip_key,f.representative_source_row_id\n  HAVING COUNT(d.source_row_id)<>1 OR MIN(d.source_row_id)<>f.representative_source_row_id)\n  THROW 51040,'Each fact needs exactly one matching accepted source representative.',1;\n IF EXISTS(SELECT 1 FROM meta.row_disposition d JOIN dwd.fact_trip f ON f.run_id=d.run_id AND f.trip_key=d.trip_key\n  WHERE d.run_id=@run_id AND d.outcome<>'REJECTED'\n    AND (d.representative_source_row_id IS NULL OR d.representative_source_row_id<>f.representative_source_row_id))\n  THROW 51040,'Duplicate/accepted lineage points to the wrong representative.',1;\n IF NOT EXISTS(SELECT 1 FROM dim.station WHERE run_id=@run_id AND station_key=0)\n  THROW 51040,'The run has no dedicated unknown station.',1;\n IF EXISTS(SELECT 1 FROM dim.station s CROSS APPLY(VALUES(s.name_source_row_id),(s.coordinate_source_row_id)) v(source_row_id)\n  LEFT JOIN meta.row_disposition d ON d.run_id=s.run_id AND d.source_row_id=v.source_row_id AND d.outcome='ACCEPTED'\n  WHERE s.run_id=@run_id AND v.source_row_id IS NOT NULL AND d.source_row_id IS NULL)\n  THROW 51040,'Station observations must come from accepted representatives in the same run.',1;\n IF NOT EXISTS(SELECT 1 FROM meta.coverage WHERE run_id=@run_id AND time_role='departure')\n OR NOT EXISTS(SELECT 1 FROM meta.coverage WHERE run_id=@run_id AND time_role='arrival')\n  THROW 51040,'Both time roles require an explicit coverage declaration.',1;\n IF EXISTS(\n  SELECT start_date_key,start_hour_key,bike_type_key,member_type_key,COUNT_BIG(*) AS n,SUM(CONVERT(decimal(38,0),duration_us)) AS duration_us\n   FROM dwd.fact_trip WHERE run_id=@run_id GROUP BY start_date_key,start_hour_key,bike_type_key,member_type_key\n  EXCEPT SELECT start_date_key,start_hour_key,bike_type_key,member_type_key,ride_count,duration_us FROM dws.trip_hourly WHERE run_id=@run_id)\n OR EXISTS(\n  SELECT start_date_key,start_hour_key,bike_type_key,member_type_key,ride_count,duration_us FROM dws.trip_hourly WHERE run_id=@run_id\n  EXCEPT SELECT start_date_key,start_hour_key,bike_type_key,member_type_key,COUNT_BIG(*),SUM(CONVERT(decimal(38,0),duration_us))\n   FROM dwd.fact_trip WHERE run_id=@run_id GROUP BY start_date_key,start_hour_key,bike_type_key,member_type_key)\n  THROW 51040,'Trip-hour aggregates differ from the atomic facts.',1;\n ;WITH events AS(\n  SELECT start_date_key AS date_key,start_hour_key AS hour_key,start_station_key AS station_key,bike_type_key,CONVERT(bigint,1) AS dep,CONVERT(bigint,0) AS arr\n   FROM dwd.fact_trip WHERE run_id=@run_id\n  UNION ALL\n  SELECT end_date_key,end_hour_key,end_station_key,bike_type_key,CONVERT(bigint,0),CONVERT(bigint,1)\n   FROM dwd.fact_trip WHERE run_id=@run_id\n ), expected AS(\n  SELECT date_key,hour_key,station_key,bike_type_key,SUM(dep) AS dep,SUM(arr) AS arr FROM events GROUP BY date_key,hour_key,station_key,bike_type_key\n ), differences AS(\n  SELECT * FROM expected EXCEPT SELECT event_date_key,event_hour_key,station_key,bike_type_key,departures,arrivals FROM dws.station_hourly WHERE run_id=@run_id\n )\n SELECT * INTO #station_difference FROM differences;\n IF EXISTS(SELECT 1 FROM #station_difference) THROW 51040,'Station-hour aggregates are missing or changed.',1;\n ;WITH events AS(\n  SELECT start_date_key AS date_key,start_hour_key AS hour_key,start_station_key AS station_key,bike_type_key,CONVERT(bigint,1) AS dep,CONVERT(bigint,0) AS arr\n   FROM dwd.fact_trip WHERE run_id=@run_id\n  UNION ALL SELECT end_date_key,end_hour_key,end_station_key,bike_type_key,CONVERT(bigint,0),CONVERT(bigint,1) FROM dwd.fact_trip WHERE run_id=@run_id\n ), expected AS(\n  SELECT date_key,hour_key,station_key,bike_type_key,SUM(dep) AS dep,SUM(arr) AS arr FROM events GROUP BY date_key,hour_key,station_key,bike_type_key\n ), differences AS(\n  SELECT event_date_key,event_hour_key,station_key,bike_type_key,departures,arrivals FROM dws.station_hourly WHERE run_id=@run_id EXCEPT SELECT * FROM expected\n ) SELECT * INTO #station_extra FROM differences;\n IF EXISTS(SELECT 1 FROM #station_extra) THROW 51040,'Station-hour aggregates contain extra groups.',1;\nEND;\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_coverage_no_overlap",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_coverage_no_overlap ON meta.coverage AFTER INSERT,UPDATE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM inserted i JOIN meta.coverage c WITH(UPDLOCK,HOLDLOCK)\n  ON c.run_id=i.run_id AND c.time_role=i.time_role AND c.coverage_id<>i.coverage_id\n  AND c.coverage_start<i.coverage_end_exclusive AND i.coverage_start<c.coverage_end_exclusive)\n  THROW 51030,'Coverage intervals for the same run and role must not overlap.',1;\nEND;\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_load_run_publication",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_load_run_publication ON meta.load_run AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted d LEFT JOIN inserted i ON i.run_id=d.run_id\n  WHERE d.status IN('VALIDATED','PUBLISHED') AND i.run_id IS NULL)\n  THROW 51043,'Validated or published run metadata cannot be deleted.',1;\n IF EXISTS(SELECT 1 FROM inserted i JOIN deleted d ON d.run_id=i.run_id\n  WHERE d.status<>i.status AND NOT((d.status='CREATED' AND i.status IN('RUNNING','FAILED'))\n    OR (d.status='RUNNING' AND i.status IN('VALIDATED','FAILED')) OR(d.status='VALIDATED' AND i.status IN('PUBLISHED','FAILED'))))\n  THROW 51043,'Invalid run-state transition; create a new run for a rebuild.',1;\n IF EXISTS(\n  SELECT run_id,CONVERT(varbinary(128),data_scope) AS scope_id,CONVERT(varbinary(64),input_set_sha256) AS input_id,\n   CONVERT(varbinary(32),model_version) AS model,CONVERT(varbinary(32),metric_rule_version) AS metric,\n   CONVERT(varbinary(32),processing_policy_version) AS policy,CONVERT(varbinary(256),code_revision) AS code,\n   started_at_utc,finished_at_utc FROM deleted WHERE status IN('VALIDATED','PUBLISHED')\n  EXCEPT SELECT run_id,CONVERT(varbinary(128),data_scope),CONVERT(varbinary(64),input_set_sha256),\n   CONVERT(varbinary(32),model_version),CONVERT(varbinary(32),metric_rule_version),\n   CONVERT(varbinary(32),processing_policy_version),CONVERT(varbinary(256),code_revision),started_at_utc,finished_at_utc FROM inserted)\n  THROW 51043,'Validated run input, code, versions and audit times are immutable.',1;\n DECLARE @id uniqueidentifier;\n DECLARE publish_cursor CURSOR LOCAL FAST_FORWARD FOR SELECT i.run_id FROM inserted i LEFT JOIN deleted d ON d.run_id=i.run_id\n  WHERE i.status IN('VALIDATED','PUBLISHED') AND (d.run_id IS NULL OR d.status<>i.status);\n OPEN publish_cursor; FETCH NEXT FROM publish_cursor INTO @id;\n WHILE @@FETCH_STATUS=0\n BEGIN\n  EXEC meta.usp_assert_run_ready @id;\n  FETCH NEXT FROM publish_cursor INTO @id;\n END;\n CLOSE publish_cursor; DEALLOCATE publish_cursor;\nEND;\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_run_source_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_run_source_run_frozen ON meta.run_source AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dim.TR_station_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dim.TR_station_run_frozen ON dim.station AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dwd.TR_fact_trip_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dwd.TR_fact_trip_run_frozen ON dwd.fact_trip AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_row_disposition_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_row_disposition_run_frozen ON meta.row_disposition AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_coverage_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_coverage_run_frozen ON meta.coverage AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dws.TR_trip_hourly_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dws.TR_trip_hourly_run_frozen ON dws.trip_hourly AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dws.TR_station_hourly_run_frozen",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dws.TR_station_hourly_run_frozen ON dws.station_hourly AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM (SELECT run_id FROM inserted UNION SELECT run_id FROM deleted) x\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=x.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51041,'Validated/published run data is immutable; construct a new run.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "ods.TR_trip_raw_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER ods.TR_trip_raw_immutable ON ods.trip_raw AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dim.TR_bike_type_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dim.TR_bike_type_immutable ON dim.bike_type AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dim.TR_member_type_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dim.TR_member_type_immutable ON dim.member_type AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dim.TR_date_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dim.TR_date_immutable ON dim.date AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "dim.TR_hour_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER dim.TR_hour_immutable ON dim.hour AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.TR_source_member_immutable",
+        "type": "TR",
+        "definition": "CREATE   TRIGGER meta.TR_source_member_immutable ON meta.source_member AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT source_member_id,CONVERT(varbinary(max),zip_sha256) AS z,CONVERT(varbinary(max),zip_url) AS u,zip_bytes,zip_month_label,zip_csv_member_count,member_path_identity,csv_sha256,CONVERT(varbinary(max),csv_header) AS h,csv_data_record_count,acquired_at_utc FROM deleted\n EXCEPT SELECT source_member_id,CONVERT(varbinary(max),zip_sha256),CONVERT(varbinary(max),zip_url),zip_bytes,zip_month_label,zip_csv_member_count,member_path_identity,csv_sha256,CONVERT(varbinary(max),csv_header),csv_data_record_count,acquired_at_utc FROM inserted)\n OR EXISTS(SELECT 1 FROM inserted i JOIN deleted d ON d.source_member_id=i.source_member_id WHERE i.archive_inventory_verified<d.archive_inventory_verified)\n  THROW 51042,'Source identity is immutable; inventory verification may only advance 0 to 1.',1;\nEND;\n",
+        "is_disabled": false
+      },
+      {
+        "name": "meta.usp_publish_run",
+        "type": "P",
+        "definition": "CREATE   PROCEDURE meta.usp_publish_run @run_id uniqueidentifier\nAS\nBEGIN\n SET NOCOUNT ON;\n SET XACT_ABORT ON;\n DECLARE @initial_trancount int=@@TRANCOUNT,@lock_result int,@state varchar(20),@current bit;\n BEGIN TRY\n  IF @initial_trancount=0 BEGIN TRANSACTION;\n  ELSE SAVE TRANSACTION citibike_publish_save;\n  EXEC @lock_result=sys.sp_getapplock @Resource=N'citibike-warehouse-current',@LockMode='Exclusive',\n   @LockOwner='Transaction',@LockTimeout=10000;\n  IF @lock_result<0 THROW 51044,'Could not acquire the publication lock.',1;\n  SELECT @state=status,@current=is_current FROM meta.load_run WITH(UPDLOCK,HOLDLOCK) WHERE run_id=@run_id;\n  IF @state IS NULL OR (@state<>'VALIDATED' AND NOT(@state='PUBLISHED' AND @current=1))\n   THROW 51044,'Only a validated run or the already-current published run can be published.',1;\n  IF @state='VALIDATED'\n  BEGIN\n   EXEC meta.usp_assert_run_ready @run_id;\n   UPDATE meta.load_run SET is_current=0 WHERE data_scope=N'JC_official_snapshot' AND is_current=1;\n   UPDATE meta.load_run SET status='PUBLISHED',is_current=1 WHERE run_id=@run_id;\n  END;\n  IF @initial_trancount=0 COMMIT TRANSACTION;\n END TRY\n BEGIN CATCH\n  IF @initial_trancount=0 AND XACT_STATE()<>0 ROLLBACK TRANSACTION;\n  ELSE IF @initial_trancount>0 AND XACT_STATE()=1 ROLLBACK TRANSACTION citibike_publish_save;\n  -- If an ambient transaction is uncommittable, the caller must roll it back.\n  THROW;\n END CATCH;\nEND;\n\n",
+        "is_disabled": false
+      }
+    ]
+  },
+  "ddl_sha256": {
+    "sql/ddl/010_schemas.sql": "ad1979235e677e4b9a654a582af4c070fffae5652a1a690676e62c5754339989",
+    "sql/ddl/020_tables.sql": "4d2501a460f3cf17974bc45191f392490b60f8f8f5bf59433f21d7a6947abd8a",
+    "sql/ddl/030_foreign_keys.sql": "6e47da5411b0d5c07e02554f224f990ce158b19a2ae978c205920658888e99fe",
+    "sql/ddl/040_indexes.sql": "0a94108ee5cb1a56cfebdb42c77aaf97ff9a68ce061d08d77e05062b7ba475b0",
+    "sql/ddl/050_integrity.sql": "35fb7bd99686c84365f695672d6bf178bb6d17ad51bd57fc65cb4b7810121e88",
+    "sql/ddl/060_seeds.sql": "b7c44dbf373ff8bc8802ad04a03c3f2d5d56a470d8dc92dd3a518a46767c9381"
+  },
+  "compiled_baseline_note": "SQL Server 2019 compiled metadata, reconciled with declared types/keys and independent rollback behavior fixtures; not real source-data acceptance.",
+  "manifest_sha256": "d5ebe5806422b4cce71fb243e7fc2064f59abba242ff5dfa0f545bfb46c3f564"
+}

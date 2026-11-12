@@ -2,6 +2,8 @@
 
 当前有效基线是对话二的 v1.0 逻辑设计契约，业务 A-1.0 / 处理 B1-1.0。该版本仅表示 B 的设计交接，不表示 A/C/D 签收、物理部署或真实验收通过。
 
+对话三已追加 B2-1.0 物理补充，独立测试库结构和合成行为验证通过，业务库未部署；本页旧“非物理部署”仅针对 B1 逻辑基线，不否认 B2 实际测试证据。详见 [B2 验证](../evidence/b2-validation.md)。
+
 - [B → C 建模契约 v1.0](b-to-c-model-contract.md)
 - [C → D 查询契约 v1.0](c-to-d-query-contract.md)
 - [六指标支持检查](../design/metric-model-mapping.md)

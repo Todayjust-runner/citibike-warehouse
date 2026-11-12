@@ -46,3 +46,7 @@
 ## B1 补充核对：精确字符串身份
 
 本阶段另查 Microsoft [字符串比较规则](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/string-comparison-assignment?view=sql-server-ver15)、[CAST/CONVERT](https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15) 和 [binary/varbinary](https://learn.microsoft.com/en-us/sql/t-sql/data-types/binary-and-varbinary-transact-sql?view=sql-server-ver15)。普通字符串等值会受到补齐尾空格的比较规则影响，字符转二进制长度不足也可能截断。因此 B1 明确定义原文与完整 UTF-16LE 身份，B2 再验证长度和无损等值实现；本次没有执行 SQL 证明物理实现已通过。
+
+## B2 补充：物理语法与实际执行
+
+查阅 Microsoft [CREATE TABLE](https://learn.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-ver15) 的持久化计算列语法、[CREATE INDEX](https://learn.microsoft.com/en-us/sql/t-sql/statements/create-index-transact-sql?view=sql-server-ver15) 的键宽与过滤唯一索引，以及 [sqlcmd](https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver15) 的编码/错误退出选项。物理实现不只依赖说明页，已在本机 15.x 执行并保存 [B2 证据](../evidence/b2-validation.md)。上节“未执行”保留为 B1 时点结论，当前 B2 结构通过仍不代表真实来源/指标通过。

@@ -1,0 +1,396 @@
+{
+  "checked_on": "2026-11-12",
+  "timezone": "Asia/Shanghai",
+  "scope": "B2 isolated structure and synthetic behavior only; no real input acceptance",
+  "server": {
+    "version": "15.0.2000.5",
+    "edition": "Developer Edition (64-bit)",
+    "is_sysadmin": 1
+  },
+  "initial_database_presence": {
+    "CitibikeDW": false,
+    "CitibikeDW_B_Test": false
+  },
+  "final_database_presence": {
+    "CitibikeDW": false,
+    "CitibikeDW_B_Test": true
+  },
+  "physical_version": "B2-1.0",
+  "logical_version": "1.0",
+  "test_database": "CitibikeDW_B_Test",
+  "compatibility_level": 150,
+  "catalog_summary": {
+    "tables": 14,
+    "columns": 132,
+    "primary_keys": 14,
+    "unique_constraints": 8,
+    "foreign_keys": 31,
+    "check_constraints": 52,
+    "indexes_including_keys": 26,
+    "modules": 17,
+    "persisted_computed_columns": 5
+  },
+  "drift": [],
+  "python_behavior_tests": {
+    "run": 10,
+    "passed": 10,
+    "exit_code": 0
+  },
+  "sql_boundary_tests": {
+    "run": 47,
+    "passed": 47,
+    "exit_code": 0
+  },
+  "final_ddl_parse_only_exit_code": 0,
+  "repeated_deploy": "already_matches_no_changes; committed synthetic CREATED marker survived and was then removed by its own test",
+  "drift_negative_test": "disabled FK detected; deploy refused; test restored WITH CHECK CHECK",
+  "final_table_rows": [
+    {
+      "table": "meta.source_member",
+      "rows": 0
+    },
+    {
+      "table": "meta.load_run",
+      "rows": 0
+    },
+    {
+      "table": "meta.run_source",
+      "rows": 0
+    },
+    {
+      "table": "ods.trip_raw",
+      "rows": 0
+    },
+    {
+      "table": "meta.row_disposition",
+      "rows": 0
+    },
+    {
+      "table": "meta.coverage",
+      "rows": 0
+    },
+    {
+      "table": "dim.date",
+      "rows": 0
+    },
+    {
+      "table": "dim.hour",
+      "rows": 24
+    },
+    {
+      "table": "dim.station",
+      "rows": 0
+    },
+    {
+      "table": "dim.bike_type",
+      "rows": 3
+    },
+    {
+      "table": "dim.member_type",
+      "rows": 3
+    },
+    {
+      "table": "dwd.fact_trip",
+      "rows": 0
+    },
+    {
+      "table": "dws.trip_hourly",
+      "rows": 0
+    },
+    {
+      "table": "dws.station_hourly",
+      "rows": 0
+    }
+  ],
+  "database_inventory_after": [
+    {
+      "name": "AdventureWorksDW2025",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "CitibikeDW_B_Test",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "DWConfiguration",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "DWDiagnostics",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "DWQueue",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "master",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "model",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "msdb",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    },
+    {
+      "name": "tempdb",
+      "compatibility_level": 150,
+      "state_desc": "ONLINE"
+    }
+  ],
+  "synthetic_cases": [
+    {
+      "name": "accepted_requires_nonnull_representative",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "adjacent_coverage_allowed",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "below_60s_one_microsecond",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "case_and_trailing_space_are_distinct",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "complete_fixture_can_publish",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "coverage_overlap_rejected",
+      "passed": true,
+      "actual_error": 51030
+    },
+    {
+      "name": "coverage_precision_is_microsecond_aligned",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "coverage_proof_required",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "cross_month_events_remain_in_fact",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "current_requires_published",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "date_role_must_match_timestamp",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "duplicate_disposition_locator",
+      "passed": true,
+      "actual_error": 2627
+    },
+    {
+      "name": "duplicate_ride_identity_rejected",
+      "passed": true,
+      "actual_error": 2627
+    },
+    {
+      "name": "duration_must_equal_timestamps",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "exact_24h_is_valid",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "exact_label_duplicate_rejected",
+      "passed": true,
+      "actual_error": 2627
+    },
+    {
+      "name": "failed_publish_preserves_current",
+      "passed": true,
+      "actual_error": 51044
+    },
+    {
+      "name": "header_shape_is_a_publication_gate",
+      "passed": true,
+      "actual_error": 51040
+    },
+    {
+      "name": "hour_role_must_match_timestamp",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "invalid_coordinate_pair",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "invalid_latitude",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "iso_weekday_is_not_session_dependent",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "long_label_fails_without_truncation",
+      "passed": true,
+      "actual_error": 2628
+    },
+    {
+      "name": "millisecond_and_microsecond_preserved",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "missing_coordinate_not_zero",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "missing_source_fk_rejected",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "missing_station_still_counts",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "negative_aggregate_rejected",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "null_raw_cell_prevents_validation",
+      "passed": true,
+      "actual_error": 51040
+    },
+    {
+      "name": "only_one_current_run",
+      "passed": true,
+      "actual_error": 2601
+    },
+    {
+      "name": "over_24h_one_microsecond",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "publish_procedure_switches_current",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "raw_rows_are_immutable",
+      "passed": true,
+      "actual_error": 51042
+    },
+    {
+      "name": "recognized_flag_is_exact",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "rejected_disposition_has_no_fact",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "ride_count_is_one",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "ride_trailing_space_identity_is_distinct",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "sixty_seconds_is_valid",
+      "passed": true,
+      "actual_error": 0
+    },
+    {
+      "name": "station_fk_cannot_cross_run",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "sub_microsecond_is_rejected",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "unknown_label_cannot_be_recognized",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "unknown_station_identity_is_null",
+      "passed": true,
+      "actual_error": 547
+    },
+    {
+      "name": "validated_fact_is_frozen",
+      "passed": true,
+      "actual_error": 51041
+    },
+    {
+      "name": "validated_metadata_is_frozen",
+      "passed": true,
+      "actual_error": 51043
+    },
+    {
+      "name": "validated_requires_all_source_rows",
+      "passed": true,
+      "actual_error": 51040
+    },
+    {
+      "name": "validated_requires_exact_rollups",
+      "passed": true,
+      "actual_error": 51040
+    },
+    {
+      "name": "zero_zero_is_valid_coordinate",
+      "passed": true,
+      "actual_error": 0
+    }
+  ],
+  "not_verified": [
+    "real ZIP/CSV identity or A baselines",
+    "actual source precision and maximum field length",
+    "full ETL/metrics/frontend",
+    "business database deployment",
+    "real-scale query performance"
+  ]
+}

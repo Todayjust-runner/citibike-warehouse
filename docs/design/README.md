@@ -1,6 +1,6 @@
 # B 设计入口
 
-对话二完成概念与逻辑设计，当前均为 B 设计基线 v1.0，不代表外部签收、实际建表或真实指标通过。
+对话二完成概念/逻辑基线 v1.0，对话三完成物理 B2-1.0 并在独立测试库验证。不代表外部业务签收或真实指标通过。
 
 | 文档 | 内容 / 状态 |
 |---|---|
@@ -12,5 +12,8 @@
 | [属性与验收缺口](open-attributes.md) | 真实值域/精度与 A 算法差异等待确认 |
 | [可编辑图](../../diagrams/README.md) | Mermaid 概念、星型、血缘图源 |
 | [交接契约](../contracts/b-c-d-contract.md) | B→C 与 C→D v1.0 逻辑基线 |
+| [物理设计](physical-design.md) | 类型/长度/精度、约束、索引、发布与重跑，B2 已实施 |
+| [物理字段字典](physical-data-dictionary.md) / [物理 JSON](physical-model.json) | 全 132 字段及实际 SQL 编译基线，B2 已核对 |
+| [B2 验证](../evidence/b2-validation.md) | 真实结构、10 个 Python 行为测试与 47 个事务回滚 SQL 用例 |
 
-物理设计、SQL2019 DDL 和实际建表证据属于对话三（B2），尚未交付；不以 JSON 或 Mermaid 代替物理设计。下一步见 [B2 交接](../handoff/next-stage.md)。
+SQL2019 DDL 与执行入口已交付；业务库未部署，完整 ETL/查询还由 C 完成。下一步见 [B3 交接](../handoff/next-stage.md)，整理复核、报告正文与最终交接。

@@ -2,6 +2,10 @@
 
 当前目标：[Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，GitHub 仓库 ID `1455379867`，必须为 private。用户在后续消息提供该地址并确认已创建，授权用此目标完成工程基础发布；取代最初的 klzyd 目标。
 
+## 对话三 B2 物理与结构交付
+
+本次继续同一工程/main，交付物理字典/编译清单、编号 DDL、受保护入口、配置示例、真实目录与合成行为证据，并更新阶段计划和 B3 交接。测试库实际为 CitibikeDW_B_Test；业务库未创建。10 个 Python 测试与 47 个 SQL 用例通过；默认部署无清空/重建，选定标记数据重跑保留，测试夹具不作为真实数据。见 [B2 验证](b2-validation.md)。发布前检查文件及 private/基线，发布后核对 HEAD/树/文件哈希；旧 28/45 文件数量分别是 B0/B1 历史快照，不是当前文件总量。
+
 ## 对话二 B1 设计交付
 
 本次沿用相同仓库和 main，在基础提交之后增加概念/逻辑、三份 Mermaid 图、逻辑 JSON/字段字典、源映射、六指标检查、B→C/C→D 契约与四阶段计划。候选共 45 个工程文本文件，26 项静态检查通过；范围见 [B1 复核](b1-design-review.md)。本阶段没有数据库部署、ETL/页面或真实数据验收。提交前再次核实 private 属性及远程 main 基线，发布后比对 HEAD、树与文件哈希；最新提交号从 Git main 读取。

@@ -1,6 +1,6 @@
 # 共享单车骑行运营分析数仓系统的设计与实现
 
-本仓库是课程共享单车数仓项目工程。当前已完成 **B0 工程基础与 B1 概念/逻辑设计和契约**；物理设计、DDL、建表验证、完整 ETL 和展示仍未完成。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
+本仓库是课程共享单车数仓项目工程。当前已完成 **B0 工程基础、B1 概念/逻辑/契约及 B2 物理设计与测试库建表验证**；完整 ETL、真实指标验收和展示仍未完成。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
 
 工程基础已发布到用户指定的私有仓库 [Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，默认分支 `main`。
 
@@ -12,14 +12,15 @@
 2. [课程要求映射](docs/review/course-requirements.md)：课程硬要求与组内建议的区别。
 3. [输入清单](inputs/README.md)：原位材料、所需附件与尚未复现的 A 基准。
 4. [设计入口](docs/design/README.md)、[六指标映射](docs/design/metric-model-mapping.md)、[B/C/D 契约](docs/contracts/b-c-d-contract.md)。
-5. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[B2 交接](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
+5. [物理设计](docs/design/physical-design.md)、[B2 验证](docs/evidence/b2-validation.md)及[执行入口](scripts/README.md)。
+6. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[B3 交接](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
 
 ## 角色与阶段
 
 | 角色 | 交付职责 | 当前状态 |
 |---|---|---|
 | A | 立项、需求、来源、指标定义与源核算依据 | 收到 PDF；附件未收到 |
-| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B1 概念/逻辑/契约已设计；B2 物理与建表待做 |
+| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B2 已在独立测试库验证；B3 复核/报告待做 |
 | C | 原始导入、清洗、维度/事实装载、汇总查询、质量与重跑 | 待实施 |
 | D | 接入真实查询的展示、筛选、多维分析、录屏 | 待实施 |
 
@@ -39,12 +40,12 @@ diagrams/                  可编辑 Mermaid 概念/星型/血缘图
 docs/evidence/             有范围说明的核验证据与提交检查
 docs/handoff/              下一阶段执行顺序与验收门槛
 docs/superpowers/plans/    本阶段实施记录
-sql/ddl/                   后续 B 的建库、分层与建表脚本
-sql/validation/            后续 B 的结构及约束验证脚本
+sql/ddl/                   B2 编号结构/约束/索引/发布门槛 SQL
+sql/validation/            真实目录采集与结构一致性检查
 etl/                       后续 C 的完整加工链路
 dashboard/                 后续 D 的展示工程
-scripts/                   后续工程辅助脚本
-tests/                     后续独立边界夹具与验证入口
+scripts/                   受保护的 SQLcmd 部署/验证入口
+tests/                     标准库行为测试与事务回滚合成夹具
 data/                      本地数据说明；实际数据被忽略
 ```
 
@@ -52,7 +53,7 @@ data/                      本地数据说明；实际数据被忽略
 
 ## 环境与接续
 
-目标为 **SQL Server 2019，T-SQL，数据库兼容级别 150**。本机只读核验连接 `localhost` 成功，版本 `15.0.2000.5`，Developer Edition；尚未创建项目数据库或执行 DDL。[环境记录](docs/evidence/environment-check.md) 提供可复查命令。
+目标为 **SQL Server 2019，T-SQL，数据库兼容级别 150**。本机 `localhost` 版本 `15.0.2000.5`，Developer Edition。已新建并验证 `CitibikeDW_B_Test`；`CitibikeDW` 未创建，课程库未被本阶段写入。[B2 证据](docs/evidence/b2-validation.md) 区分结构、合成行为与真实数据验收。
 
 在现有根目录接续：
 
@@ -62,7 +63,16 @@ git status --short
 git log -3 --oneline
 ```
 
-新机器拉取仓库后，先阅读输入清单，再获取课程原件和 A 附件。`inputs/local-materials.json` 中的 `../` 路径相对于本仓库；远程克隆不会自动带上这些材料。当前没有 ETL、建表或页面启动命令。
+新机器先读输入清单并取得课程原件与 A 附件。`inputs/local-materials.json` 中的 `../` 路径相对于仓库，克隆不会带上材料。建表/验证使用下列命令；部署默认测试库，有漂移则拒绝，不重置已有数据。
+
+```powershell
+python -X utf8 scripts/warehouse.py inspect
+python -X utf8 scripts/warehouse.py deploy
+python -X utf8 scripts/warehouse.py verify
+python -X utf8 scripts/warehouse.py boundaries
+```
+
+前提为 Python 3.10+、已安装的 Microsoft sqlcmd 和 Windows 集成认证。参数及 `.env.example` 用法见 scripts/README；本阶段没有完整 ETL 或页面启动命令。
 
 ## 数据与材料管理
 
