@@ -42,3 +42,7 @@
 - [DATEDIFF_BIG](https://learn.microsoft.com/en-us/sql/t-sql/functions/datediff-big-transact-sql?view=sql-server-ver15)：返回 bigint，支持微秒；比 int 微秒差适合本项目时长中间量。
 
 这些资料支持后续技术选择；当前未执行建表，不宣称兼容级别已在项目数据库设置。
+
+## B1 补充核对：精确字符串身份
+
+本阶段另查 Microsoft [字符串比较规则](https://learn.microsoft.com/en-us/sql/t-sql/language-elements/string-comparison-assignment?view=sql-server-ver15)、[CAST/CONVERT](https://learn.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15) 和 [binary/varbinary](https://learn.microsoft.com/en-us/sql/t-sql/data-types/binary-and-varbinary-transact-sql?view=sql-server-ver15)。普通字符串等值会受到补齐尾空格的比较规则影响，字符转二进制长度不足也可能截断。因此 B1 明确定义原文与完整 UTF-16LE 身份，B2 再验证长度和无损等值实现；本次没有执行 SQL 证明物理实现已通过。

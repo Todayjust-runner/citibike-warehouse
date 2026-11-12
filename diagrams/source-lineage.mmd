@@ -1,0 +1,23 @@
+flowchart LR
+    FILE["meta.source_member<br/>ZIP / CSV 全哈希及成员清单"]
+    RUN["meta.load_run + meta.run_source<br/>固定输入 / 版本 / 发布状态"]
+    RAW["ods.trip_raw<br/>每条源记录 / 13 列原文"]
+    DISP["meta.row_disposition<br/>每运行每源行一个主去向"]
+    A["ACCEPTED<br/>有效组唯一代表"]
+    D["DUPLICATE_EXACT<br/>有效组其余同内容记录"]
+    X["REJECTED<br/>唯一主原因 / 附属问题"]
+    FACT["dwd.fact_trip<br/>一次有效 ride_id"]
+    COV["meta.coverage<br/>出发 / 归还独立证据"]
+    ADS["dws 派生汇总 / ads 查询契约<br/>仅同一已发布 run_id"]
+    FILE --> RAW
+    FILE --> RUN
+    RUN --> DISP
+    RAW --> DISP
+    DISP --> A
+    DISP --> D
+    DISP --> X
+    A -->|"1:1"| FACT
+    D -->|"N:1 追溯同一事实"| FACT
+    RUN --> COV
+    FACT --> ADS
+    COV --> ADS

@@ -54,7 +54,7 @@
       "bytes": 16029102,
       "sha256": "084d9daccbcd671e7b181d2a52c9d8a740575c9ddcde1122df4566611e47e642",
       "role": "reference_book",
-      "read_scope": "仅核实存在及哈希；未通读",
+      "read_scope": "B0 核实存在和哈希；B1 抽读 PDF 62-64、92-94、144-145、168-169 页，未通读",
       "preservation": "original_in_place_not_copied_to_repository"
     },
     {

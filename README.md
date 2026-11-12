@@ -1,6 +1,6 @@
 # 共享单车骑行运营分析数仓系统的设计与实现
 
-本仓库是课程共享单车数仓项目的工程基础。当前阶段为 **B0：A 交付审查与工程初始化**；三级设计、DDL、建表验证、完整 ETL 和展示均未完成。事实、证据和待办以 [STATUS](STATUS.md) 为准。
+本仓库是课程共享单车数仓项目工程。当前已完成 **B0 工程基础与 B1 概念/逻辑设计和契约**；物理设计、DDL、建表验证、完整 ETL 和展示仍未完成。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
 
 工程基础已发布到用户指定的私有仓库 [Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，默认分支 `main`。
 
@@ -11,15 +11,15 @@
 1. [A 交付审查](docs/review/a-delivery-review.md)：文中声明、实际核验与缺失附件影响。
 2. [课程要求映射](docs/review/course-requirements.md)：课程硬要求与组内建议的区别。
 3. [输入清单](inputs/README.md)：原位材料、所需附件与尚未复现的 A 基准。
-4. [决定记录](docs/decisions/README.md)、[B/C/D 交接契约](docs/contracts/b-c-d-contract.md)。
-5. [下一阶段交接](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
+4. [设计入口](docs/design/README.md)、[六指标映射](docs/design/metric-model-mapping.md)、[B/C/D 契约](docs/contracts/b-c-d-contract.md)。
+5. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[B2 交接](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
 
 ## 角色与阶段
 
 | 角色 | 交付职责 | 当前状态 |
 |---|---|---|
 | A | 立项、需求、来源、指标定义与源核算依据 | 收到 PDF；附件未收到 |
-| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | 本阶段仅完成工程基础与约束整理 |
+| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B1 概念/逻辑/契约已设计；B2 物理与建表待做 |
 | C | 原始导入、清洗、维度/事实装载、汇总查询、质量与重跑 | 待实施 |
 | D | 接入真实查询的展示、筛选、多维分析、录屏 | 待实施 |
 
@@ -32,8 +32,10 @@ inputs/                    原位材料哈希、缺失输入与 A 声明值
 docs/review/               A 交付审查、课程要求映射
 docs/sources/              官方来源与字段核对
 docs/decisions/            决定与开放问题
-docs/contracts/            B/C/D 最低交接要求
-docs/design/               下一阶段三级设计交付入口
+docs/planning/             四阶段计划和唯一详细 STATUS
+docs/contracts/            B→C 建模与 C→D 查询契约
+docs/design/               概念/逻辑模型、字段字典、映射与待核实属性
+diagrams/                  可编辑 Mermaid 概念/星型/血缘图
 docs/evidence/             有范围说明的核验证据与提交检查
 docs/handoff/              下一阶段执行顺序与验收门槛
 docs/superpowers/plans/    本阶段实施记录
@@ -46,7 +48,7 @@ tests/                     后续独立边界夹具与验证入口
 data/                      本地数据说明；实际数据被忽略
 ```
 
-目录 README 用于保存职责和准入要求，不代表已有实现。
+设计入口列出已完成设计；各实现目录的 README 仅保存后续职责，不代表已有实现。
 
 ## 环境与接续
 

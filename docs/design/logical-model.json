@@ -1,0 +1,1392 @@
+{
+  "model_version": "1.0",
+  "status": "B_design_baseline_not_business_signoff_or_physical_validation",
+  "metric_rule_version": "A-1.0",
+  "processing_policy_version": "B1-1.0",
+  "business_fact": "dwd.fact_trip",
+  "notes": [
+    "Logical types only; SQL Server lengths, exact SQL types, indexes and DDL belong to conversation three.",
+    "Every query locks one published run_id. Station display snapshots are scoped to that run; no invented source historical versions.",
+    "source_timestamp is offset-free; exact integer microseconds must be representable, otherwise publication stops pending a precision decision."
+  ],
+  "tables": [
+    {
+      "name": "meta.source_member",
+      "grain": "一个原始 ZIP 哈希与其一个 CSV 成员路径；空 CSV 也登记",
+      "primary_key": [
+        "source_member_id"
+      ],
+      "unique_keys": [
+        [
+          "zip_sha256",
+          "member_path_identity"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "source_member_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "成员代理键"
+        },
+        {
+          "name": "zip_sha256",
+          "logical_type": "sha256_hex",
+          "nullable": false,
+          "description": "完整 ZIP 字节 SHA-256；不是 ETag"
+        },
+        {
+          "name": "zip_url",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "官方取得地址"
+        },
+        {
+          "name": "zip_bytes",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "完整压缩包字节数"
+        },
+        {
+          "name": "zip_month_label",
+          "logical_type": "year_month",
+          "nullable": false,
+          "description": "文件名月份标签，不是事件日期"
+        },
+        {
+          "name": "zip_csv_member_count",
+          "logical_type": "positive_integer",
+          "nullable": false,
+          "description": "ZIP 内全部 CSV 成员数，不只首个"
+        },
+        {
+          "name": "archive_inventory_verified",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "全部成员清点并核验完成标志"
+        },
+        {
+          "name": "member_path",
+          "logical_type": "exact_string",
+          "nullable": false,
+          "description": "ZIP 中原始 CSV 成员路径"
+        },
+        {
+          "name": "member_path_identity",
+          "logical_type": "binary_identity",
+          "nullable": false,
+          "description": "member_path 的 UTF-16LE 无 BOM 字节，用于精确等值"
+        },
+        {
+          "name": "csv_sha256",
+          "logical_type": "sha256_hex",
+          "nullable": false,
+          "description": "解压后完整 CSV 字节 SHA-256"
+        },
+        {
+          "name": "csv_header",
+          "logical_type": "ordered_string_list",
+          "nullable": false,
+          "description": "原始 13 列表头与次序"
+        },
+        {
+          "name": "csv_data_record_count",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "CSV 数据记录数，不含表头"
+        },
+        {
+          "name": "acquired_at_utc",
+          "logical_type": "utc_instant",
+          "nullable": false,
+          "description": "取得时间；审计时间与业务时间分开"
+        }
+      ]
+    },
+    {
+      "name": "meta.load_run",
+      "grain": "一次固定输入集合与规则/代码版本的全量构建尝试",
+      "primary_key": [
+        "run_id"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "运行标识；不得跨运行聚合事实"
+        },
+        {
+          "name": "data_scope",
+          "logical_type": "exact_string",
+          "nullable": false,
+          "description": "固定 JC_official_snapshot，表示来源分区而非完整纽约"
+        },
+        {
+          "name": "input_set_sha256",
+          "logical_type": "sha256_hex",
+          "nullable": false,
+          "description": "排序后的全成员身份/哈希清单指纹"
+        },
+        {
+          "name": "model_version",
+          "logical_type": "version_string",
+          "nullable": false,
+          "description": "本逻辑交接为 1.0"
+        },
+        {
+          "name": "metric_rule_version",
+          "logical_type": "version_string",
+          "nullable": false,
+          "description": "A-1.0；业务定义变更需新版本"
+        },
+        {
+          "name": "processing_policy_version",
+          "logical_type": "version_string",
+          "nullable": false,
+          "description": "B1-1.0；字节比较/排除顺序等技术规则"
+        },
+        {
+          "name": "code_revision",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "C 实际执行代码提交号，不得用设计提交冒充 ETL 代码"
+        },
+        {
+          "name": "status",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "CREATED/RUNNING/VALIDATED/PUBLISHED/FAILED"
+        },
+        {
+          "name": "is_current",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "同一 data_scope 至多一行 true，且 status=PUBLISHED"
+        },
+        {
+          "name": "started_at_utc",
+          "logical_type": "utc_instant",
+          "nullable": false,
+          "description": "执行审计开始"
+        },
+        {
+          "name": "finished_at_utc",
+          "logical_type": "utc_instant",
+          "nullable": true,
+          "description": "执行完成，运行中可空"
+        }
+      ]
+    },
+    {
+      "name": "meta.run_source",
+      "grain": "一个运行选中的一个源成员，包括无数据行成员",
+      "primary_key": [
+        "run_id",
+        "source_member_id"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "所属构建尝试"
+        },
+        {
+          "name": "source_member_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "选入的完整 CSV 成员"
+        },
+        {
+          "name": "read_record_count",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "本次实际读取的数据记录数"
+        },
+        {
+          "name": "read_status",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "PENDING/COMPLETE/FAILED；非 COMPLETE 禁止发布"
+        }
+      ]
+    },
+    {
+      "name": "ods.trip_raw",
+      "grain": "一个 source_member_id 内的一条 CSV 数据记录，不去重、不筛时间",
+      "primary_key": [
+        "source_row_id"
+      ],
+      "unique_keys": [
+        [
+          "source_member_id",
+          "csv_record_number"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "source_row_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "原始行代理键"
+        },
+        {
+          "name": "source_member_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "原文件及成员身份"
+        },
+        {
+          "name": "csv_record_number",
+          "logical_type": "positive_integer",
+          "nullable": false,
+          "description": "表头为记录 1，首条数据为 2；不是物理文本行号"
+        },
+        {
+          "name": "field_count",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "实际解析单元格数量，要求 13 才可正常处理"
+        },
+        {
+          "name": "raw_values",
+          "logical_type": "ordered_string_list",
+          "nullable": false,
+          "description": "完整已解析单元格数组，保持空字符串和原文"
+        },
+        {
+          "name": "ride_id_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 ride_id 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "rideable_type_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 rideable_type 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "started_at_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 started_at 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "ended_at_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 ended_at 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "start_station_name_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 start_station_name 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "start_station_id_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 start_station_id 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "end_station_name_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 end_station_name 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "end_station_id_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 end_station_id 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "start_lat_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 start_lat 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "start_lng_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 start_lng 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "end_lat_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 end_lat 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "end_lng_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 end_lng 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        },
+        {
+          "name": "member_casual_raw",
+          "logical_type": "source_text",
+          "nullable": true,
+          "description": "原始 member_casual 单元格；空字段保留空字符串，NULL 仅表示无法安全解析该列"
+        }
+      ]
+    },
+    {
+      "name": "meta.row_disposition",
+      "grain": "一个运行对一个源行的唯一主去向；同时充当源行到事实血缘",
+      "primary_key": [
+        "run_id",
+        "source_row_id"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "处理此源行的运行"
+        },
+        {
+          "name": "source_row_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "原始行，运行输入内每行恰好一条"
+        },
+        {
+          "name": "outcome",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "ACCEPTED/DUPLICATE_EXACT/REJECTED"
+        },
+        {
+          "name": "primary_reason",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "NONE/MISSING_RIDE_ID/CONFLICTING_RIDE_ID/TIME_PARSE_ERROR/NONPOSITIVE_DURATION/DURATION_LT_60S/DURATION_GT_24H"
+        },
+        {
+          "name": "trip_key",
+          "logical_type": "integer_key",
+          "nullable": true,
+          "description": "ACCEPTED 或 DUPLICATE_EXACT 指向同运行事实，REJECTED 必为空"
+        },
+        {
+          "name": "representative_source_row_id",
+          "logical_type": "integer_key",
+          "nullable": true,
+          "description": "保留代表源行；ACCEPTED 指自己、DUPLICATE_EXACT 指代表、REJECTED 为空"
+        },
+        {
+          "name": "warning_codes",
+          "logical_type": "string_set",
+          "nullable": false,
+          "description": "非互斥附属问题，如缺坐标/站点、未知标签；空集合允许"
+        }
+      ]
+    },
+    {
+      "name": "meta.coverage",
+      "grain": "一个运行、一个时间角色的一段有证据的覆盖声明；同角色区间不重叠",
+      "primary_key": [
+        "coverage_id"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "time_role",
+          "coverage_start"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "coverage_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "覆盖记录代理键"
+        },
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "适用的运行输入"
+        },
+        {
+          "name": "time_role",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "departure 或 arrival"
+        },
+        {
+          "name": "coverage_start",
+          "logical_type": "source_timestamp",
+          "nullable": false,
+          "description": "左闭起点，源无偏移时间"
+        },
+        {
+          "name": "coverage_end_exclusive",
+          "logical_type": "source_timestamp",
+          "nullable": false,
+          "description": "右开终点，大于起点"
+        },
+        {
+          "name": "coverage_status",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "complete/partial/unknown；只相对约定 JC 发布快照"
+        },
+        {
+          "name": "proof_ref",
+          "logical_type": "text",
+          "nullable": true,
+          "description": "检查代码/输入清单/证据路径；complete 必须非空"
+        }
+      ]
+    },
+    {
+      "name": "dim.date",
+      "grain": "一个源日历日期，覆盖所有入选有效事实两端日期",
+      "primary_key": [
+        "date_key"
+      ],
+      "unique_keys": [
+        [
+          "calendar_date"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "date_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "YYYYMMDD；有效事实无未知日期"
+        },
+        {
+          "name": "calendar_date",
+          "logical_type": "date",
+          "nullable": false,
+          "description": "真实公历日期"
+        },
+        {
+          "name": "calendar_year",
+          "logical_type": "integer",
+          "nullable": false,
+          "description": "公历年"
+        },
+        {
+          "name": "calendar_quarter",
+          "logical_type": "integer",
+          "nullable": false,
+          "description": "1-4"
+        },
+        {
+          "name": "calendar_month",
+          "logical_type": "integer",
+          "nullable": false,
+          "description": "1-12"
+        },
+        {
+          "name": "year_month",
+          "logical_type": "year_month",
+          "nullable": false,
+          "description": "YYYY-MM"
+        },
+        {
+          "name": "day_of_month",
+          "logical_type": "integer",
+          "nullable": false,
+          "description": "1-31"
+        },
+        {
+          "name": "iso_weekday",
+          "logical_type": "integer",
+          "nullable": false,
+          "description": "1=周一，7=周日，计算不得依赖默认 DATEFIRST"
+        },
+        {
+          "name": "weekday_name",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "固定中文星期名称，不代表当地工作日"
+        }
+      ]
+    },
+    {
+      "name": "dim.hour",
+      "grain": "一个日内小时；日期与小时组合才标识事件小时桶",
+      "primary_key": [
+        "hour_key"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "hour_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "0-23"
+        },
+        {
+          "name": "hour_label",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "00:00 等展示文本"
+        }
+      ]
+    },
+    {
+      "name": "dim.station",
+      "grain": "一个运行内的一个观察到的非空站点 ID，另有 key=0 未知成员",
+      "primary_key": [
+        "run_id",
+        "station_key"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "station_id_identity"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "运行内展示快照；不是业务历史版本"
+        },
+        {
+          "name": "station_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "0 表示专用未知，真实站点使用正数"
+        },
+        {
+          "name": "station_id",
+          "logical_type": "exact_string",
+          "nullable": true,
+          "description": "原站点 ID，未知成员为空"
+        },
+        {
+          "name": "station_id_identity",
+          "logical_type": "binary_identity",
+          "nullable": true,
+          "description": "非空 station_id 的 UTF-16LE 无 BOM 精确身份"
+        },
+        {
+          "name": "station_name",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "确定性选出的非空源名；无名时回退 ID，未知显示未知站点"
+        },
+        {
+          "name": "is_unknown",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "仅 station_key=0 为 true"
+        },
+        {
+          "name": "name_is_fallback",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "站名是否回退显示"
+        },
+        {
+          "name": "name_source_row_id",
+          "logical_type": "integer_key",
+          "nullable": true,
+          "description": "选名所用源行；无源名时空"
+        },
+        {
+          "name": "reference_lat",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "最近有效源坐标观察纬度，不是官方现状坐标"
+        },
+        {
+          "name": "reference_lng",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "与纬度同一次观察；必须成对存在"
+        },
+        {
+          "name": "coordinate_source_row_id",
+          "logical_type": "integer_key",
+          "nullable": true,
+          "description": "参考坐标来源行"
+        },
+        {
+          "name": "coordinate_role",
+          "logical_type": "enum",
+          "nullable": true,
+          "description": "start/end；无参考坐标时空"
+        }
+      ]
+    },
+    {
+      "name": "dim.bike_type",
+      "grain": "一个非空原始标签，另有 key=0 缺失成员",
+      "primary_key": [
+        "bike_type_key"
+      ],
+      "unique_keys": [
+        [
+          "bike_type_identity"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "bike_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "0 是缺失标签，其余代理键；不借键值推断已知类别"
+        },
+        {
+          "name": "bike_type_code",
+          "logical_type": "exact_string",
+          "nullable": true,
+          "description": "原始标签；未知缺失成员为空"
+        },
+        {
+          "name": "bike_type_identity",
+          "logical_type": "binary_identity",
+          "nullable": true,
+          "description": "非空原标签的 UTF-16LE 无 BOM 字节"
+        },
+        {
+          "name": "bike_type_label",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "展示名；未识别标签仍独立保留"
+        },
+        {
+          "name": "is_unknown",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "仅缺失成员为 true"
+        },
+        {
+          "name": "is_recognized",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "车型仅 classic_bike/electric_bike；会员类型仅 member/casual 为 true"
+        }
+      ]
+    },
+    {
+      "name": "dim.member_type",
+      "grain": "一个非空原始标签，另有 key=0 缺失成员",
+      "primary_key": [
+        "member_type_key"
+      ],
+      "unique_keys": [
+        [
+          "member_type_identity"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "member_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "0 是缺失标签，其余代理键；不借键值推断已知类别"
+        },
+        {
+          "name": "member_type_code",
+          "logical_type": "exact_string",
+          "nullable": true,
+          "description": "原始标签；未知缺失成员为空"
+        },
+        {
+          "name": "member_type_identity",
+          "logical_type": "binary_identity",
+          "nullable": true,
+          "description": "非空原标签的 UTF-16LE 无 BOM 字节"
+        },
+        {
+          "name": "member_type_label",
+          "logical_type": "text",
+          "nullable": false,
+          "description": "展示名；未识别标签仍独立保留"
+        },
+        {
+          "name": "is_unknown",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "仅缺失成员为 true"
+        },
+        {
+          "name": "is_recognized",
+          "logical_type": "boolean",
+          "nullable": false,
+          "description": "车型仅 classic_bike/electric_bike；会员类型仅 member/casual 为 true"
+        }
+      ]
+    },
+    {
+      "name": "dwd.fact_trip",
+      "grain": "一个运行内，一次通过规则的唯一 ride_id 的完整骑行，不裁为 Q3 出发",
+      "primary_key": [
+        "run_id",
+        "trip_key"
+      ],
+      "unique_keys": [
+        [
+          "run_id",
+          "ride_id_identity"
+        ]
+      ],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "查询必须锁定一个已发布运行"
+        },
+        {
+          "name": "trip_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "运行内骑行代理键，不作为用户身份"
+        },
+        {
+          "name": "ride_id",
+          "logical_type": "exact_string",
+          "nullable": false,
+          "description": "非空源骑行 ID，保留大小写及非空值边缘字符"
+        },
+        {
+          "name": "ride_id_identity",
+          "logical_type": "binary_identity",
+          "nullable": false,
+          "description": "ride_id 的 UTF-16LE 无 BOM 字节，精确唯一比较"
+        },
+        {
+          "name": "representative_source_row_id",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "确定性选出的接受源行"
+        },
+        {
+          "name": "started_at",
+          "logical_type": "source_timestamp",
+          "nullable": false,
+          "description": "源出发时间，保留实际精度至少毫秒"
+        },
+        {
+          "name": "ended_at",
+          "logical_type": "source_timestamp",
+          "nullable": false,
+          "description": "源归还时间，保留实际精度至少毫秒"
+        },
+        {
+          "name": "duration_us",
+          "logical_type": "positive_integer",
+          "nullable": false,
+          "description": "精确整数微秒，60000000 至 86400000000 含两端"
+        },
+        {
+          "name": "trip_count",
+          "logical_type": "positive_integer",
+          "nullable": false,
+          "description": "恒为 1，不能存聚合骑行数"
+        },
+        {
+          "name": "start_date_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "started_at 对应日期"
+        },
+        {
+          "name": "start_hour_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "started_at 小时 0-23"
+        },
+        {
+          "name": "end_date_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "ended_at 对应日期"
+        },
+        {
+          "name": "end_hour_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "ended_at 小时 0-23"
+        },
+        {
+          "name": "start_station_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "起点站角色，可为 0"
+        },
+        {
+          "name": "end_station_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "终点站角色，可为 0"
+        },
+        {
+          "name": "bike_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "车型标签，包括缺失或未识别值"
+        },
+        {
+          "name": "member_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "骑行类型标签，不是用户键"
+        },
+        {
+          "name": "start_lat",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "仅保留有效坐标对的解析纬度"
+        },
+        {
+          "name": "start_lng",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "仅保留有效坐标对的解析经度"
+        },
+        {
+          "name": "end_lat",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "仅保留有效坐标对的解析纬度"
+        },
+        {
+          "name": "end_lng",
+          "logical_type": "exact_decimal",
+          "nullable": true,
+          "description": "仅保留有效坐标对的解析经度"
+        },
+        {
+          "name": "start_coordinate_status",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "valid/missing/nonnumeric/out_of_range"
+        },
+        {
+          "name": "end_coordinate_status",
+          "logical_type": "enum",
+          "nullable": false,
+          "description": "valid/missing/nonnumeric/out_of_range"
+        }
+      ]
+    },
+    {
+      "name": "dws.trip_hourly",
+      "grain": "运行 × 出发日期 × 小时 × 车型 × 会员骑行类型",
+      "primary_key": [
+        "run_id",
+        "start_date_key",
+        "start_hour_key",
+        "bike_type_key",
+        "member_type_key"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "单次运行"
+        },
+        {
+          "name": "start_date_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "出发日期"
+        },
+        {
+          "name": "start_hour_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "出发小时"
+        },
+        {
+          "name": "bike_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "车型"
+        },
+        {
+          "name": "member_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "会员骑行类型"
+        },
+        {
+          "name": "ride_count",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "互斥骑行数求和"
+        },
+        {
+          "name": "duration_us",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "总微秒，不存预先舍入的平均值"
+        }
+      ]
+    },
+    {
+      "name": "dws.station_hourly",
+      "grain": "运行 × 事件日期 × 小时 × 站点 × 车型；两事件角色聚合后合并",
+      "primary_key": [
+        "run_id",
+        "event_date_key",
+        "event_hour_key",
+        "station_key",
+        "bike_type_key"
+      ],
+      "unique_keys": [],
+      "fields": [
+        {
+          "name": "run_id",
+          "logical_type": "opaque_id",
+          "nullable": false,
+          "description": "单次运行"
+        },
+        {
+          "name": "event_date_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "两侧各自事件日期"
+        },
+        {
+          "name": "event_hour_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "两侧各自事件小时"
+        },
+        {
+          "name": "station_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "事件站点，可为 0"
+        },
+        {
+          "name": "bike_type_key",
+          "logical_type": "integer_key",
+          "nullable": false,
+          "description": "两侧使用相同车型维度"
+        },
+        {
+          "name": "departures",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "按 started_at/start_station_key 的次数"
+        },
+        {
+          "name": "arrivals",
+          "logical_type": "nonnegative_integer",
+          "nullable": false,
+          "description": "按 ended_at/end_station_key 的次数"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "table": "meta.run_source",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "meta.run_source",
+      "fields": [
+        "source_member_id"
+      ],
+      "references": "meta.source_member",
+      "reference_fields": [
+        "source_member_id"
+      ]
+    },
+    {
+      "table": "ods.trip_raw",
+      "fields": [
+        "source_member_id"
+      ],
+      "references": "meta.source_member",
+      "reference_fields": [
+        "source_member_id"
+      ]
+    },
+    {
+      "table": "meta.row_disposition",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "meta.coverage",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "dim.station",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "dws.trip_hourly",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "dws.station_hourly",
+      "fields": [
+        "run_id"
+      ],
+      "references": "meta.load_run",
+      "reference_fields": [
+        "run_id"
+      ]
+    },
+    {
+      "table": "meta.row_disposition",
+      "fields": [
+        "source_row_id"
+      ],
+      "references": "ods.trip_raw",
+      "reference_fields": [
+        "source_row_id"
+      ]
+    },
+    {
+      "table": "meta.row_disposition",
+      "fields": [
+        "representative_source_row_id"
+      ],
+      "references": "ods.trip_raw",
+      "reference_fields": [
+        "source_row_id"
+      ]
+    },
+    {
+      "table": "meta.row_disposition",
+      "fields": [
+        "run_id",
+        "trip_key"
+      ],
+      "references": "dwd.fact_trip",
+      "reference_fields": [
+        "run_id",
+        "trip_key"
+      ]
+    },
+    {
+      "table": "dim.station",
+      "fields": [
+        "name_source_row_id"
+      ],
+      "references": "ods.trip_raw",
+      "reference_fields": [
+        "source_row_id"
+      ]
+    },
+    {
+      "table": "dim.station",
+      "fields": [
+        "coordinate_source_row_id"
+      ],
+      "references": "ods.trip_raw",
+      "reference_fields": [
+        "source_row_id"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "representative_source_row_id"
+      ],
+      "references": "ods.trip_raw",
+      "reference_fields": [
+        "source_row_id"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "start_date_key"
+      ],
+      "references": "dim.date",
+      "reference_fields": [
+        "date_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "start_hour_key"
+      ],
+      "references": "dim.hour",
+      "reference_fields": [
+        "hour_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "run_id",
+        "start_station_key"
+      ],
+      "references": "dim.station",
+      "reference_fields": [
+        "run_id",
+        "station_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "end_date_key"
+      ],
+      "references": "dim.date",
+      "reference_fields": [
+        "date_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "end_hour_key"
+      ],
+      "references": "dim.hour",
+      "reference_fields": [
+        "hour_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "run_id",
+        "end_station_key"
+      ],
+      "references": "dim.station",
+      "reference_fields": [
+        "run_id",
+        "station_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "bike_type_key"
+      ],
+      "references": "dim.bike_type",
+      "reference_fields": [
+        "bike_type_key"
+      ]
+    },
+    {
+      "table": "dwd.fact_trip",
+      "fields": [
+        "member_type_key"
+      ],
+      "references": "dim.member_type",
+      "reference_fields": [
+        "member_type_key"
+      ]
+    },
+    {
+      "table": "dws.trip_hourly",
+      "fields": [
+        "start_date_key"
+      ],
+      "references": "dim.date",
+      "reference_fields": [
+        "date_key"
+      ]
+    },
+    {
+      "table": "dws.trip_hourly",
+      "fields": [
+        "start_hour_key"
+      ],
+      "references": "dim.hour",
+      "reference_fields": [
+        "hour_key"
+      ]
+    },
+    {
+      "table": "dws.trip_hourly",
+      "fields": [
+        "bike_type_key"
+      ],
+      "references": "dim.bike_type",
+      "reference_fields": [
+        "bike_type_key"
+      ]
+    },
+    {
+      "table": "dws.station_hourly",
+      "fields": [
+        "event_date_key"
+      ],
+      "references": "dim.date",
+      "reference_fields": [
+        "date_key"
+      ]
+    },
+    {
+      "table": "dws.station_hourly",
+      "fields": [
+        "event_hour_key"
+      ],
+      "references": "dim.hour",
+      "reference_fields": [
+        "hour_key"
+      ]
+    },
+    {
+      "table": "dws.station_hourly",
+      "fields": [
+        "bike_type_key"
+      ],
+      "references": "dim.bike_type",
+      "reference_fields": [
+        "bike_type_key"
+      ]
+    },
+    {
+      "table": "dws.trip_hourly",
+      "fields": [
+        "member_type_key"
+      ],
+      "references": "dim.member_type",
+      "reference_fields": [
+        "member_type_key"
+      ]
+    },
+    {
+      "table": "dws.station_hourly",
+      "fields": [
+        "run_id",
+        "station_key"
+      ],
+      "references": "dim.station",
+      "reference_fields": [
+        "run_id",
+        "station_key"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "M01",
+      "fact": "dwd.fact_trip",
+      "time_role": "departure",
+      "required_fact_fields": [
+        "run_id",
+        "ride_id_identity",
+        "started_at",
+        "bike_type_key",
+        "trip_count"
+      ]
+    },
+    {
+      "id": "M02",
+      "fact": "dwd.fact_trip",
+      "time_role": "departure",
+      "required_fact_fields": [
+        "run_id",
+        "started_at",
+        "bike_type_key",
+        "duration_us",
+        "trip_count"
+      ]
+    },
+    {
+      "id": "M03",
+      "fact": "dwd.fact_trip",
+      "time_role": "departure",
+      "required_fact_fields": [
+        "run_id",
+        "started_at",
+        "bike_type_key",
+        "member_type_key",
+        "trip_count"
+      ]
+    },
+    {
+      "id": "M04",
+      "fact": "dwd.fact_trip",
+      "time_role": "departure",
+      "required_fact_fields": [
+        "run_id",
+        "started_at",
+        "start_station_key",
+        "bike_type_key",
+        "trip_count"
+      ]
+    },
+    {
+      "id": "M05",
+      "fact": "dwd.fact_trip",
+      "time_role": "arrival",
+      "required_fact_fields": [
+        "run_id",
+        "ended_at",
+        "end_station_key",
+        "bike_type_key",
+        "trip_count"
+      ]
+    },
+    {
+      "id": "M06",
+      "fact": "dwd.fact_trip",
+      "time_role": "dual",
+      "required_fact_fields": [
+        "run_id",
+        "started_at",
+        "ended_at",
+        "start_station_key",
+        "end_station_key",
+        "bike_type_key",
+        "trip_count"
+      ]
+    }
+  ]
+}
