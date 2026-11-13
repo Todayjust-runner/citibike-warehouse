@@ -1,15 +1,13 @@
-# B 报告正文与合并说明
+# B报告正文
 
-版本 B 交付 v1.2，2026-11-13。以下正文对应原位《期末大作业文档模版.docx》的第 3、4、5 章，可按章节合入最终 Word。正文引用的图已导出 PNG/SVG，原始 Mermaid 保留可编辑性。
+以下三章对应课程报告模板，可合入最终Word：
 
-| 正文 | 内容 | 对应图 |
-|---|---|---|
-| [第 3 章 概念设计](03-conceptual-design.md) | Kimball 四步法、信息包、业务边界 | 图 3-1 概念模型 |
-| [第 4 章 逻辑设计](04-logical-design.md) | 总线、星型、14 表、源映射、六指标与血缘 | 图 4-1 星型、图 4-2 血缘 |
-| [第 5 章 物理设计](05-physical-design.md) | SQL 类型、约束/索引、部署与实际验证 | 表 5-1 至 5-3、可运行命令 |
+| 正文 | 内容 |
+|---|---|
+| [第3章 概念设计](03-conceptual-design.md) | 建模四步法、信息包和业务范围 |
+| [第4章 逻辑设计](04-logical-design.md) | 总线/星型、表粒度、角色和血缘 |
+| [第5章 物理设计](05-physical-design.md) | SQL类型、约束/索引、部署与实际验证 |
 
-合并时保留图表编号及“设计/实测/待验”的限定，按最终报告统一字体、页码、目录和参考文献编号。完整 132 字段不在正文重复铺表，可把[逻辑字典](../design/data-dictionary.md)和[物理字典](../design/physical-data-dictionary.md)编为附录；图用 [SVG](../../diagrams/README.md)保持缩放清晰，PNG 可直接插入。合并后按版心检查图中字形大小，必要时单独占页。
+[模型图](../../diagrams/README.md)有Mermaid、SVG和PNG；[逻辑字典](../design/data-dictionary.md)、[物理字典](../design/physical-data-dictionary.md)可作附录。第6章ETL/KPI实现、第7章展示由C/D补充真实内容。
 
-第 6.1 节可引用第 5.4/5.5 的实际平台和命令，勿把结构入口写成 ETL；第 6.3/6.4/6.5 和第 7 章需 C/D 完成真实实现后另写。最终姓名学号、PPT、录屏、分工和打包由团队汇总，当前不填虚构信息。
-
-证据入口：[B3 复核](../review/b3-final-review.md)、[执行摘要](../evidence/b3-execution-summary.json)、[最终交付索引](../handoff/b-delivery-v1.2.md)。后续公开源的38项A数值已核对，章节已补真实输入适配；仍没有完整ETL/查询/展示验收成功结论，A原包同哈希未确认。
+全项目口径见[需求说明](../requirements.md)，当前进度见[STATUS](../planning/STATUS.md)，测试结果见[最近验证](../evidence/recent-checks.md)。

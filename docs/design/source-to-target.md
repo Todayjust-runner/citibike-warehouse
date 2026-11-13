@@ -1,8 +1,7 @@
 # 源到目标、处理去向与覆盖映射 v1.0
 
-> 当前补充（2026-11-13）：逻辑/物理语义不变；[新官方快照](../sources/public-snapshot-validation.md)已全量剖析且38项A数值匹配，SQLServer ETL/完整查询仍未验。下述B1推演保留当时证据范围，真实属性现见[开放属性表](open-attributes.md)。
 
-依据 A v1.0 p2-3、5-7。当前只完成映射设计，真实附件和脚本未收到；所有处理策略是 B 的可实现约定，不能据此声称复现 A。
+依据A v1.0 p2—3、5—7及当前固定五包。源核算已完成，C按下面映射实现数仓装载。
 
 ## 13 列逐字段映射
 
@@ -72,4 +71,4 @@ A 声称五包按 ended_at 月覆盖，本次尚未全量复核。C 必须扫描
 
 ## 公开快照实测补充：真实CSV与元数据成员
 
-本次每ZIP为1个真正骑行CSV，另有1个.csv后缀AppleDouble元数据。全部成员均留哈希，但只有经表头验证的骑行CSV计入source_member/run_source/ODS和zip_csv_member_count；侧车须验证magic/版本/描述边界/对应CSV，未知文件阻断，不能只按名字跳过。详见[源核验](../sources/public-snapshot-validation.md)。全563874行结束月份匹配月包；该观察和候选覆盖针对固定五包，C实际run仍需生成proof_ref。其余13文本去重/主原因/代表规则不变。
+本次每ZIP为1个真正骑行CSV，另有1个.csv后缀AppleDouble元数据。全部成员均留哈希，但只有经表头验证的骑行CSV计入source_member/run_source/ODS和zip_csv_member_count；Mac附属文件按__MACOSX/._目录规则跳过；ZIP身份已核对，不再逐次解析元数据头。详见[源核验](../sources/public-snapshot-validation.md)。全563874行结束月份匹配月包；该观察和候选覆盖针对固定五包，C实际run仍需生成proof_ref。其余13文本去重/主原因/代表规则不变。

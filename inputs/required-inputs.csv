@@ -1,10 +1,10 @@
 input_id,item,status,pdf_page,owner,design_impact,acceptance_impact,next_action
 A01,A v1.0 PDF,received,1-9,A,可提取需求和业务约束,不能代替附件或运行证据,按local-materials.json保留原位哈希
 A02,202406-202410五份JC原始ZIP及全部内部CSV,public_snapshot_acquired_A_identity_unverified,2;9,A提供/C接收,新下载5个官方ZIP与全部5个骑行CSV已全量剖析并适配B2-1.1；另5个AppleDouble元数据已识别,38项A数值在新快照匹配；缺A哈希不能断言同原快照或数仓ETL通过,C使用public-source-snapshot.json锁定输入并装载；A补原哈希清单供身份比对
-A03,数据核验结果.json及ZIP/CSV哈希清单,missing,2;9,A,无法锁定A使用的输入快照及全部成员,下载新快照不能直接证明匹配A,提供原清单及生成时间
-A04,prepare_bike_a_evidence.py及依赖版本,missing,9,A,无法审查预处理和排除优先级,无法重建A预审结果,提供脚本及依赖说明
-A05,verify_bike_a_source.py及运行输出,missing,8-9,A,无法审查独立核算的细节,无法验证独立复核及舍入规则,提供标准库脚本和运行参数日志
-A06,完整月份与逐站基准CSV,missing,8-9,A,无法校验全站点集合及未知站点编码,HB102单个示例不能代替逐站验收,提供基准文件及字段口径哈希
+A03,数据核验结果.json及ZIP/CSV哈希清单,optional_followup,2;9,A,现有需求和固定公开输入已可开发,用于追溯A原快照或处理细节；数仓先与本仓库源核算对账,A方便时补充，C无需等待
+A04,prepare_bike_a_evidence.py及依赖版本,optional_followup,9,A,现有需求和固定公开输入已可开发,用于追溯A原快照或处理细节；数仓先与本仓库源核算对账,A方便时补充，C无需等待
+A05,verify_bike_a_source.py及运行输出,optional_followup,8-9,A,现有需求和固定公开输入已可开发,用于追溯A原快照或处理细节；数仓先与本仓库源核算对账,A方便时补充，C无需等待
+A06,完整月份与逐站基准CSV,optional_followup,8-9,A,现有需求和固定公开输入已可开发,用于追溯A原快照或处理细节；数仓先与本仓库源核算对账,A方便时补充，C无需等待
 A07,排除明细或分类统计及源行定位说明,independent_public_audit_available_A_detail_missing,3;8-9,A/C,本次全量互斥去向守恒与边界源记录核算已完成,原A排除明细和脚本仍缺；SQLServer真实加工待验,复用源审计摘要及data/audit本地明细；比对A算法并验证仓库去向
 A08,源时间时区及精度或上游生成说明,precision_verified_public_snapshot_timezone_unconfirmed,3;5,A/C,五个骑行CSV起止文本均毫秒精度；按无偏移源值处理,未获上游时区保证；客户端精度和SQL装载仍需核验,保持原文不换时区；C绑定前执行无损检查
 TEAM01,统一演示机器和SQL实例数据库命名,partially_verified,9,B/团队,本机SQL2019可连接但团队部署未确认,不等于建表部署验收通过,下一阶段确认实例权限与隔离数据库

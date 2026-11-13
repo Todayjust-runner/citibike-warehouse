@@ -1,3 +1,10 @@
-# C 的 ETL 目录
+# C：ETL与查询
 
-完整 ETL 本阶段未实施。C 后续按 B 冻结结构实现全成员导入、源行与批次血缘、异常隔离、确定性去重、维度/事实装载、DWS/ADS 查询、源行守恒及同输入重跑。不要只读取 Q3 文件或先按出发窗口过滤归还事件。交接最低要求见 docs/contracts/b-c-d-contract.md。
+固定数据已在仓库内。本目录下一步实现：
+
+1. 读取五包全部真实CSV，导入ODS并记录来源。
+2. 按规则去重/排除，生成维度、事实和源行去向。
+3. 生成两张小时汇总，与源核算对账并验证重跑。
+4. 发布运行，提供五种查询结果给D。
+
+入口：[需求说明](../docs/requirements.md)、[B→C契约](../docs/contracts/b-to-c-model-contract.md)、[验收清单](../docs/handoff/acceptance-checklist.md)。

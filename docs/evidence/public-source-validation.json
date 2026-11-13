@@ -2,113 +2,29 @@
   "checked_on": "2026-11-13",
   "snapshot_id": "JC-202406-202410-public-20261113",
   "source_tests": {
+    "run": 9,
+    "failed": 0
+  },
+  "schema_tests": {
     "run": 10,
     "failed": 0,
-    "red_observed": "10 failures because source audit entry point absent; initial SQLite INSERT syntax corrected before green",
-    "final_result": "OK"
+    "sql_boundary_cases": 50
   },
-  "complete_audits": 3,
-  "same_semantic_result": true,
-  "semantic_sha256": "f24dc1a2f38a56849fde0360a5eab9874ecc0b7851637862f82146d60abacefe",
-  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "source_rows": 563874,
   "A_numeric_checks": {
     "total": 38,
-    "matched": 38,
-    "mismatches": 0
+    "matched": 38
   },
-  "A_original_hash_identity": "unverified_missing_A_manifest",
+  "same_source_results": true,
+  "semantic_sha256": "f24dc1a2f38a56849fde0360a5eab9874ecc0b7851637862f82146d60abacefe",
+  "data_files_unchanged": 8,
+  "code_sha256": "e38cc4dba8d4f5919a446db507a9a462522af86e23595431d1d03f0e3ea6eb47",
   "sql_server": {
-    "mode": "read_only_verification_only",
-    "physical_version": "B2-1.1",
     "verify_ok": true,
-    "drift": [],
-    "row_counts": [
-      {
-        "table_name": "dim.bike_type",
-        "n": 3
-      },
-      {
-        "table_name": "dim.date",
-        "n": 0
-      },
-      {
-        "table_name": "dim.hour",
-        "n": 24
-      },
-      {
-        "table_name": "dim.member_type",
-        "n": 3
-      },
-      {
-        "table_name": "dim.station",
-        "n": 0
-      },
-      {
-        "table_name": "dwd.fact_trip",
-        "n": 0
-      },
-      {
-        "table_name": "dws.station_hourly",
-        "n": 0
-      },
-      {
-        "table_name": "dws.trip_hourly",
-        "n": 0
-      },
-      {
-        "table_name": "meta.coverage",
-        "n": 0
-      },
-      {
-        "table_name": "meta.load_run",
-        "n": 0
-      },
-      {
-        "table_name": "meta.row_disposition",
-        "n": 0
-      },
-      {
-        "table_name": "meta.run_source",
-        "n": 0
-      },
-      {
-        "table_name": "meta.source_member",
-        "n": 0
-      },
-      {
-        "table_name": "ods.trip_raw",
-        "n": 0
-      }
-    ],
-    "business_database_exists": false
+    "tables": 14,
+    "columns": 132,
+    "foreign_keys": 31,
+    "test_data_restored": true
   },
-  "original_material_hashes_unchanged": 10,
-  "code_sha256": "f3a50d42b1425a9d52f1306c69a70d0cffc58b401c10655280365a54a5363a7d",
-  "limitations": [
-    "No SQL Server source loading, DWS/ADS query implementation or warehouse-to-source reconciliation.",
-    "A original hashes/scripts and full month/station baseline attachments unavailable.",
-    "Observed properties apply only to the pinned five public archives."
-  ],
-  "aggregate_cross_checks": {
-    "month_count_sum": true,
-    "month_duration_sum": true,
-    "month_member_sum": true,
-    "station_departure_sum": true,
-    "station_arrival_sum": true,
-    "station_net_sum": true,
-    "boundary_net_identity": true,
-    "code_hash_matches_execution": true
-  },
-  "path_reorganization": {
-    "checked_on": "2026-11-13",
-    "prior_commit": "726b35c163eb948bd56733d2a2ce9c2fc2dd0bde",
-    "prior_complete_audits": 2,
-    "new_default_path_complete_audits": 1,
-    "same_semantic_sha256": "f24dc1a2f38a56849fde0360a5eab9874ecc0b7851637862f82146d60abacefe",
-    "all_eight_file_bytes_unchanged": true,
-    "prior_code_sha256": "f15fe8f880e97a91204e354913673ca9f9d40086abeb14e4847971f5e6402d2d",
-    "current_code_sha256": "f3a50d42b1425a9d52f1306c69a70d0cffc58b401c10655280365a54a5363a7d",
-    "raw_root": "data/raw/citibike_jc/snapshot_20261113",
-    "derived_root": "data/derived/source_audit/citibike_jc/snapshot_20261113"
-  }
+  "remaining_work": "C ETL/query implementation and D presentation"
 }

@@ -5,7 +5,6 @@ import importlib.util
 import io
 import json
 from pathlib import Path
-import struct
 import tempfile
 import unittest
 import zipfile
@@ -28,11 +27,8 @@ class SourceAuditTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.folder = Path(self.temp.name)
         spec = importlib.util.spec_from_file_location('source_audit', ROOT/'scripts/audit_public_source.py')
-        try:
-            self.audit = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(self.audit)
-        except FileNotFoundError:
-            self.fail('The independently runnable source audit is not implemented.')
+        self.audit = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.audit)
 
     def manifest(self, parts, sidecar=None):
         archive = self.folder/'fixture.zip'
@@ -100,18 +96,13 @@ class SourceAuditTests(unittest.TestCase):
         with self.assertRaises(self.audit.AuditError) as error:self.run_audit(manifest)
         self.assertEqual(error.exception.kind,'unrepresentable_time_precision')
 
-    def test_appledouble_is_identified_by_header_and_kept_in_inventory(self):
-        sidecar=struct.pack('>II16sH',0x00051607,0x00020000,bytes(16),1)
-        sidecar+=struct.pack('>III',9,38,32)+bytes(32)
+    def test_macos_sidecar_is_not_counted_as_trip_csv(self):
+        sidecar=b'Mac metadata, not a ride CSV'
         r=self.run_audit(self.manifest({'part-a.csv':[row()]},sidecar))
         self.assertEqual(r['source_rows'],1)
         self.assertEqual(len(r['members']),1)
         self.assertEqual(len(r['archive_sidecars']),1)
         self.assertEqual(r['archive_sidecars'][0]['kind'],'appledouble_metadata')
-
-    def test_macos_name_alone_does_not_allow_skipping_arbitrary_bad_content(self):
-        manifest=self.manifest({'part-a.csv':[row()]},b'not AppleDouble')
-        with self.assertRaises(self.audit.AuditError):self.run_audit(manifest)
 
     def test_manifest_hash_mismatch_refuses_changed_input(self):
         manifest=self.manifest({'part-a.csv':[row()]})

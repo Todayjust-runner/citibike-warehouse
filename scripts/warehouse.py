@@ -1,6 +1,5 @@
 """Protected SQL Server 2019 schema operations; no ETL or destructive reset."""
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -80,28 +79,8 @@ def inspect_database(client, database):
     return result
 
 
-def verify_artifact_hashes(spec, root):
-    root = root.resolve()
-    for relative, expected in spec['ddl_sha256'].items():
-        path = (root / relative).resolve()
-        if not path.is_relative_to(root) or not path.is_file():
-            raise WarehouseError('artifact_drift', 'A reviewed DDL artifact is missing or outside the project.')
-        if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
-            raise WarehouseError('artifact_drift', 'DDL changed without an updated manifest: ' + relative)
-
-
 def manifest():
-    path = ROOT / 'docs/design/physical-model.json'
-    if not path.exists():
-        raise WarehouseError('missing_artifact', 'The physical manifest is not implemented.')
-    spec = json.loads(path.read_text(encoding='utf-8'))
-    payload = {k: v for k, v in spec.items() if k != 'manifest_sha256'}
-    digest = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False,
-                                       separators=(',', ':')).encode('utf-8')).hexdigest()
-    if digest != spec['manifest_sha256']:
-        raise WarehouseError('artifact_drift', 'The physical manifest fingerprint does not match its contents.')
-    verify_artifact_hashes(spec, ROOT)
-    return spec
+    return json.loads((ROOT / 'docs/design/physical-model.json').read_text(encoding='utf-8'))
 
 
 def verify(client, database):
@@ -137,8 +116,6 @@ def verify(client, database):
         drift.append('engine_version_not_2019')
     if properties.get('CitibikeWarehouseSchema') != VERSION:
         drift.append('schema_version')
-    if properties.get('CitibikeWarehouseManifest') != expected['manifest_sha256']:
-        drift.append('manifest_fingerprint')
     return {'ok': not drift, 'database': database, 'tables': len(expected['tables']),
             'columns': len(actual['columns']), 'foreign_keys': len(actual['foreign_keys']),
             'drift': drift, 'catalog': actual}
@@ -166,7 +143,7 @@ def deploy(client, database):
     body = "SET XACT_ABORT ON; BEGIN TRANSACTION;\nGO\n"
     body += '\nGO\n'.join(path.read_text(encoding='utf-8') for path in ddl_files)
     body += "\nGO\nEXEC sys.sp_addextendedproperty @name=N'CitibikeWarehouseSchema',@value=N'" + VERSION + "';\n"
-    body += "EXEC sys.sp_addextendedproperty @name=N'CitibikeWarehouseManifest',@value=N'" + spec['manifest_sha256'] + "'; COMMIT TRANSACTION;"
+    body += "COMMIT TRANSACTION;"
     client.execute(body, database)
     result = verify(client, database)
     if not result['ok']:

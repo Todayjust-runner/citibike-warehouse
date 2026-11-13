@@ -1,20 +1,12 @@
-# 输入与证据等级
+# 输入清单
 
-更新2026-11-13。A交付仍只有PDF；用户后续授权直接获取公开源，现已下载并完整核验新的官方JC五包。两者分开登记，不再把公开可得数据笼统标为缺失。
-
-| 文件 | 当前用途 / 等级 |
+| 文件 | 内容 |
 |---|---|
-| [local-materials.json](local-materials.json) | 10份课程原位材料身份，仍全部一致；不复制原件 |
-| [public-source-snapshot.json](public-source-snapshot.json) | 5 ZIP、10成员SHA/分类、URL/UTC下载时间、CSV行数与输入集指纹；可用新快照 |
-| [required-inputs.csv](required-inputs.csv) | 10项输入状态；公开ZIP可用，A原哈希/脚本/完整逐站附件仍缺 |
-| [a-claimed-baselines.json](a-claimed-baselines.json) | A转录原数值保留；新状态为数值在公开快照匹配、A原身份未证实 |
-| [实际源核算](../docs/evidence/public-source-audit.json) / [38项比较](../docs/evidence/a-public-comparison.json) | 全量剖析与精确核算，不能替代SQLServer ETL验收 |
-| [旧官方对象检查](../docs/evidence/official-object-check.json) | B0 HEAD/局部表头历史，非当前核验上限 |
+| [public-source-snapshot.json](public-source-snapshot.json) | 固定五包URL、取得时间、ZIP/成员身份和数据路径 |
+| [a-claimed-baselines.json](a-claimed-baselines.json) | A PDF的原数值及公开快照核对状态 |
+| [required-inputs.csv](required-inputs.csv) | A附件和团队信息的补充事项 |
+| [local-materials.json](local-materials.json) | 原位课程材料/参考书的身份与阅读范围 |
 
-现有原ZIP在data/raw/citibike_jc/snapshot_20261113，5份骑行CSV仍在ZIP内。每包另1个AppleDouble元数据，其后缀虽.csv，但经文件头/条目/对应关系验证后不进入骑行CSV计数或ODS；全部10成员仍保留SHA。实际5 CSV共563874条，60秒—24小时规则接受563668，206条超24小时排除，重复/冲突0。
+五个真实骑行CSV在ZIP内，共563874行；Mac附属文件不导入。原ZIP和三个核算CSV已随私有工程保存，分类见[data目录](../data/README.md)。现有数据可直接用于C的ETL和数仓对账。
 
-源审计重复运行两次，语义结果一致，38项A可比数值匹配。仍未收到A原数据核验结果.json、两个脚本/环境/日志、全量月份/逐站基准，故不能确认下载字节等同A原包或全部处理细节相同。C可先使用本次锁定输入，不必等待公开数据本身；接到A哈希后再比身份。
-
-[获取/重跑说明](../docs/sources/public-snapshot-validation.md)给出SHA固定的恢复命令。CSV定位按表头记录1/首数据2，多行字段按解析记录号；该定义由新核验程序明确实现，不代表已证明A原脚本相同行号规则。
-
-本轮用户要求数据目录入Git，固定5 ZIP/3源核算CSV已按raw/derived+来源+快照日期整理。路径见[data/catalog](../data/catalog.json)，官方文件名及字节未改，输入集指纹不变；克隆后无需先下载。除这批白名单外的数据/临时文件继续忽略。
+A原哈希JSON、两个脚本和完整逐站附件尚未收到；公开快照的38项可比数值已独立匹配。这些附件可后续补充追溯，不是开发阻塞项。业务要求统一见[需求说明](../docs/requirements.md)。

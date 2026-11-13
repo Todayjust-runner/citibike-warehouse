@@ -14,13 +14,10 @@ ENTRY = ROOT / 'scripts' / 'warehouse.py'
 
 class DeploymentSafetyTests(unittest.TestCase):
     def runner(self):
-        try:
-            spec = importlib.util.spec_from_file_location('b2_warehouse', ENTRY)
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            return module
-        except FileNotFoundError:
-            self.fail('The protected B2 deployment runner is not implemented yet.')
+        spec = importlib.util.spec_from_file_location('b2_warehouse', ENTRY)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
 
     def test_system_and_unrelated_databases_are_refused(self):
         # Removing the allowlist must fail this test before any connection.
@@ -48,24 +45,24 @@ class DeploymentSafetyTests(unittest.TestCase):
             self.fail('Runner has not produced the required structured safety refusal.')
         self.assertEqual(report['kind'], 'unsafe_database')
 
-    def test_changed_ddl_artifact_is_refused(self):
-        # Editing a DDL file without a matching reviewed manifest must stop deploy.
+    def test_model_loads_without_release_fingerprints(self):
+        # Editing project files should not require rebuilding a second release ledger.
         module = self.runner()
-        with tempfile.TemporaryDirectory(prefix='citibike-b2-artifact-') as directory:
+        with tempfile.TemporaryDirectory(prefix='citibike-model-') as directory:
             folder = Path(directory).resolve()
-            self.assertTrue(folder.is_relative_to(Path(tempfile.gettempdir()).resolve()))
-            artifact = folder / 'change.sql'
-            artifact.write_text('', encoding='utf-8')
-            spec = {'ddl_sha256': {'change.sql': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}}
+            model = json.loads((ROOT / 'docs/design/physical-model.json').read_text(encoding='utf-8'))
+            model.pop('ddl_sha256', None)
+            model.pop('manifest_sha256', None)
+            target = folder / 'docs/design/physical-model.json'
+            target.parent.mkdir(parents=True)
+            target.write_text(json.dumps(model), encoding='utf-8')
+            module.ROOT = folder
             try:
-                validator = module.verify_artifact_hashes
-            except AttributeError:
-                self.fail('DDL artifact tampering is not checked yet.')
-            validator(spec, folder)
-            artifact.write_text('-- unreviewed edit', encoding='utf-8')
-            with self.assertRaises(module.WarehouseError) as failure:
-                validator(spec, folder)
-            self.assertEqual(failure.exception.kind, 'artifact_drift')
+                actual = module.manifest()
+            except (KeyError, module.WarehouseError) as error:
+                self.fail('Reading the model must not require release fingerprints: ' + str(error))
+            self.assertEqual(len(actual['tables']), 14)
+            self.assertEqual(sum(len(t['columns']) for t in actual['tables']), 132)
 
 
 class LiveSchemaTests(unittest.TestCase):

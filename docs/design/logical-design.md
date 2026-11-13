@@ -1,6 +1,5 @@
 # 逻辑设计 v1.0
 
-> 当前补充（2026-11-13）：逻辑/物理语义不变；[新官方快照](../sources/public-snapshot-validation.md)已全量剖析且38项A数值匹配，SQLServer ETL/完整查询仍未验。下述B1推演保留当时证据范围，真实属性现见[开放属性表](open-attributes.md)。
 
 阶段 B1，业务规则 A-1.0，处理策略 B1-1.0。一个业务事实，14 个逻辑关系。完整字段与外键见 [JSON 定义](logical-model.json) / [字段字典](data-dictionary.md)。本文件不包含可执行 DDL。
 
@@ -118,6 +117,6 @@ ods 保留源，dim 描述角色，dwd 唯一事实，meta 管输入/运行/去�
 
 覆盖不是事实表的 min/max。`meta.coverage` 记录相对已约定 JC 快照的出发/归还覆盖证据，整个请求窗口必须被该角色的 complete 区间并集覆盖。完整空结果可计零；partial/unknown 不能当真实零，具体输出与错误约定见 [C→D 契约](../contracts/c-to-d-query-contract.md)。
 
-## 未冻结的物理属性
+## 物理实现
 
-本阶段逻辑关系及语义可供 C/D 设计接续，不表示外部已签收。SQL 类型/最大长度/定点精度/索引和数据库结构验证属于 B2；真实值域、精度、月份归属和 A 源基准仍待 C 输入。登记见 [属性与验收缺口](open-attributes.md)。
+SQL类型、字段上限和索引已落实并在测试库验证，固定五包适配现有定义，见[物理设计](physical-design.md)。C按装载契约实现ETL；实测属性与接入事项见[属性表](open-attributes.md)。
