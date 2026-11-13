@@ -10,7 +10,7 @@
     {
       "month": "202406",
       "url": "https://s3.amazonaws.com/tripdata/JC-202406-citibike-tripdata.csv.zip",
-      "path_from_repo": "data/raw/public-jc-20261113/JC-202406-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/citibike_jc/snapshot_20261113/JC-202406-citibike-tripdata.csv.zip",
       "acquired_at_utc": "2026-11-13T07:13:32.675828+00:00",
       "completed_at_utc": "2026-11-13T07:13:36.194787+00:00",
       "http_status": 200,
@@ -46,7 +46,7 @@
     {
       "month": "202407",
       "url": "https://s3.amazonaws.com/tripdata/JC-202407-citibike-tripdata.csv.zip",
-      "path_from_repo": "data/raw/public-jc-20261113/JC-202407-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/citibike_jc/snapshot_20261113/JC-202407-citibike-tripdata.csv.zip",
       "acquired_at_utc": "2026-11-13T07:13:32.677390+00:00",
       "completed_at_utc": "2026-11-13T07:13:36.163156+00:00",
       "http_status": 200,
@@ -82,7 +82,7 @@
     {
       "month": "202408",
       "url": "https://s3.amazonaws.com/tripdata/JC-202408-citibike-tripdata.csv.zip",
-      "path_from_repo": "data/raw/public-jc-20261113/JC-202408-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/citibike_jc/snapshot_20261113/JC-202408-citibike-tripdata.csv.zip",
       "acquired_at_utc": "2026-11-13T07:13:32.678307+00:00",
       "completed_at_utc": "2026-11-13T07:13:35.539520+00:00",
       "http_status": 200,
@@ -118,7 +118,7 @@
     {
       "month": "202409",
       "url": "https://s3.amazonaws.com/tripdata/JC-202409-citibike-tripdata.csv.zip",
-      "path_from_repo": "data/raw/public-jc-20261113/JC-202409-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/citibike_jc/snapshot_20261113/JC-202409-citibike-tripdata.csv.zip",
       "acquired_at_utc": "2026-11-13T07:13:35.539678+00:00",
       "completed_at_utc": "2026-11-13T07:13:38.164683+00:00",
       "http_status": 200,
@@ -154,7 +154,7 @@
     {
       "month": "202410",
       "url": "https://s3.amazonaws.com/tripdata/JC-202410-citibike-tripdata.csv.zip",
-      "path_from_repo": "data/raw/public-jc-20261113/JC-202410-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/citibike_jc/snapshot_20261113/JC-202410-citibike-tripdata.csv.zip",
       "acquired_at_utc": "2026-11-13T07:13:36.163318+00:00",
       "completed_at_utc": "2026-11-13T07:13:38.793734+00:00",
       "http_status": 200,
@@ -188,5 +188,11 @@
       "appledouble_member_count": 1
     }
   ],
-  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829"
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "repository_data_policy": {
+    "approved_on": "2026-11-13",
+    "authority": "User explicitly requested data directory upload to existing private Git repository.",
+    "catalog": "data/catalog.json",
+    "raw_zip_bytes_preserved": true
+  }
 }

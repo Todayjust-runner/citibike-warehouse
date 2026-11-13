@@ -11,18 +11,27 @@
 | 对话三 / B2 | 物理设计与独立建表验证完成 | ee2d762；原47 SQL+10 Python通过，证据作为历史保留 |
 | 对话四 / B3 | B内部复核、报告与最终交付v1.0完成 | 物理B2-1.1，当前10 Python+50 SQL通过；外部签收/真实验收未完成 |
 
-计划为[四阶段v1.4](b-four-conversations.md)。用户授权继续B3后完成本阶段；完整ETL/业务查询/页面仍由C/D接续，B后续参加一次真实联合验收。
+计划为[四阶段v1.5](b-four-conversations.md)。用户授权继续B3后完成本阶段；完整ETL/业务查询/页面仍由C/D接续，B后续参加一次真实联合验收。
 
-## 当前补充：公开源核验与 B v1.1
+## 当前补充：数据目录入Git与 B v1.2
+
+用户明确要求“数据目录也上传git，做好分类和命名”，覆盖旧的全部数据仅本地工程决定。本轮仅放行已经核验的5原ZIP、3源核算CSV及目录说明/清单；分类为data/raw/citibike_jc/snapshot_20261113与data/derived/source_audit/citibike_jc/snapshot_20261113。官方ZIP原名/原字节保留，不重复提交解压CSV。
+
+- 八文件共20,321,820字节，移动前后及完整重跑后SHA全部相同；[目录说明](../../data/README.md)与[data/catalog.json](../../data/catalog.json)给出分类/业务范围/字段/文件身份。
+- 源脚本默认路径与inputs清单、当前报告/交接已同步，新增精确Git白名单、ZIP binary与CSV UTF-8/LF约定；其他数据、临时SQLite、凭据、备份和课程原件仍忽略。
+- 10个源测试通过；目录调整后完整核算一次，与整理前两次语义摘要一致，38项A数值不变。没有SQLServer写入、DDL或ETL实现变更。
+- 当前交付为[B v1.2](../handoff/b-delivery-v1.2.md)；v1.1/SHA清单对应726b35c，v1.0对应966d774，历史文件在相应提交校验。
+
+## 公开源核验（v1.1起，结果仍有效）
 
 用户后续授权根据A公开链接直接获取数据并完善，已完成：
 
-- 官方五ZIP已完整获取，20,311,165字节；5骑行CSV/563874行，另5个经结构识别的AppleDouble元数据，全部10成员SHA保留。清单为[public-source-snapshot.json](../../inputs/public-source-snapshot.json)，本地ZIP在data/raw/public-jc-20261113。
+- 官方五ZIP已完整获取，20,311,165字节；5骑行CSV/563874行，另5个经结构识别的AppleDouble元数据，全部10成员SHA保留。清单为[public-source-snapshot.json](../../inputs/public-source-snapshot.json)，本地ZIP在data/raw/citibike_jc/snapshot_20261113。
 - 独立源规则接受563668/排除206（超24h）/重复与冲突0；Q3 M01/M04=334332、总微秒216990044333000、M02=10.82、member242927/known334332、M03=72.66%、M05=334331、M06=1、10进入/11流出及未知归还1026均复算。
-- [38项A数值](../evidence/a-public-comparison.json)全部匹配；新增源审计10个小ZIP测试通过，两次完整同输入核算语义摘要相同。[执行证据](../evidence/public-source-validation.json)。这不是A原包同哈希/原脚本复现，也不是SQLServer ETL验收。
+- [38项A数值](../evidence/a-public-comparison.json)全部匹配；新增源审计10个小ZIP测试通过，累计三次完整同输入核算语义摘要相同（含目录调整后一次）。[执行证据](../evidence/public-source-validation.json)。这不是A原包同哈希/原脚本复现，也不是SQLServer ETL验收。
 - 全量字段长度、最多3位小数秒、纬度15/经度14位小数适配B2-1.1，无DDL修改。全部行ended_at月份吻合月包；427观察站点中1多名、160多坐标，继续确定性观察快照。
 - 本轮SQLServer仅只读verify，目录无漂移；测试库仍仅24+3+3种子，其余表0，业务库不存在。没有完整ETL/ADS/API/页面实现。
-- 当前交付为[B v1.1](../handoff/b-delivery-v1.1.md)，报告/输入/设计属性/C-D交接已补证据。B v1.0及其SHA清单对应历史提交966d774，不能拿旧清单校验当前修改后的文件。
+- 源核验补充最初交付为[B v1.1](../handoff/b-delivery-v1.1.md)，当前目录以v1.2为准，报告/输入/设计属性/C-D交接已补证据。B v1.0及其SHA清单对应历史提交966d774，不能拿旧清单校验当前修改后的文件。
 
 ## B3 交付时点（966d774，历史）
 

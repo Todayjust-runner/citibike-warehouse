@@ -1,6 +1,6 @@
 # 共享单车骑行运营分析数仓系统的设计与实现
 
-本仓库是课程共享单车数仓项目工程。当前已完成 **B0—B3：工程基础、三级设计、DDL/结构验证、独立复核、报告与 B 最终交接**；完整 ETL、真实指标验收和展示仍未完成。本次补充已获取五个官方JC包并完成独立全量源核算，B交付更新为v1.1。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
+本仓库是课程共享单车数仓项目工程。当前已完成 **B0—B3：工程基础、三级设计、DDL/结构验证、独立复核、报告与 B 最终交接**；完整 ETL、真实指标验收和展示仍未完成。本次补充已获取五个官方JC包并完成独立全量源核算，B交付更新为v1.2，用户指定的5个原ZIP和3份核算CSV按目录分类纳入私有Git。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
 
 工程基础已发布到用户指定的私有仓库 [Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，默认分支 `main`。
 
@@ -14,7 +14,7 @@
 4. [设计入口](docs/design/README.md)、[六指标映射](docs/design/metric-model-mapping.md)、[B/C/D 契约](docs/contracts/b-c-d-contract.md)。
 5. [物理设计](docs/design/physical-design.md)、[B2 验证](docs/evidence/b2-validation.md)及[执行入口](scripts/README.md)。
 6. [公开快照/下载与重跑](docs/sources/public-snapshot-validation.md)、[源核算证据](docs/evidence/public-source-audit.json)。
-7. [B 最终交付](docs/handoff/b-delivery-v1.1.md)、[报告正文](docs/report/README.md)、[B3 复核](docs/review/b3-final-review.md)。
+7. [B 最终交付](docs/handoff/b-delivery-v1.2.md)、[报告正文](docs/report/README.md)、[B3 复核](docs/review/b3-final-review.md)。
 8. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[C/D 下一步](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
 
 ## 角色与阶段
@@ -22,7 +22,7 @@
 | 角色 | 交付职责 | 当前状态 |
 |---|---|---|
 | A | 立项、需求、来源、指标定义与源核算依据 | 收到PDF；公开五包已获取，A原哈希/脚本附件未收到 |
-| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B 交付 v1.1 完成，公开源核算38项匹配，物理 B2-1.1；外部签收/真实联合验收待做 |
+| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B 交付 v1.2 完成，公开源核算38项匹配，物理 B2-1.1；外部签收/真实联合验收待做 |
 | C | 原始导入、清洗、维度/事实装载、汇总查询、质量与重跑 | 待实施 |
 | D | 接入真实查询的展示、筛选、多维分析、录屏 | 待实施 |
 
@@ -49,7 +49,7 @@ etl/                       后续 C 的完整加工链路
 dashboard/                 后续 D 的展示工程
 scripts/                   受保护的 SQLcmd 部署/验证入口
 tests/                     标准库行为测试与事务回滚合成夹具
-data/                      五个本地原ZIP和源核算CSV，均被忽略
+data/                      已入库的固定原始快照、源核算结果、分类说明与文件SHA
 ```
 
 设计入口列出已完成设计；各实现目录的 README 仅保存后续职责，不代表已有实现。
@@ -66,7 +66,7 @@ git status --short
 git log -3 --oneline
 ```
 
-新机器先读输入清单，按公开快照说明恢复固定ZIP并验证SHA；A原哈希/脚本与课程原件仍需另取得。`inputs/local-materials.json` 中的 `../` 路径相对于仓库，克隆不会带上材料。建表/验证使用下列命令；部署默认测试库，有漂移则拒绝，不重置已有数据。
+克隆后已包含固定五ZIP和三份源核算CSV，先读data/README与清单验证SHA；文件缺失时按公开快照说明恢复；A原哈希/脚本与课程原件仍需另取得。`inputs/local-materials.json` 中的 `../` 路径相对于仓库，克隆不会带上材料。建表/验证使用下列命令；部署默认测试库，有漂移则拒绝，不重置已有数据。
 
 ```powershell
 python -X utf8 scripts/warehouse.py inspect
@@ -79,8 +79,8 @@ python -X utf8 scripts/warehouse.py boundaries
 
 ## 数据与材料管理
 
-课程材料保留在父目录原位；仓库仅记录相对路径与哈希，不复制 PDF、模板、参考书或学长作业。只使用必要的工程元数据与审查结论。原始骑行数据、结果数据、数据库文件、备份、录屏和凭据不入 Git。
+课程材料保留在父目录原位；仓库仅记录相对路径与哈希，不复制 PDF、模板、参考书或学长作业。只使用必要的工程元数据与审查结论。用户追加授权将固定五ZIP/三份源核算CSV作为私有课程工程材料入Git，分类见[data/README](data/README.md)；非白名单数据、数据库文件、备份、录屏和凭据仍不入Git。
 
-官方 [System Data](https://citibikenyc.com/system-data) 提供数据入口与字段分类；使用条件见 [Data Sharing Policy](https://citibikenyc.com/data-sharing-policy)。本项目按非商业课程分析处理来源材料，不另行发布独立数据集，不暗示官方背书。具体核验边界见 [官方来源记录](docs/sources/official-sources.md)。
+官方 [System Data](https://citibikenyc.com/system-data) 提供数据入口与字段分类；使用条件见 [Data Sharing Policy](https://citibikenyc.com/data-sharing-policy)。本项目按非商业课程分析保留来源材料，不暗示官方背书。具体核验边界见 [官方来源记录](docs/sources/official-sources.md)。
 
 提交前检查 `git diff --cached --check`、`git diff --cached --stat` 与 `git ls-files`；禁止使用整个 `D:\数据仓库` 作为 Git 根目录。远程交付状态见 [GitHub 记录](docs/evidence/github-delivery.md)。

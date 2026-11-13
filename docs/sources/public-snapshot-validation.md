@@ -1,6 +1,6 @@
 # 官方公开快照获取与独立核验
 
-日期：2026-11-13。用户补充授权根据 A PDF 公开链接获取数据并完善工程。本次新快照为 `JC-202406-202410-public-20261113`，不是 A 机器上的附件副本。官方入口仍为 [System Data](https://citibikenyc.com/system-data)→[S3下载列表](https://s3.amazonaws.com/tripdata/index.html)，字段与使用政策再次核对；[政策](https://citibikenyc.com/data-sharing-policy)原文仍需遵守。只提交元数据/分析摘要，不再分发数据集。
+日期：2026-11-13。用户补充授权根据 A PDF 公开链接获取数据并完善工程。本次新快照为 `JC-202406-202410-public-20261113`，不是 A 机器上的附件副本。官方入口仍为 [System Data](https://citibikenyc.com/system-data)→[S3下载列表](https://s3.amazonaws.com/tripdata/index.html)，字段与使用政策再次核对；[政策](https://citibikenyc.com/data-sharing-policy)原文仍需遵守。用户本轮追加要求将这批原ZIP及源核算CSV纳入既有私有课程工程；本目录保留来源政策与固定八文件清单，不作为独立数据集另行发布。
 
 ## 已取得的完整文件
 
@@ -15,7 +15,7 @@
 | 202410 | 4028203 | 1 | 118307 | 1 AppleDouble |
 | 合计 | 20311165 | 5 | 563874 | 5元数据成员 |
 
-ZIP原样保存于 `data/raw/public-jc-20261113/`。5个真实骑行CSV均有同顺序13列表头，排除表头后按CSV记录计数；它们仍在ZIP内，审计不依赖另行解压。记录号为表头1、首数据2。
+ZIP原样保存于 `data/raw/citibike_jc/snapshot_20261113/`。5个真实骑行CSV均有同顺序13列表头，排除表头后按CSV记录计数；它们仍在ZIP内，审计不依赖另行解压。记录号为表头1、首数据2。
 
 ### AppleDouble分类对C的影响
 
@@ -52,7 +52,7 @@ ZIP原样保存于 `data/raw/public-jc-20261113/`。5个真实骑行CSV均有同
 
 已做到“在新下载官方快照上独立复算并匹配A数值”；未做到“A原ZIP/CSV同哈希”“A两个脚本复现”“完整逐站A附件对账”“数仓ETL/接口/展示验收”。A哈希JSON、两个脚本/依赖/日志、完整月度/逐站基准仍未收到。不能因为38项匹配推断源字节和全部处理细节相同。
 
-全量逐月/逐站和跨月源定位CSV只落本地 `data/audit/public-jc-20261113/`；提交摘要含这些文件哈希，不包含整份逐站结果数据。两次全量审计的语义摘要相同，记录见[执行验证](../evidence/public-source-validation.json)。完整[剖析JSON](../evidence/public-source-audit.json)可定位每成员表头/行数/时间范围、字段分布和精确月分子分母。
+全量逐月/逐站和跨月源定位CSV位于 `data/derived/source_audit/citibike_jc/snapshot_20261113/`；原先仅提交摘要，现按用户新授权将这三份CSV随私有工程版本管理，见[data目录说明](../../data/README.md)。整理前两次和整理后一次完整审计的语义摘要相同，记录见[执行验证](../evidence/public-source-validation.json)。完整[剖析JSON](../evidence/public-source-audit.json)可定位每成员表头/行数/时间范围、字段分布和精确月分子分母。
 
 覆盖相对于本清单列出的官方JC快照与分析规则：已完成全部真实CSV读取并观察到结束月分区；若采用“每个所选月对象完整代表该月官方发布记录”的源契约，则归还候选完整范围为 `[2024-06-01,2024-11-01)`，最长24h下出发的保守候选范围为 `[2024-06-01,2024-10-31)`，包含Q3。C仍须将清单、归档观察和此充分条件写成coverage proof_ref，并在自己的真实运行验证，不能从fact min/max推定；这不保证现实所有骑行完整。
 
@@ -63,11 +63,11 @@ python -X utf8 -m unittest discover -s tests -p test_source_audit.py -v
 python -X utf8 scripts/audit_public_source.py
 ```
 
-默认读取inputs/public-source-snapshot.json，SHA不符拒绝；默认派生CSV在data/audit，摘要在docs/evidence。不同输出目录/摘要可用 `--output-dir`、`--summary`。命令仅做源审计，SQL Server不写入。返回0表示核算完成且物理适配，1表示物理上限不适配，2表示输入/格式/精度等阻断。源脚本先有10个失败测试，再实现并通过；小ZIP覆盖冲突/重复、角色、未知、精度、Unicode、完整成员与错误哈希，不使用A数值当测试期望。
+默认读取inputs/public-source-snapshot.json，SHA不符拒绝；默认派生CSV在data/derived/source_audit/citibike_jc/snapshot_20261113，摘要在docs/evidence。不同输出目录/摘要可用 `--output-dir`、`--summary`。命令仅做源审计，SQL Server不写入。返回0表示核算完成且物理适配，1表示物理上限不适配，2表示输入/格式/精度等阻断。源脚本先有10个失败测试，再实现并通过；小ZIP覆盖冲突/重复、角色、未知、精度、Unicode、完整成员与错误哈希，不使用A数值当测试期望。
 
-## 克隆后恢复固定快照
+## 克隆与缺失文件恢复
 
-先在工程根执行以下PowerShell片段；只下载清单中五个官方URL，不覆盖现有文件。下载后必须再执行上面的全量源审计，校验所有成员。若官方对象改变，停止并登记新快照，不能改旧SHA绕过检查。
+正常克隆已包含固定五个ZIP和三份CSV，先运行源审计核对SHA。只有文件缺失时才在工程根执行以下PowerShell片段；只下载清单中五个官方URL，不覆盖现有文件。下载后必须再执行上面的全量源审计，校验所有成员。若官方对象改变，停止并登记新快照，不能改旧SHA绕过检查。
 
 ```powershell
 $taskRoot = (Get-Location).Path

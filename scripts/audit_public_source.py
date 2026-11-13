@@ -311,7 +311,7 @@ def audit_manifest(manifest_path,output_dir):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest',type=Path,default=ROOT/'inputs/public-source-snapshot.json')
-    parser.add_argument('--output-dir',type=Path,default=ROOT/'data/audit/public-jc-20261113')
+    parser.add_argument('--output-dir',type=Path,default=ROOT/'data/derived/source_audit/citibike_jc/snapshot_20261113')
     parser.add_argument('--summary',type=Path,default=ROOT/'docs/evidence/public-source-audit.json')
     args=parser.parse_args()
     try:

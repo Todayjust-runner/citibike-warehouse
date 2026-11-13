@@ -2,6 +2,12 @@
 
 当前目标：[Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，GitHub 仓库 ID `1455379867`，必须为 private。用户在后续消息提供该地址并确认已创建，授权用此目标完成工程基础发布；取代最初的 klzyd 目标。
 
+## 用户明确授权数据目录：B v1.2（2026-11-13）
+
+用户本轮要求“数据目录也上传git，做好分类和命名”，覆盖此前全部数据仅本地的工程约定。本次把固定5原ZIP/3源核算CSV按raw/derived、来源和快照日期纳入既有private课程工程，数据catalog、说明、精确白名单和二进制/LF属性同步；全8文件20,321,820字节，SHA/数值未变。见[交付v1.2](../handoff/b-delivery-v1.2.md)。
+
+发布前再次通过已授权本机Git认证/API确认账户Todayjust-runner/241897350、仓库1455379867、private=true及push权限，本地HEAD/追踪分支/远程main均726b35c163eb948bd56733d2a2ce9c2fc2dd0bde。普通提交推送，提交候选110文件，后验门槛为远程完整树/blob与HEAD一致、8数据真实字节大小一致、无LFS指针及工作区干净。不强推、不改全局身份/代理，令牌不输出或入盘。课程原件、非白名单数据和临时文件未上传；[提交检查](submission-check.md)记录数据例外及所有核验范围。
+
 ## 用户补充公开源：B v1.1（2026-11-13）
 
 在966d774之后，按用户新授权取得官方完整五包并独立源核算；38项A数值匹配、10源测试及两次完整同输入核算通过。更新输入、报告、属性/交接、STATUS/计划及当前SHA，见[B v1.1](../handoff/b-delivery-v1.1.md)。没有SQLServer真实加载或完整ETL/页面，A原哈希/脚本仍缺。

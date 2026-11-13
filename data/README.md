@@ -1,7 +1,24 @@
-# 本地数据，不入 Git
+# 课程工程数据目录
 
-2026-11-13已按A PDF官方入口下载五个JC月包，保留于 `data/raw/public-jc-20261113/`；共20,311,165字节。原ZIP不改写，5份骑行CSV直接在ZIP内读取，另5个AppleDouble元数据成员只登记哈希，不能当骑行CSV。完整身份见 `inputs/public-source-snapshot.json`。
+用户2026-11-13明确要求数据目录也上传Git。本目录现将固定五个官方ZIP和三份对应源核算CSV纳入既有私有课程工程；数据按用途、来源和取得日期分类。原始文件保留官方名称和字节，不重复提交解压CSV。
 
-源核算派生的月度/逐站/边界CSV位于 `data/audit/public-jc-20261113/`，全量临时SQLite在每次结束后只清理本次创建的文件。本地数据和派生CSV均被忽略，不上传GitHub。提交的摘要属于报告分析证据，不能替代C的SQLServer ETL/发布。
+```text
+data/
+  catalog.json                                  八个数据文件分类、字节数及SHA
+  raw/
+    citibike_jc/
+      snapshot_20261113/                         202406—202410五个官方ZIP
+  derived/
+    source_audit/
+      citibike_jc/
+        snapshot_20261113/                       monthly / station-flow / boundary-records CSV
+```
 
-新下载快照与A原包是否同哈希仍未知。重建下载、SHA校验和审计命令见 `docs/sources/public-snapshot-validation.md`。课程原件保持父目录原位，私有仓库也不提交原始/派生数据、备份或凭据。
+- [原始来源目录](raw/README.md)：20,311,165字节、563874源记录，ZIP内含5真实CSV及5个AppleDouble元数据。
+- [派生核算目录](derived/README.md)：三份Q3源侧对照CSV，共10655字节；不是SQLServer DWS/ADS已发布结果。
+- [完整文件清单](catalog.json)与[输入身份](../inputs/public-source-snapshot.json)：目录移动不改变文件SHA、输入集指纹或38项数值。
+- [重跑说明](../docs/sources/public-snapshot-validation.md)：克隆后数据已经在对应目录，先校验SHA即可运行；官方恢复下载仅供文件缺失时使用。
+
+命名规则：`raw/<source>/snapshot_YYYYMMDD/<official_filename>`；`derived/<purpose>/<source>/snapshot_YYYYMMDD/<result_name>`。快照日期是取得日期，业务月份和查询窗口在各目录README/输入清单中明确。原ZIP官方名不改，派生名使用小写英文和连字符。
+
+数据仅作为本非商业课程分析工程的来源及核算材料，保留[Citi Bike来源](https://citibikenyc.com/system-data)与[Data Sharing Policy](https://citibikenyc.com/data-sharing-policy)，源许可不因放入工程而改变。仓库保持private。Git白名单只放行本批8个数据文件和说明/清单；课程原件、备份、凭据、日志、临时SQLite及其他未列明数据仍忽略。

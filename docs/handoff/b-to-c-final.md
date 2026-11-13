@@ -1,6 +1,6 @@
-# B → C 最终工程交接 v1.1
+# B → C 最终工程交接 v1.2
 
-2026-11-13。B 已交付模型与结构，C 尚未签收或完成真实加载。工程根目录不变。版本组合：业务 A-1.0 / 处理 B1-1.0 / 逻辑 1.0 / 物理 B2-1.1；报告/打包版本 B v1.1，不把它写进 load_run.model_version。
+2026-11-13。B 已交付模型与结构，C 尚未签收或完成真实加载。工程根目录不变。版本组合：业务 A-1.0 / 处理 B1-1.0 / 逻辑 1.0 / 物理 B2-1.1；报告/打包版本 B v1.2，不把它写进 load_run.model_version。
 
 先读[设计入口](../design/README.md)、[物理字典](../design/physical-data-dictionary.md)、[源映射](../design/source-to-target.md)、[B→C 契约](../contracts/b-to-c-model-contract.md)和[复核结论](../review/b3-final-review.md)。本页给执行依赖，不另定义一套字段。
 
@@ -19,9 +19,9 @@ python -X utf8 scripts/warehouse.py verify
 
 ## 当前可用输入与源侧核验
 
-用户授权后已获取 `data/raw/public-jc-20261113/` 的五个官方ZIP，完整身份见[public-source-snapshot.json](../../inputs/public-source-snapshot.json)，input_set_sha256=`0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829`。五CSV/563874行，源规则接受563668、排除206、重复/冲突0；38项A数值在新快照匹配，两次源核算一致。可用现有公开快照开始C工作，不再等待公开文件本身。A原哈希/脚本/全逐站附件仍缺，见[来源与恢复/重跑](../sources/public-snapshot-validation.md)。
+用户授权后已获取 `data/raw/citibike_jc/snapshot_20261113/` 的五个官方ZIP，完整身份见[public-source-snapshot.json](../../inputs/public-source-snapshot.json)，input_set_sha256=`0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829`。五CSV/563874行，源规则接受563668、排除206、重复/冲突0；38项A数值在新快照匹配，两次源核算一致。可用现有公开快照开始C工作，不再等待公开文件本身。A原哈希/脚本/全逐站附件仍缺，见[来源与恢复/重跑](../sources/public-snapshot-validation.md)。
 
-每ZIP实际1骑行CSV+1.csv后缀AppleDouble；全部成员哈希登记，只有真实CSV进入source_member/run_source/ODS，zip_csv_member_count=1。必须验证AppleDouble文件头/描述/对应关系，不能盲按名字跳过，未知额外成员阻断。源核算月/逐站/边界CSV在data/audit/public-jc-20261113，仅本地，不上传Git；可作为同清单仓库验收对照。
+每ZIP实际1骑行CSV+1.csv后缀AppleDouble；全部成员哈希登记，只有真实CSV进入source_member/run_source/ODS，zip_csv_member_count=1。必须验证AppleDouble文件头/描述/对应关系，不能盲按名字跳过，未知额外成员阻断。源核算月/逐站/边界CSV在data/derived/source_audit/citibike_jc/snapshot_20261113，按用户新授权纳入私有Git，见data/catalog.json；可作为同清单仓库验收对照。
 
 当前列长/时间/坐标精度全部适配B2-1.1；427个观察站点，1站多名、160站多坐标，确定性观察策略不能省略。该源核验不证明C实际绑定、去向/维度选择、DWS/ADS实现和重跑正确，C仍需对自己的运行逐项验收。
 
@@ -64,4 +64,4 @@ input_set_sha256 按源映射固定：成员三元数组 `[zip_sha256, member_pa
 
 交付可运行 ETL/依赖说明、输入身份与全成员日志、无损剖析、全源去向/质量、同输入重跑差异、覆盖证明、事实与两汇总守恒、五种查询输出，以及[联合验收清单](acceptance-checklist.md)证据。与 A 基准先比完整哈希/规则和精确整数，再比舍入显示；不匹配开差异单，不为凑数修改数据。
 
-共享工程只提交代码和精选元数据；数据包、派生数据、课程原件、机器日志、连接秘密与备份不提交。A/C/D 外部签收尚未取得，后续在 STATUS 逐项记录实际证据。
+共享工程现包含用户指定的5个固定原ZIP和3个源核算CSV；Git白名单以data/catalog.json为准，其他未列明数据、课程原件、机器日志、连接秘密与备份不提交。A/C/D 外部签收尚未取得，后续在 STATUS 逐项记录实际证据。

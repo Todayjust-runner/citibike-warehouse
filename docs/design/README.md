@@ -16,6 +16,8 @@
 | [物理字段字典](physical-data-dictionary.md) / [物理 JSON](physical-model.json) | 全 132 字段及实际 SQL 编译基线，B2 已核对 |
 | [B2 验证](../evidence/b2-validation.md) | 真实结构、10 个 Python 行为测试与 47 个事务回滚 SQL 用例 |
 
-SQL2019 DDL 与执行入口已交付；业务库未部署，完整 ETL/查询还由 C 完成。B3 已完成[复核](../review/b3-final-review.md)、[报告正文](../report/README.md)与[当前交付](../handoff/b-delivery-v1.1.md)，当前10 Python + 50 SQL通过，图件已导出。下一步见 [C/D 接续](../handoff/next-stage.md)。
+SQL2019 DDL 与执行入口已交付；业务库未部署，完整 ETL/查询还由 C 完成。B3 已完成[复核](../review/b3-final-review.md)、[报告正文](../report/README.md)与[当前交付](../handoff/b-delivery-v1.2.md)，当前10 Python + 50 SQL通过，图件已导出。下一步见 [C/D 接续](../handoff/next-stage.md)。
 
 用户后续授权的公开源核验已完成：5包/563874行，38项A数值匹配，现有物理上限适配且DDL不变。见[来源补充](../sources/public-snapshot-validation.md)与[B交付v1.1](../handoff/b-delivery-v1.1.md)。B v1.0/SHA清单对应966d774历史。
+
+最新用户要求数据目录也入Git，固定8文件按[data分类说明](../../data/README.md)交付为[B v1.2](../handoff/b-delivery-v1.2.md)。v1.1身份和核算不变，目录调整不影响逻辑/物理模型。

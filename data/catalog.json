@@ -1,0 +1,122 @@
+{
+  "catalog_version": "1.0",
+  "updated_on": "2026-11-13",
+  "snapshot_id": "JC-202406-202410-public-20261113",
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "repository_visibility": "private",
+  "authorization": "User explicitly requested data directory in Git; fixed five raw ZIPs and three course source-audit CSVs.",
+  "naming": {
+    "raw": "raw/<source>/snapshot_YYYYMMDD/<official_filename>",
+    "derived": "derived/<purpose>/<source>/snapshot_YYYYMMDD/<result_name>"
+  },
+  "source_page": "https://citibikenyc.com/system-data",
+  "source_policy": "https://citibikenyc.com/data-sharing-policy",
+  "file_count": 8,
+  "total_bytes": 20321820,
+  "files": [
+    {
+      "path_from_data": "derived/source_audit/citibike_jc/snapshot_20261113/boundary-records.csv",
+      "category": "derived_source_audit",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "window": "[2024-07-01T00:00:00,2024-10-01T00:00:00)",
+      "bytes": 3547,
+      "sha256": "79ea7df099e94c212918161de07acf2c4c1066dcdb8d6c2ce3b5b84f21ec7bfa",
+      "csv_data_records": 21,
+      "columns": [
+        "direction",
+        "zip_sha256",
+        "member_path",
+        "csv_record_number",
+        "started_at",
+        "ended_at"
+      ]
+    },
+    {
+      "path_from_data": "derived/source_audit/citibike_jc/snapshot_20261113/monthly.csv",
+      "category": "derived_source_audit",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "window": "[2024-07-01T00:00:00,2024-10-01T00:00:00)",
+      "bytes": 284,
+      "sha256": "2fcea3d99a7d53738005ec53b36dabee081d88dd6abc58a0162e47e3b3352347",
+      "csv_data_records": 3,
+      "columns": [
+        "month",
+        "ride_count",
+        "duration_us",
+        "member_count",
+        "known_member_type_count",
+        "avg_duration_minutes_display",
+        "member_share_display"
+      ]
+    },
+    {
+      "path_from_data": "derived/source_audit/citibike_jc/snapshot_20261113/station-flow.csv",
+      "category": "derived_source_audit",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "window": "[2024-07-01T00:00:00,2024-10-01T00:00:00)",
+      "bytes": 6824,
+      "sha256": "3e17660e5174d870ce34c961fa2bea0be115b29e68f7356a87d8d6f9b327af1b",
+      "csv_data_records": 304,
+      "columns": [
+        "station_id",
+        "is_unknown",
+        "departures",
+        "arrivals",
+        "net_outflow"
+      ]
+    },
+    {
+      "path_from_data": "raw/citibike_jc/snapshot_20261113/JC-202406-citibike-tripdata.csv.zip",
+      "category": "raw_archive",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "business_month": "202406",
+      "bytes": 4413867,
+      "sha256": "45570371fa2d06670ebee12e3c7ce0da6538cfcd667585bdd75806dd6d341863",
+      "trip_csv_records": 111115
+    },
+    {
+      "path_from_data": "raw/citibike_jc/snapshot_20261113/JC-202407-citibike-tripdata.csv.zip",
+      "category": "raw_archive",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "business_month": "202407",
+      "bytes": 4198201,
+      "sha256": "fdd4dd1eadfd87e7bdc47635a31f9c8f4a0e5752f7f8b95f4d8a2fd68617ecab",
+      "trip_csv_records": 112443
+    },
+    {
+      "path_from_data": "raw/citibike_jc/snapshot_20261113/JC-202408-citibike-tripdata.csv.zip",
+      "category": "raw_archive",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "business_month": "202408",
+      "bytes": 3530848,
+      "sha256": "ab16afaaaf608b8c2392ff9be547dc77059fd65a990122bad7ebc62e8ad8a141",
+      "trip_csv_records": 106451
+    },
+    {
+      "path_from_data": "raw/citibike_jc/snapshot_20261113/JC-202409-citibike-tripdata.csv.zip",
+      "category": "raw_archive",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "business_month": "202409",
+      "bytes": 4140046,
+      "sha256": "9bdf20c1a16ae41b7c4a9f70554166b847703c112e2ddce63d80c6c37ea65ff3",
+      "trip_csv_records": 115558
+    },
+    {
+      "path_from_data": "raw/citibike_jc/snapshot_20261113/JC-202410-citibike-tripdata.csv.zip",
+      "category": "raw_archive",
+      "dataset": "citibike_jc",
+      "snapshot_date": "2026-11-13",
+      "business_month": "202410",
+      "bytes": 4028203,
+      "sha256": "ba2b2431e618047f4092a48931f914b8abe53c0d053f366f2a4e2e1850feb23c",
+      "trip_csv_records": 118307
+    }
+  ]
+}

@@ -26,4 +26,4 @@ B3 在既有 ODS 触发器增加验证/发布来源的 INSERT 保护，其余结
 
 ## 真实公开源审计（用户补充授权）
 
-`python -X utf8 scripts/audit_public_source.py` 校验已锁定五个公开ZIP及所有成员SHA，区分真正CSV与AppleDouble，独立全量核算字段、去向和六指标。只使用Python标准库/临时SQLite，不连接或装载SQLServer。默认本地派生CSV在data/audit/public-jc-20261113，摘要在docs/evidence/public-source-audit.json；源核验测试为 `python -X utf8 -m unittest discover -s tests -p test_source_audit.py -v`。下载恢复、参数/退出码与证据边界见[公开快照说明](../docs/sources/public-snapshot-validation.md)。
+`python -X utf8 scripts/audit_public_source.py` 校验已锁定五个公开ZIP及所有成员SHA，区分真正CSV与AppleDouble，独立全量核算字段、去向和六指标。只使用Python标准库/临时SQLite，不连接或装载SQLServer。默认派生CSV在data/derived/source_audit/citibike_jc/snapshot_20261113，摘要在docs/evidence/public-source-audit.json；源核验测试为 `python -X utf8 -m unittest discover -s tests -p test_source_audit.py -v`。下载恢复、参数/退出码与证据边界见[公开快照说明](../docs/sources/public-snapshot-validation.md)。

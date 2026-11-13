@@ -1,4 +1,4 @@
-# Local source data and derived data: metadata manifests belong in inputs/.
+# Data defaults to local-only; the user-approved pinned snapshot below is tracked.
 /data/**
 !/data/README.md
 *.csv
@@ -9,6 +9,28 @@
 *.zip
 *.7z
 *.rar
+
+# Fixed course snapshot: explicit directories and files only.
+!/data/catalog.json
+!/data/raw/
+!/data/raw/README.md
+!/data/raw/citibike_jc/
+!/data/raw/citibike_jc/snapshot_20261113/
+!/data/raw/citibike_jc/snapshot_20261113/README.md
+!/data/raw/citibike_jc/snapshot_20261113/JC-202406-citibike-tripdata.csv.zip
+!/data/raw/citibike_jc/snapshot_20261113/JC-202407-citibike-tripdata.csv.zip
+!/data/raw/citibike_jc/snapshot_20261113/JC-202408-citibike-tripdata.csv.zip
+!/data/raw/citibike_jc/snapshot_20261113/JC-202409-citibike-tripdata.csv.zip
+!/data/raw/citibike_jc/snapshot_20261113/JC-202410-citibike-tripdata.csv.zip
+!/data/derived/
+!/data/derived/README.md
+!/data/derived/source_audit/
+!/data/derived/source_audit/citibike_jc/
+!/data/derived/source_audit/citibike_jc/snapshot_20261113/
+!/data/derived/source_audit/citibike_jc/snapshot_20261113/README.md
+!/data/derived/source_audit/citibike_jc/snapshot_20261113/monthly.csv
+!/data/derived/source_audit/citibike_jc/snapshot_20261113/station-flow.csv
+!/data/derived/source_audit/citibike_jc/snapshot_20261113/boundary-records.csv
 
 # Course materials, books, exports and recordings stay outside source control.
 *.pdf

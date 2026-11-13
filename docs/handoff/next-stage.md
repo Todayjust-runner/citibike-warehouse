@@ -1,10 +1,10 @@
 # 下一阶段：C/D 实施与 B 联合验收
 
-2026-11-13。B0—B3的内部产物已交付为[B v1.1](b-delivery-v1.1.md)，本页替代原B3待开展任务。仍在既有工程接续，不重新初始化，不将B完成称为课程项目全部完成。
+2026-11-13。B0—B3的内部产物已交付为[B v1.2](b-delivery-v1.2.md)，本页替代原B3待开展任务。仍在既有工程接续，不重新初始化，不将B完成称为课程项目全部完成。
 
 ## 已可用的真实输入
 
-五个官方JC包已在data/raw/public-jc-20261113，全部成员SHA/分类和5真实CSV的563874行已核验；38项A数值源侧匹配、当前物理上限适配。见[公开快照说明](../sources/public-snapshot-validation.md)。C直接使用inputs/public-source-snapshot.json锁定输入，无需等待公开数据本身；A原哈希/脚本和全逐站附件仍未取得，数值匹配不证明同原字节。
+五个官方JC包已在data/raw/citibike_jc/snapshot_20261113，全部成员SHA/分类和5真实CSV的563874行已核验；38项A数值源侧匹配、当前物理上限适配。见[公开快照说明](../sources/public-snapshot-validation.md)。用户已要求数据纳入私有Git，C克隆后直接使用data目录和inputs/public-source-snapshot.json校验/锁定输入，无需等待公开数据本身；A原哈希/脚本和全逐站附件仍未取得，数值匹配不证明同原字节。
 
 ## 当前入口
 
