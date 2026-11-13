@@ -1,8 +1,8 @@
 {
-  "evidence_status": "a_claimed_not_reproduced",
+  "evidence_status": "numeric_claims_matched_on_public_snapshot_original_A_identity_unverified",
   "source": "A v1.0 PDF 2026-11-06, PDF pages 2, 3, 8; see local-materials.json A-01",
   "transcribed_on": "2026-11-12",
-  "warning": "These are claims transcribed from the PDF, not outputs of a reproduced data pipeline or verified source snapshot. Never report them as passed tests.",
+  "warning": "The numbers below remain transcribed A claims. All 38 comparable numeric items matched an independent audit of the newly acquired official snapshot; A original hash identity/scripts and SQL Server ETL validation are separate and unverified.",
   "window": {
     "start_inclusive": "2024-07-01T00:00:00",
     "end_exclusive": "2024-10-01T00:00:00",
@@ -69,7 +69,7 @@
   },
   "claimed_unknown_end_station_arrivals_in_window": 1026,
   "missing_reproduction_materials": [
-    "all five original ZIPs and every CSV member",
+    "A original ZIP/CSV hash identity remains unverified; five fresh official public ZIPs and all members are now locally available (see public-source-snapshot.json)",
     "数据核验结果.json",
     "prepare_bike_a_evidence.py and dependencies",
     "verify_bike_a_source.py and logs",
@@ -79,5 +79,13 @@
     "Reproduce exact counts and duration_us before checking rounded display metrics.",
     "M03 denominator is known member/casual rides; do not assume total rides equals known type count without verification.",
     "Quality counts over all five source files and window-specific metrics have different scopes."
-  ]
+  ],
+  "verification": {
+    "checked_on": "2026-11-13",
+    "snapshot_id": "JC-202406-202410-public-20261113",
+    "comparison_ref": "docs/evidence/a-public-comparison.json",
+    "numeric_items_matched": 38,
+    "A_original_hash_identity": "unverified",
+    "warehouse_ETL": "not_performed"
+  }
 }

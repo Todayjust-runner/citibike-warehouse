@@ -1,0 +1,240 @@
+{
+  "checked_on": "2026-11-13",
+  "snapshot_id": "JC-202406-202410-public-20261113",
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "audit_semantic_sha256": "f24dc1a2f38a56849fde0360a5eab9874ecc0b7851637862f82146d60abacefe",
+  "checks": [
+    {
+      "item": "source_rows.202406",
+      "A_claim": 111115,
+      "actual_public_snapshot": 111115,
+      "match": true
+    },
+    {
+      "item": "source_rows.202407",
+      "A_claim": 112443,
+      "actual_public_snapshot": 112443,
+      "match": true
+    },
+    {
+      "item": "source_rows.202408",
+      "A_claim": 106451,
+      "actual_public_snapshot": 106451,
+      "match": true
+    },
+    {
+      "item": "source_rows.202409",
+      "A_claim": 115558,
+      "actual_public_snapshot": 115558,
+      "match": true
+    },
+    {
+      "item": "source_rows.202410",
+      "A_claim": 118307,
+      "actual_public_snapshot": 118307,
+      "match": true
+    },
+    {
+      "item": "source_rows.main_month_files_total",
+      "A_claim": 334452,
+      "actual_public_snapshot": 334452,
+      "match": true
+    },
+    {
+      "item": "source_rows.all_five_files_total",
+      "A_claim": 563874,
+      "actual_public_snapshot": 563874,
+      "match": true
+    },
+    {
+      "item": "quality.duplicate_ride_ids",
+      "A_claim": 0,
+      "actual_public_snapshot": 0,
+      "match": true
+    },
+    {
+      "item": "quality.conflicting_ride_ids",
+      "A_claim": 0,
+      "actual_public_snapshot": 0,
+      "match": true
+    },
+    {
+      "item": "quality.duration_over_24h",
+      "A_claim": 206,
+      "actual_public_snapshot": 206,
+      "match": true
+    },
+    {
+      "item": "quality.duration_under_60s_or_nonpositive",
+      "A_claim": 0,
+      "actual_public_snapshot": 0,
+      "match": true
+    },
+    {
+      "item": "quality.missing_start_station_id",
+      "A_claim": 3,
+      "actual_public_snapshot": 3,
+      "match": true
+    },
+    {
+      "item": "quality.missing_end_station_id",
+      "A_claim": 1877,
+      "actual_public_snapshot": 1877,
+      "match": true
+    },
+    {
+      "item": "quality.invalid_or_missing_end_coordinates",
+      "A_claim": 197,
+      "actual_public_snapshot": 197,
+      "match": true
+    },
+    {
+      "item": "M01_ride_count",
+      "A_claim": 334332,
+      "actual_public_snapshot": 334332,
+      "match": true
+    },
+    {
+      "item": "M02_avg_duration_minutes_display",
+      "A_claim": "10.82",
+      "actual_public_snapshot": "10.82",
+      "match": true
+    },
+    {
+      "item": "M02_duration_us",
+      "A_claim": "216990044333000",
+      "actual_public_snapshot": "216990044333000",
+      "match": true
+    },
+    {
+      "item": "M03_member_count",
+      "A_claim": 242927,
+      "actual_public_snapshot": 242927,
+      "match": true
+    },
+    {
+      "item": "M03_claimed_denominator",
+      "A_claim": 334332,
+      "actual_public_snapshot": 334332,
+      "match": true
+    },
+    {
+      "item": "M03_member_share_display",
+      "A_claim": "72.66%",
+      "actual_public_snapshot": "72.66%",
+      "match": true
+    },
+    {
+      "item": "M04_departures_including_unknown",
+      "A_claim": 334332,
+      "actual_public_snapshot": 334332,
+      "match": true
+    },
+    {
+      "item": "M05_arrivals_including_unknown",
+      "A_claim": 334331,
+      "actual_public_snapshot": 334331,
+      "match": true
+    },
+    {
+      "item": "M06_net_outflow",
+      "A_claim": 1,
+      "actual_public_snapshot": 1,
+      "match": true
+    },
+    {
+      "item": "2024-07.ride_count",
+      "A_claim": 112385,
+      "actual_public_snapshot": 112385,
+      "match": true
+    },
+    {
+      "item": "2024-07.avg_duration_minutes_display",
+      "A_claim": "11.37",
+      "actual_public_snapshot": "11.37",
+      "match": true
+    },
+    {
+      "item": "2024-07.member_share_display",
+      "A_claim": "71.27%",
+      "actual_public_snapshot": "71.27%",
+      "match": true
+    },
+    {
+      "item": "2024-08.ride_count",
+      "A_claim": 106420,
+      "actual_public_snapshot": 106420,
+      "match": true
+    },
+    {
+      "item": "2024-08.avg_duration_minutes_display",
+      "A_claim": "11.03",
+      "actual_public_snapshot": "11.03",
+      "match": true
+    },
+    {
+      "item": "2024-08.member_share_display",
+      "A_claim": "72.89%",
+      "actual_public_snapshot": "72.89%",
+      "match": true
+    },
+    {
+      "item": "2024-09.ride_count",
+      "A_claim": 115527,
+      "actual_public_snapshot": 115527,
+      "match": true
+    },
+    {
+      "item": "2024-09.avg_duration_minutes_display",
+      "A_claim": "10.08",
+      "actual_public_snapshot": "10.08",
+      "match": true
+    },
+    {
+      "item": "2024-09.member_share_display",
+      "A_claim": "73.81%",
+      "actual_public_snapshot": "73.81%",
+      "match": true
+    },
+    {
+      "item": "boundary.entering",
+      "A_claim": 10,
+      "actual_public_snapshot": 10,
+      "match": true
+    },
+    {
+      "item": "boundary.leaving",
+      "A_claim": 11,
+      "actual_public_snapshot": 11,
+      "match": true
+    },
+    {
+      "item": "HB102.departures",
+      "A_claim": 17171,
+      "actual_public_snapshot": 17171,
+      "match": true
+    },
+    {
+      "item": "HB102.arrivals",
+      "A_claim": 16708,
+      "actual_public_snapshot": 16708,
+      "match": true
+    },
+    {
+      "item": "HB102.net_outflow",
+      "A_claim": 463,
+      "actual_public_snapshot": 463,
+      "match": true
+    },
+    {
+      "item": "unknown_end_station_arrivals",
+      "A_claim": 1026,
+      "actual_public_snapshot": 1026,
+      "match": true
+    }
+  ],
+  "total_checks": 38,
+  "matched": 38,
+  "mismatches": [],
+  "conclusion": "Numeric claims independently checked on newly downloaded official snapshot; A original ZIP hash identity and scripts remain unavailable; SQL Server ETL not performed."
+}

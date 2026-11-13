@@ -1,0 +1,192 @@
+{
+  "snapshot_id": "JC-202406-202410-public-20261113",
+  "created_on": "2026-11-13",
+  "provenance": "Downloaded through official System Data S3 interface linked in A PDF p2; not a supplied A attachment.",
+  "A_snapshot_identity": "unverified_missing_A_hash_manifest",
+  "source_page": "https://citibikenyc.com/system-data",
+  "download_index": "https://s3.amazonaws.com/tripdata/index.html",
+  "policy": "https://citibikenyc.com/data-sharing-policy",
+  "archives": [
+    {
+      "month": "202406",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202406-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/public-jc-20261113/JC-202406-citibike-tripdata.csv.zip",
+      "acquired_at_utc": "2026-11-13T07:13:32.675828+00:00",
+      "completed_at_utc": "2026-11-13T07:13:36.194787+00:00",
+      "http_status": 200,
+      "bytes": 4413867,
+      "sha256": "45570371fa2d06670ebee12e3c7ce0da6538cfcd667585bdd75806dd6d341863",
+      "etag": "\"2d719fe85e9ddfaaad85d9d5ed84d2fa\"",
+      "last_modified": "Mon, 08 Jul 2024 18:18:21 GMT",
+      "zip_crc_verified": true,
+      "all_members": [
+        {
+          "member_path": "JC-202406-citibike-tripdata.csv",
+          "bytes": 24037611,
+          "compressed_bytes": 4413051,
+          "crc32": "6cad5b9e",
+          "sha256": "72106bce10a0a0f78098b7205dd2e0b710b717fc4a2761f8ef8b952595914cd3",
+          "filename_ends_with_csv": true,
+          "member_kind": "trip_csv",
+          "csv_data_record_count": 111115
+        },
+        {
+          "member_path": "__MACOSX/._JC-202406-citibike-tripdata.csv",
+          "bytes": 562,
+          "compressed_bytes": 336,
+          "crc32": "54cd0c7e",
+          "sha256": "dc37fba9cdf0613a0d82ffb7c4a4a96f828572b7731701de8b8cc859cec8dd60",
+          "filename_ends_with_csv": true,
+          "member_kind": "appledouble_metadata"
+        }
+      ],
+      "csv_data_member_count": 1,
+      "appledouble_member_count": 1
+    },
+    {
+      "month": "202407",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202407-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/public-jc-20261113/JC-202407-citibike-tripdata.csv.zip",
+      "acquired_at_utc": "2026-11-13T07:13:32.677390+00:00",
+      "completed_at_utc": "2026-11-13T07:13:36.163156+00:00",
+      "http_status": 200,
+      "bytes": 4198201,
+      "sha256": "fdd4dd1eadfd87e7bdc47635a31f9c8f4a0e5752f7f8b95f4d8a2fd68617ecab",
+      "etag": "\"a7238085605ab1983a7d7b34a88d4cfc\"",
+      "last_modified": "Thu, 08 Aug 2024 15:40:05 GMT",
+      "zip_crc_verified": true,
+      "all_members": [
+        {
+          "member_path": "JC-202407-citibike-tripdata.csv",
+          "bytes": 24430797,
+          "compressed_bytes": 4197387,
+          "crc32": "71821e65",
+          "sha256": "8f04dbbc950f9b24c0a48cf6b72818a5b74b99c8bf2a7e3b2ccadf5acd53d892",
+          "filename_ends_with_csv": true,
+          "member_kind": "trip_csv",
+          "csv_data_record_count": 112443
+        },
+        {
+          "member_path": "__MACOSX/._JC-202407-citibike-tripdata.csv",
+          "bytes": 562,
+          "compressed_bytes": 334,
+          "crc32": "e479be56",
+          "sha256": "fbac3de5b49e2d3e99f59c7bc76682d5cb10b029045c9c029693e05a9f9a360c",
+          "filename_ends_with_csv": true,
+          "member_kind": "appledouble_metadata"
+        }
+      ],
+      "csv_data_member_count": 1,
+      "appledouble_member_count": 1
+    },
+    {
+      "month": "202408",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202408-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/public-jc-20261113/JC-202408-citibike-tripdata.csv.zip",
+      "acquired_at_utc": "2026-11-13T07:13:32.678307+00:00",
+      "completed_at_utc": "2026-11-13T07:13:35.539520+00:00",
+      "http_status": 200,
+      "bytes": 3530848,
+      "sha256": "ab16afaaaf608b8c2392ff9be547dc77059fd65a990122bad7ebc62e8ad8a141",
+      "etag": "\"c7278f83fe588737bf692dad566cfc7f\"",
+      "last_modified": "Thu, 05 Sep 2024 00:48:02 GMT",
+      "zip_crc_verified": true,
+      "all_members": [
+        {
+          "member_path": "JC-202408-citibike-tripdata.csv",
+          "bytes": 23215446,
+          "compressed_bytes": 3530031,
+          "crc32": "dcf8a60f",
+          "sha256": "e8b99c97d8713934dd4c64d8eada88941c1880f08b7cf7085504ed50470de16f",
+          "filename_ends_with_csv": true,
+          "member_kind": "trip_csv",
+          "csv_data_record_count": 106451
+        },
+        {
+          "member_path": "__MACOSX/._JC-202408-citibike-tripdata.csv",
+          "bytes": 562,
+          "compressed_bytes": 337,
+          "crc32": "106e0a8a",
+          "sha256": "21c77379823972cd5cea10b5ef917c98cd3cb769671c5a3f2988a904d25916ff",
+          "filename_ends_with_csv": true,
+          "member_kind": "appledouble_metadata"
+        }
+      ],
+      "csv_data_member_count": 1,
+      "appledouble_member_count": 1
+    },
+    {
+      "month": "202409",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202409-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/public-jc-20261113/JC-202409-citibike-tripdata.csv.zip",
+      "acquired_at_utc": "2026-11-13T07:13:35.539678+00:00",
+      "completed_at_utc": "2026-11-13T07:13:38.164683+00:00",
+      "http_status": 200,
+      "bytes": 4140046,
+      "sha256": "9bdf20c1a16ae41b7c4a9f70554166b847703c112e2ddce63d80c6c37ea65ff3",
+      "etag": "\"f69acbe890d87d3f2318ec896c9b72ac\"",
+      "last_modified": "Tue, 08 Oct 2024 00:36:38 GMT",
+      "zip_crc_verified": true,
+      "all_members": [
+        {
+          "member_path": "JC-202409-citibike-tripdata.csv",
+          "bytes": 25343119,
+          "compressed_bytes": 4139176,
+          "crc32": "339e6101",
+          "sha256": "491ac433ec02bfa8e9c456075532b3b44aaa02f3b8503bb59e2b3bdd99db2a81",
+          "filename_ends_with_csv": true,
+          "member_kind": "trip_csv",
+          "csv_data_record_count": 115558
+        },
+        {
+          "member_path": "__MACOSX/._JC-202409-citibike-tripdata.csv",
+          "bytes": 618,
+          "compressed_bytes": 390,
+          "crc32": "8e541bc3",
+          "sha256": "45bb4a0e94268f5fe2e33af10104bf63a9c912baedbd7bd4be79a769bb0daaed",
+          "filename_ends_with_csv": true,
+          "member_kind": "appledouble_metadata"
+        }
+      ],
+      "csv_data_member_count": 1,
+      "appledouble_member_count": 1
+    },
+    {
+      "month": "202410",
+      "url": "https://s3.amazonaws.com/tripdata/JC-202410-citibike-tripdata.csv.zip",
+      "path_from_repo": "data/raw/public-jc-20261113/JC-202410-citibike-tripdata.csv.zip",
+      "acquired_at_utc": "2026-11-13T07:13:36.163318+00:00",
+      "completed_at_utc": "2026-11-13T07:13:38.793734+00:00",
+      "http_status": 200,
+      "bytes": 4028203,
+      "sha256": "ba2b2431e618047f4092a48931f914b8abe53c0d053f366f2a4e2e1850feb23c",
+      "etag": "\"3bddc389be440bba6955a0fd87c0ee47\"",
+      "last_modified": "Mon, 04 Nov 2024 19:48:14 GMT",
+      "zip_crc_verified": true,
+      "all_members": [
+        {
+          "member_path": "JC-202410-citibike-tripdata.csv",
+          "bytes": 26022320,
+          "compressed_bytes": 4027362,
+          "crc32": "aba04b0e",
+          "sha256": "0a5ef8f2b1dab18758a6b8936e10851ff309e595a74c505df02168dd5c38dbda",
+          "filename_ends_with_csv": true,
+          "member_kind": "trip_csv",
+          "csv_data_record_count": 118307
+        },
+        {
+          "member_path": "__MACOSX/._JC-202410-citibike-tripdata.csv",
+          "bytes": 562,
+          "compressed_bytes": 361,
+          "crc32": "51df4e35",
+          "sha256": "0e0102b11cb0a6b4a384b9e424b326ee174a6b838f85201b1117fbd8f135259c",
+          "filename_ends_with_csv": true,
+          "member_kind": "appledouble_metadata"
+        }
+      ],
+      "csv_data_member_count": 1,
+      "appledouble_member_count": 1
+    }
+  ],
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829"
+}

@@ -1,5 +1,7 @@
 # 官方来源与字段核对
 
+> 更新2026-11-13：本页下方HEAD/局部表头为B0历史范围。现已完整下载五个官方包并全量核验，最新见[公开快照核验](public-snapshot-validation.md)及inputs/public-source-snapshot.json；38项A数值在新快照匹配，仍不证明A原包同哈希或完整ETL。
+
 核验日：2026-11-12。入口为 Citi Bike [System Data](https://citibikenyc.com/system-data)，其下载链接指向[官方 S3 列表](https://s3.amazonaws.com/tripdata/index.html)。官方概览列出 13 类当前骑行字段；历史版本字段另列，不应混用旧版的用户年龄、性别或 Bike ID。
 
 官方说明会预处理短于 60 秒等部分记录，也说明大月份可能拆为多个 CSV；不能因此省略项目自身的边界检查或只读取一个 CSV。官方概览未给出 A 所用五包的完整字段长度、NULL、毫秒精度、时间偏移或按结束月归档的保证。

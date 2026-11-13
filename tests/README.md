@@ -9,3 +9,7 @@
 本次不测试 C 的真实去重、排除算法、所有六查询或实际覆盖证明；跨月/均值/占比的完整指标验收仍由 C 后续实现。IDENTITY 在回滚测试后可能有空洞，不把它当真实业务数量。
 
 真实 A 基准只有在输入快照核对并独立复现后才能作为已确认对照，来源为 inputs/a-claimed-baselines.json 的当前声明状态不得静默升级。
+
+## 新增源审计测试
+
+`python -X utf8 -m unittest discover -s tests -p test_source_audit.py -v`：10个标准库小ZIP夹具测试，覆盖冲突优先、无效重复、双时间角色/分母/加权、精确ID/微秒、超精度、AppleDouble结构、全成员/错SHA、多行CSV/记录号与同输入重跑。与原10个SQLServer行为测试分开运行；源测试不写SQLServer，也不使用A数值当期望。真实五包全量运行2次、38项A数值匹配的证据另存public-source-validation.json，不能当数仓ETL/查询通过。

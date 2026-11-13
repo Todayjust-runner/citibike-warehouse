@@ -23,3 +23,7 @@ python -X utf8 -m unittest discover -s tests -p test_b2.py -v
 ## 当前物理修订 B2-1.1
 
 B3 在既有 ODS 触发器增加验证/发布来源的 INSERT 保护，其余结构不变。10 Python + 50 SQL通过，见[B3复核](../docs/review/b3-final-review.md)。旧B2-1.0会按版本/指纹/模块漂移被拒绝；本机只对已核验空的测试库作一个触发器的受控补丁，未增加自动迁移。遇旧库需对照旧版清单另行审阅，禁止只改扩展属性或默认重建。
+
+## 真实公开源审计（用户补充授权）
+
+`python -X utf8 scripts/audit_public_source.py` 校验已锁定五个公开ZIP及所有成员SHA，区分真正CSV与AppleDouble，独立全量核算字段、去向和六指标。只使用Python标准库/临时SQLite，不连接或装载SQLServer。默认本地派生CSV在data/audit/public-jc-20261113，摘要在docs/evidence/public-source-audit.json；源核验测试为 `python -X utf8 -m unittest discover -s tests -p test_source_audit.py -v`。下载恢复、参数/退出码与证据边界见[公开快照说明](../docs/sources/public-snapshot-validation.md)。

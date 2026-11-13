@@ -1,6 +1,6 @@
 # 六指标与模型支持检查 v1.0
 
-> 接续时点（2026-11-13）：本文件保留 B1 设计语义和当时未执行的推演；SQL 类型已由[物理 B2-1.1](physical-design.md)落实，部分结构/边界见[B3复核](../review/b3-final-review.md)，完整 ETL/六查询与真实基准仍未验证。
+> 当前补充（2026-11-13）：逻辑/物理语义不变；[新官方快照](../sources/public-snapshot-validation.md)已全量剖析且38项A数值匹配，SQLServer ETL/完整查询仍未验。下述B1推演保留当时证据范围，真实属性现见[开放属性表](open-attributes.md)。
 
 这是**设计推演**，不是执行 ETL、SQL 或真实数据验收。定义依据 A v1.0 p5-8；实际 A 数值仍为 [待复现声明](../../inputs/a-claimed-baselines.json)。下列所有运算锁定一个已发布 `run_id`。
 

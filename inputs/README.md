@@ -1,16 +1,18 @@
 # 输入与证据等级
 
-核对日期：2026-11-12（Asia/Shanghai）。工程初始不存在；父目录课程材料原位保留。当前收到的 A 交付仅 PDF。
+更新2026-11-13。A交付仍只有PDF；用户后续授权直接获取公开源，现已下载并完整核验新的官方JC五包。两者分开登记，不再把公开可得数据笼统标为缺失。
 
-| 文件 | 用途 | 使用限制 |
-|---|---|---|
-| [local-materials.json](local-materials.json) | 10 份本地材料路径、字节数、SHA-256、实际阅读范围 | 路径相对仓库；课程/书籍本体未入库 |
-| [required-inputs.csv](required-inputs.csv) | 必要附件、状态、设计及验收影响、补齐责任 | `missing` 表示当前未收到，不能推断文件不存在于 A 机器 |
-| [a-claimed-baselines.json](a-claimed-baselines.json) | 从 PDF 逐项转录的核算声明 | `a_claimed_not_reproduced`，仅供后续对照，不能当实际运行结果 |
-| [官方对象检查](../docs/evidence/official-object-check.json) | 五个月 HEAD 元数据和 7 月局部表头 | 无完整包哈希、CSV 行数或基准复现 |
+| 文件 | 当前用途 / 等级 |
+|---|---|
+| [local-materials.json](local-materials.json) | 10份课程原位材料身份，仍全部一致；不复制原件 |
+| [public-source-snapshot.json](public-source-snapshot.json) | 5 ZIP、10成员SHA/分类、URL/UTC下载时间、CSV行数与输入集指纹；可用新快照 |
+| [required-inputs.csv](required-inputs.csv) | 10项输入状态；公开ZIP可用，A原哈希/脚本/完整逐站附件仍缺 |
+| [a-claimed-baselines.json](a-claimed-baselines.json) | A转录原数值保留；新状态为数值在公开快照匹配、A原身份未证实 |
+| [实际源核算](../docs/evidence/public-source-audit.json) / [38项比较](../docs/evidence/a-public-comparison.json) | 全量剖析与精确核算，不能替代SQLServer ETL验收 |
+| [旧官方对象检查](../docs/evidence/official-object-check.json) | B0 HEAD/局部表头历史，非当前核验上限 |
 
-A 声明的预计本地输入路径为 `data/raw/citibike_jc_2024Q3/`，涵盖 202406-202410 五份 JC ZIP。此目录名并不说明只存 Q3 文件。当前未创建或填入数据。新增输入按清单接收，不把整份 A PDF 拆出的数值冒充附件。
+现有原ZIP在data/raw/public-jc-20261113，5份骑行CSV仍在ZIP内。每包另1个AppleDouble元数据，其后缀虽.csv，但经文件头/条目/对应关系验证后不进入骑行CSV计数或ODS；全部10成员仍保留SHA。实际5 CSV共563874条，60秒—24小时规则接受563668，206条超24小时排除，重复/冲突0。
 
-附件到位时由 C 建立独立的源文件清单，至少包括 ZIP 下载 URL/日期/字节数/SHA-256、所有 CSV 成员名及 SHA-256、表头、数据记录数（排除表头）、起止时间范围与精度、各文件月份覆盖结论。先比对 A 的哈希，再决定是否仍属于口径 v1.0 的同一快照；不匹配则记录差异与版本。
+源审计重复运行两次，语义结果一致，38项A可比数值匹配。仍未收到A原数据核验结果.json、两个脚本/环境/日志、全量月份/逐站基准，故不能确认下载字节等同A原包或全部处理细节相同。C可先使用本次锁定输入，不必等待公开数据本身；接到A哈希后再比身份。
 
-源行定位中 A 的“CSV 实际行号”尚需澄清：建议固定表头为第 1 条 CSV 记录、首条数据为第 2 条，另保留需要时的物理行范围。该建议未冻结为已验证的 A 附件实现。
+[获取/重跑说明](../docs/sources/public-snapshot-validation.md)给出SHA固定的恢复命令。CSV定位按表头记录1/首数据2，多行字段按解析记录号；该定义由新核验程序明确实现，不代表已证明A原脚本相同行号规则。

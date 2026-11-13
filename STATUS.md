@@ -1,7 +1,7 @@
 # STATUS
 
-详细阶段状态唯一入口：[docs/planning/STATUS.md](docs/planning/STATUS.md)。
+唯一详细状态：[docs/planning/STATUS.md](docs/planning/STATUS.md)。
 
-2026-11-13：B0—B3 已完成 B 的工程、三级设计、DDL/结构验证、复核、报告与最终交接。物理 B2-1.1；10 Python + 50 SQL 通过，测试库与清单无漂移，业务库未创建。外部签收/真实数据验收未完成。
+2026-11-13：B0—B3完成后，按用户补充授权取得官方五包，完整核验563874源行；38项A数值全部匹配，10个源审计测试通过、全量同输入重跑一致。B交付更新v1.1，物理仍B2-1.1，不需DDL变更；SQLServer仅只读verify，未加载真实数据。
 
-入口：[B 交付 v1.0](docs/handoff/b-delivery-v1.0.md)、[报告3/4/5章](docs/report/README.md)、[阶段计划](docs/planning/b-four-conversations.md)、[C/D 下一步](docs/handoff/next-stage.md)。A 附件仍缺，完整 ETL/查询/页面由 C/D 接续，A 基准保持未复现。
+入口：[公开快照/恢复与重跑](docs/sources/public-snapshot-validation.md)、[B v1.1](docs/handoff/b-delivery-v1.1.md)、[报告](docs/report/README.md)、[阶段计划](docs/planning/b-four-conversations.md)、[C/D下一步](docs/handoff/next-stage.md)。A原哈希身份/脚本和完整ETL/查询/页面验收仍未完成。

@@ -9,6 +9,8 @@
 - [六指标支持检查](../design/metric-model-mapping.md)
 - [真实属性与验收缺口](../design/open-attributes.md)
 
+公开源补充已交付为[B v1.1](../handoff/b-delivery-v1.1.md)：38项A数值在锁定新快照匹配，物理/逻辑口径不变，完整ETL与外部签收仍待完成。
+
 以下 v0.1 只保留为 B0 历史记录；与 v1.0 不同之处以新契约和追加决定为准。
 
 ## 历史：B/C/D 最低交接契约 v0.1

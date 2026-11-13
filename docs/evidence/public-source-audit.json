@@ -1,0 +1,434 @@
+{
+  "audit_version": "source-audit-1.0",
+  "snapshot_id": "JC-202406-202410-public-20261113",
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "scope": "Full public source audit only; no SQL Server ETL, query API or publication.",
+  "source_rows": 563874,
+  "members": [
+    {
+      "zip_month": "202406",
+      "zip_sha256": "45570371fa2d06670ebee12e3c7ce0da6538cfcd667585bdd75806dd6d341863",
+      "member_path": "JC-202406-citibike-tripdata.csv",
+      "csv_sha256": "72106bce10a0a0f78098b7205dd2e0b710b717fc4a2761f8ef8b952595914cd3",
+      "header": [
+        "ride_id",
+        "rideable_type",
+        "started_at",
+        "ended_at",
+        "start_station_name",
+        "start_station_id",
+        "end_station_name",
+        "end_station_id",
+        "start_lat",
+        "start_lng",
+        "end_lat",
+        "end_lng",
+        "member_casual"
+      ],
+      "data_records": 111115,
+      "csv_record_number_first": 2,
+      "csv_record_number_last": 111116,
+      "ended_month_mismatches": 0,
+      "time_parse_errors": 0,
+      "time_ranges": {
+        "started_at": [
+          "2024-05-31T12:16:36.339000",
+          "2024-06-30T23:55:20.703000"
+        ],
+        "ended_at": [
+          "2024-06-01T00:00:50.426000",
+          "2024-06-30T23:59:17.352000"
+        ]
+      },
+      "member_path_utf16_units": 31
+    },
+    {
+      "zip_month": "202407",
+      "zip_sha256": "fdd4dd1eadfd87e7bdc47635a31f9c8f4a0e5752f7f8b95f4d8a2fd68617ecab",
+      "member_path": "JC-202407-citibike-tripdata.csv",
+      "csv_sha256": "8f04dbbc950f9b24c0a48cf6b72818a5b74b99c8bf2a7e3b2ccadf5acd53d892",
+      "header": [
+        "ride_id",
+        "rideable_type",
+        "started_at",
+        "ended_at",
+        "start_station_name",
+        "start_station_id",
+        "end_station_name",
+        "end_station_id",
+        "start_lat",
+        "start_lng",
+        "end_lat",
+        "end_lng",
+        "member_casual"
+      ],
+      "data_records": 112443,
+      "csv_record_number_first": 2,
+      "csv_record_number_last": 112444,
+      "ended_month_mismatches": 0,
+      "time_parse_errors": 0,
+      "time_ranges": {
+        "started_at": [
+          "2024-06-30T13:05:37.602000",
+          "2024-07-31T23:53:13.855000"
+        ],
+        "ended_at": [
+          "2024-07-01T00:00:10.836000",
+          "2024-07-31T23:59:37.328000"
+        ]
+      },
+      "member_path_utf16_units": 31
+    },
+    {
+      "zip_month": "202408",
+      "zip_sha256": "ab16afaaaf608b8c2392ff9be547dc77059fd65a990122bad7ebc62e8ad8a141",
+      "member_path": "JC-202408-citibike-tripdata.csv",
+      "csv_sha256": "e8b99c97d8713934dd4c64d8eada88941c1880f08b7cf7085504ed50470de16f",
+      "header": [
+        "ride_id",
+        "rideable_type",
+        "started_at",
+        "ended_at",
+        "start_station_name",
+        "start_station_id",
+        "end_station_name",
+        "end_station_id",
+        "start_lat",
+        "start_lng",
+        "end_lat",
+        "end_lng",
+        "member_casual"
+      ],
+      "data_records": 106451,
+      "csv_record_number_first": 2,
+      "csv_record_number_last": 106452,
+      "ended_month_mismatches": 0,
+      "time_parse_errors": 0,
+      "time_ranges": {
+        "started_at": [
+          "2024-07-31T13:31:23.232000",
+          "2024-08-31T23:55:07.669000"
+        ],
+        "ended_at": [
+          "2024-08-01T00:01:53.460000",
+          "2024-08-31T23:59:07.550000"
+        ]
+      },
+      "member_path_utf16_units": 31
+    },
+    {
+      "zip_month": "202409",
+      "zip_sha256": "9bdf20c1a16ae41b7c4a9f70554166b847703c112e2ddce63d80c6c37ea65ff3",
+      "member_path": "JC-202409-citibike-tripdata.csv",
+      "csv_sha256": "491ac433ec02bfa8e9c456075532b3b44aaa02f3b8503bb59e2b3bdd99db2a81",
+      "header": [
+        "ride_id",
+        "rideable_type",
+        "started_at",
+        "ended_at",
+        "start_station_name",
+        "start_station_id",
+        "end_station_name",
+        "end_station_id",
+        "start_lat",
+        "start_lng",
+        "end_lat",
+        "end_lng",
+        "member_casual"
+      ],
+      "data_records": 115558,
+      "csv_record_number_first": 2,
+      "csv_record_number_last": 115559,
+      "ended_month_mismatches": 0,
+      "time_parse_errors": 0,
+      "time_ranges": {
+        "started_at": [
+          "2024-08-31T12:41:43.099000",
+          "2024-09-30T23:56:21.288000"
+        ],
+        "ended_at": [
+          "2024-09-01T00:03:11.615000",
+          "2024-09-30T23:59:56.414000"
+        ]
+      },
+      "member_path_utf16_units": 31
+    },
+    {
+      "zip_month": "202410",
+      "zip_sha256": "ba2b2431e618047f4092a48931f914b8abe53c0d053f366f2a4e2e1850feb23c",
+      "member_path": "JC-202410-citibike-tripdata.csv",
+      "csv_sha256": "0a5ef8f2b1dab18758a6b8936e10851ff309e595a74c505df02168dd5c38dbda",
+      "header": [
+        "ride_id",
+        "rideable_type",
+        "started_at",
+        "ended_at",
+        "start_station_name",
+        "start_station_id",
+        "end_station_name",
+        "end_station_id",
+        "start_lat",
+        "start_lng",
+        "end_lat",
+        "end_lng",
+        "member_casual"
+      ],
+      "data_records": 118307,
+      "csv_record_number_first": 2,
+      "csv_record_number_last": 118308,
+      "ended_month_mismatches": 0,
+      "time_parse_errors": 0,
+      "time_ranges": {
+        "started_at": [
+          "2024-09-30T20:54:50.083000",
+          "2024-10-31T23:53:54.283000"
+        ],
+        "ended_at": [
+          "2024-10-01T00:00:01.725000",
+          "2024-10-31T23:58:24.325000"
+        ]
+      },
+      "member_path_utf16_units": 31
+    }
+  ],
+  "archive_sidecars": [
+    {
+      "zip_sha256": "45570371fa2d06670ebee12e3c7ce0da6538cfcd667585bdd75806dd6d341863",
+      "member_path": "__MACOSX/._JC-202406-citibike-tripdata.csv",
+      "kind": "appledouble_metadata",
+      "sha256": "dc37fba9cdf0613a0d82ffb7c4a4a96f828572b7731701de8b8cc859cec8dd60",
+      "bytes": 562
+    },
+    {
+      "zip_sha256": "fdd4dd1eadfd87e7bdc47635a31f9c8f4a0e5752f7f8b95f4d8a2fd68617ecab",
+      "member_path": "__MACOSX/._JC-202407-citibike-tripdata.csv",
+      "kind": "appledouble_metadata",
+      "sha256": "fbac3de5b49e2d3e99f59c7bc76682d5cb10b029045c9c029693e05a9f9a360c",
+      "bytes": 562
+    },
+    {
+      "zip_sha256": "ab16afaaaf608b8c2392ff9be547dc77059fd65a990122bad7ebc62e8ad8a141",
+      "member_path": "__MACOSX/._JC-202408-citibike-tripdata.csv",
+      "kind": "appledouble_metadata",
+      "sha256": "21c77379823972cd5cea10b5ef917c98cd3cb769671c5a3f2988a904d25916ff",
+      "bytes": 562
+    },
+    {
+      "zip_sha256": "9bdf20c1a16ae41b7c4a9f70554166b847703c112e2ddce63d80c6c37ea65ff3",
+      "member_path": "__MACOSX/._JC-202409-citibike-tripdata.csv",
+      "kind": "appledouble_metadata",
+      "sha256": "45bb4a0e94268f5fe2e33af10104bf63a9c912baedbd7bd4be79a769bb0daaed",
+      "bytes": 618
+    },
+    {
+      "zip_sha256": "ba2b2431e618047f4092a48931f914b8abe53c0d053f366f2a4e2e1850feb23c",
+      "member_path": "__MACOSX/._JC-202410-citibike-tripdata.csv",
+      "kind": "appledouble_metadata",
+      "sha256": "0e0102b11cb0a6b4a384b9e424b326ee174a6b838f85201b1117fbd8f135259c",
+      "bytes": 562
+    }
+  ],
+  "fields": {
+    "ride_id": {
+      "max_utf16_units": 16,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "rideable_type": {
+      "max_utf16_units": 13,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "started_at": {
+      "max_utf16_units": 23,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 3
+    },
+    "ended_at": {
+      "max_utf16_units": 23,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 3
+    },
+    "start_station_name": {
+      "max_utf16_units": 44,
+      "empty_or_ascii_blank": 3,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "start_station_id": {
+      "max_utf16_units": 7,
+      "empty_or_ascii_blank": 3,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "end_station_name": {
+      "max_utf16_units": 44,
+      "empty_or_ascii_blank": 1711,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "end_station_id": {
+      "max_utf16_units": 7,
+      "empty_or_ascii_blank": 1877,
+      "nonblank_outer_ascii_whitespace": 0
+    },
+    "start_lat": {
+      "max_utf16_units": 18,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 15
+    },
+    "start_lng": {
+      "max_utf16_units": 18,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 14
+    },
+    "end_lat": {
+      "max_utf16_units": 18,
+      "empty_or_ascii_blank": 197,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 15
+    },
+    "end_lng": {
+      "max_utf16_units": 18,
+      "empty_or_ascii_blank": 197,
+      "nonblank_outer_ascii_whitespace": 0,
+      "max_fractional_digits": 14
+    },
+    "member_casual": {
+      "max_utf16_units": 6,
+      "empty_or_ascii_blank": 0,
+      "nonblank_outer_ascii_whitespace": 0
+    }
+  },
+  "labels": {
+    "rideable_type": {
+      "classic_bike": 230750,
+      "electric_bike": 333124
+    },
+    "member_casual": {
+      "casual": 152605,
+      "member": 411269
+    }
+  },
+  "quality": {
+    "outcomes": {
+      "ACCEPTED": 563668,
+      "DUPLICATE_EXACT": 0,
+      "REJECTED": 206
+    },
+    "rejected_reasons": {
+      "DURATION_GT_24H": 206
+    },
+    "duplicate_id_groups": 0,
+    "conflicting_id_groups": 0,
+    "coordinates": {
+      "start": {
+        "valid": 563874
+      },
+      "end": {
+        "missing": 197,
+        "valid": 563677
+      }
+    },
+    "conservation_ok": true
+  },
+  "physical_fit": {
+    "version": "B2-1.1",
+    "ok": true,
+    "overlong_fields": [],
+    "overlong_member_paths": [],
+    "valid_coordinate_pairs_exceeding_scale_15": 0,
+    "time_semantics": "source text without offset; no timezone conversion"
+  },
+  "window": {
+    "start_inclusive": "2024-07-01T00:00:00",
+    "end_exclusive": "2024-10-01T00:00:00",
+    "bike_filter": null
+  },
+  "metrics": {
+    "ride_count": 334332,
+    "duration_us": "216990044333000",
+    "avg_duration_minutes_display": "10.82",
+    "member_count": 242927,
+    "known_member_type_count": 334332,
+    "unknown_member_type_count": 0,
+    "member_share_display": "72.66%",
+    "member_type_coverage": "1.000000000000",
+    "departures": 334332,
+    "arrivals": 334331,
+    "net_outflow": 1,
+    "unknown_departures": 0,
+    "unknown_arrivals": 1026
+  },
+  "departure_months": [
+    {
+      "month": "2024-07",
+      "ride_count": 112385,
+      "duration_us": "76690599918000",
+      "member_count": 80092,
+      "known_member_type_count": 112385,
+      "avg_duration_minutes_display": "11.37",
+      "member_share_display": "71.27%"
+    },
+    {
+      "month": "2024-08",
+      "ride_count": 106420,
+      "duration_us": "70398067605000",
+      "member_count": 77566,
+      "known_member_type_count": 106420,
+      "avg_duration_minutes_display": "11.03",
+      "member_share_display": "72.89%"
+    },
+    {
+      "month": "2024-09",
+      "ride_count": 115527,
+      "duration_us": "69901376810000",
+      "member_count": 85269,
+      "known_member_type_count": 115527,
+      "avg_duration_minutes_display": "10.08",
+      "member_share_display": "73.81%"
+    }
+  ],
+  "boundary": {
+    "entering": 10,
+    "leaving": 11
+  },
+  "station_observations": {
+    "real_station_ids": 427,
+    "multiple_nonempty_names": 1,
+    "multiple_valid_coordinate_pairs": 160
+  },
+  "station_example_HB102": {
+    "station_id": "HB102",
+    "is_unknown": false,
+    "departures": 17171,
+    "arrivals": 16708,
+    "net_outflow": 463
+  },
+  "ended_month_rule_observed_all_rows": true,
+  "local_outputs": [
+    {
+      "name": "monthly.csv",
+      "bytes": 284,
+      "sha256": "2fcea3d99a7d53738005ec53b36dabee081d88dd6abc58a0162e47e3b3352347"
+    },
+    {
+      "name": "station-flow.csv",
+      "bytes": 6824,
+      "sha256": "3e17660e5174d870ce34c961fa2bea0be115b29e68f7356a87d8d6f9b327af1b"
+    },
+    {
+      "name": "boundary-records.csv",
+      "bytes": 3547,
+      "sha256": "79ea7df099e94c212918161de07acf2c4c1066dcdb8d6c2ce3b5b84f21ec7bfa"
+    }
+  ],
+  "semantic_sha256": "f24dc1a2f38a56849fde0360a5eab9874ecc0b7851637862f82146d60abacefe",
+  "execution": {
+    "generated_at_utc": "2026-11-13T07:21:19.716541+00:00",
+    "code_sha256": "f15fe8f880e97a91204e354913673ca9f9d40086abeb14e4847971f5e6402d2d",
+    "source_database_written": false,
+    "A_original_hash_identity": "unverified_without_A_manifest"
+  }
+}

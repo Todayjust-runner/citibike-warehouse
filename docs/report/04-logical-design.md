@@ -51,7 +51,7 @@
 
 ## 4.4 源映射、去重与血缘
 
-官方当前结构为 13 列：ride_id、rideable_type、started_at、ended_at、start_station_name、start_station_id、end_station_name、end_station_id、start_lat、start_lng、end_lat、end_lng、member_casual。它们按原顺序进入 `raw_values` 及同名 `_raw` 列。CSV 空单元格保留空字符串；无法安全解析、列数不符或读取不完整会阻止运行发布。
+官方当前结构为 13 列：ride_id、rideable_type、started_at、ended_at、start_station_name、start_station_id、end_station_name、end_station_id、start_lat、start_lng、end_lat、end_lng、member_casual。五包另有5个AppleDouble元数据成员，验证后单列哈希，不进入CSV记录数/ODS。真正骑行CSV的这些字段按原顺序进入 `raw_values` 及同名 `_raw` 列。CSV 空单元格保留空字符串；无法安全解析、列数不符或读取不完整会阻止运行发布。
 
 ID 映射到事实/维度精确身份；起止时间映射到事实与各自日期/小时键并产生整数微秒；两端站点 ID 映射站点键；名称/坐标成为观察属性和质量信息；车型/会员标签映射对应维度。完整逐列规则见[源到目标映射](../design/source-to-target.md)。
 
@@ -80,4 +80,4 @@ ODS 保留所有原始记录；DIM 描述角色；DWD 保存唯一原子事实�
 
 小时 DWS 只直接服务完整小时窗口。请求边界在小时内部或筛选不被该粒度保留时，回到事实精确筛选。M06 不直接连接借还明细，缺某侧仅在该侧完整覆盖时补 0；两角色覆盖不足不能输出权威差值。
 
-逻辑模型已覆盖六项指标，结构和部分边界已在独立测试库验证，但完整 ETL、真实值域/月份规则和六查询尚待 C 验证。具体查询字段、排序、NULL 与元信息见 [C→D 契约](../contracts/c-to-d-query-contract.md)，真实验收清单见[最终交接](../handoff/acceptance-checklist.md)。
+逻辑模型已覆盖六项指标，结构和部分边界已在独立测试库验证，但新公开五包的真实值域/月份关系与38项源数值已核验，见[来源补充](../sources/public-snapshot-validation.md)；完整ETL、六查询及仓库对源对账仍待C验证。具体查询字段、排序、NULL 与元信息见 [C→D 契约](../contracts/c-to-d-query-contract.md)，真实验收清单见[最终交接](../handoff/acceptance-checklist.md)。

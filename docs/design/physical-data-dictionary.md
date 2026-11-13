@@ -1,6 +1,6 @@
 # SQL Server 2019 物理字段字典 B2-1.1
 
-来源：[physical-model.json](physical-model.json)。与逻辑 14 关系/132 字段一一对应；以下是实际 SQL 定义，列长与精度为受控装载上限，尚未由真实五包剖析证明。完整键/检查/索引和编译定义在清单与编号 SQL 中。
+来源：[physical-model.json](physical-model.json)。与逻辑 14 关系/132 字段一一对应；以下是实际 SQL 定义，列长与精度为受控装载上限，本次公开五包已全量剖析适配（见公开源核验），未来新输入仍需检查。完整键/检查/索引和编译定义在清单与编号 SQL 中。
 
 `计算/持久化` 列由 SQL Server 生成，C 不在 INSERT 中传入；IDENTITY 也通常由服务器分配。源码原文进入 ODS 的 nvarchar(max)，精炼字段不得截断。
 

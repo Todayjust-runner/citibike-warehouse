@@ -1,6 +1,6 @@
 # 逻辑设计 v1.0
 
-> 接续时点（2026-11-13）：本文件保留 B1 设计语义和当时未执行的推演；SQL 类型已由[物理 B2-1.1](physical-design.md)落实，部分结构/边界见[B3复核](../review/b3-final-review.md)，完整 ETL/六查询与真实基准仍未验证。
+> 当前补充（2026-11-13）：逻辑/物理语义不变；[新官方快照](../sources/public-snapshot-validation.md)已全量剖析且38项A数值匹配，SQLServer ETL/完整查询仍未验。下述B1推演保留当时证据范围，真实属性现见[开放属性表](open-attributes.md)。
 
 阶段 B1，业务规则 A-1.0，处理策略 B1-1.0。一个业务事实，14 个逻辑关系。完整字段与外键见 [JSON 定义](logical-model.json) / [字段字典](data-dictionary.md)。本文件不包含可执行 DDL。
 

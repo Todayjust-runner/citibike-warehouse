@@ -2,7 +2,7 @@
 
 将 B1 的 14 关系、132 字段、31 外键落实为 SQL Server 2019 / 兼容级别 150 的关系型数仓。物理清单为 [physical-model.json](physical-model.json)，逐字段可读版见 [physical-data-dictionary.md](physical-data-dictionary.md)。逻辑模型 1.0、业务 A-1.0、处理 B1-1.0 不变。2026-11-13 B3 修订 B2-1.1，在既有 ODS 触发器增加验证/发布来源的追加保护；其余表/列/键不变，见 [B3 复核](../review/b3-final-review.md)。
 
-已在独立 `CitibikeDW_B_Test` 实际建表并验证；业务库 `CitibikeDW` 本阶段未创建。A 原始快照和真实指标仍未复现；有限列长与坐标精度是明确的装载契约，不是已完成真实字段剖析。
+已在独立 `CitibikeDW_B_Test` 实际建表并验证；业务库 `CitibikeDW` 本阶段未创建。A 原包同哈希仍未确认；新公开快照38项源数值已核对，仓库ETL未验；有限列长与坐标精度是装载契约；后续用户授权取得的新五包已全量剖析并适配现有上限，证据见[公开源核验](../sources/public-snapshot-validation.md)，不需要DDL变更。
 
 ## 分层、键与类型
 

@@ -2,6 +2,12 @@
 
 当前目标：[Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，GitHub 仓库 ID `1455379867`，必须为 private。用户在后续消息提供该地址并确认已创建，授权用此目标完成工程基础发布；取代最初的 klzyd 目标。
 
+## 用户补充公开源：B v1.1（2026-11-13）
+
+在966d774之后，按用户新授权取得官方完整五包并独立源核算；38项A数值匹配、10源测试及两次完整同输入核算通过。更新输入、报告、属性/交接、STATUS/计划及当前SHA，见[B v1.1](../handoff/b-delivery-v1.1.md)。没有SQLServer真实加载或完整ETL/页面，A原哈希/脚本仍缺。
+
+继续使用用户指定Todayjust-runner/citibike-warehouse，本机已授权Git认证/API再次核实账户ID241897350、仓库ID1455379867、private=true、push权限及远程main=966d774a01e035643bb3b2dc439b7804b13c2b7c，与本地/追踪分支相同。普通提交/推送，令牌仅进程内使用，不改全局身份/代理、不强推。发布候选94文件，原ZIP/CSV/本地派生CSV未提交，提交检查见[检查记录](submission-check.md)。最终门槛为HEAD=private main、完整树/所有blob一致及工作区干净；提交号从Git读取，避免文件自引用。
+
 ## 对话四 B3 最终 B 交付（2026-11-13）
 
 延续 ee2d762 基线与同一main，交付B报告3/4/5章、图源/SVG/PNG、复核矩阵、C/D交接及联合清单。修正已验证/发布来源仍可追加ODS的问题，物理B2-1.1；10 Python+50 SQL通过，业务库未部署，A附件/真实ETL/数值/展示仍未验。B交付版本与核心文件SHA清单见[最终索引](../handoff/b-delivery-v1.0.md)。
