@@ -1,5 +1,7 @@
 # 逻辑设计 v1.0
 
+> 接续时点（2026-11-13）：本文件保留 B1 设计语义和当时未执行的推演；SQL 类型已由[物理 B2-1.1](physical-design.md)落实，部分结构/边界见[B3复核](../review/b3-final-review.md)，完整 ETL/六查询与真实基准仍未验证。
+
 阶段 B1，业务规则 A-1.0，处理策略 B1-1.0。一个业务事实，14 个逻辑关系。完整字段与外键见 [JSON 定义](logical-model.json) / [字段字典](data-dictionary.md)。本文件不包含可执行 DDL。
 
 ## 总线矩阵
@@ -15,21 +17,18 @@
 <!-- diagram: star-schema.mmd -->
 
 ```mermaid
-flowchart TB
+flowchart LR
     DATE["dim.date<br/>date_key PK<br/>年 / 季 / 月 / 日 / 星期"]
     HOUR["dim.hour<br/>hour_key PK<br/>0..23"]
     STATION["dim.station<br/>(run_id, station_key) PK<br/>同运行观察快照 / 未知 key=0"]
     BIKE["dim.bike_type<br/>bike_type_key PK<br/>原标签 / 已识别标志"]
     MEMBER["dim.member_type<br/>member_type_key PK<br/>member / casual / 其他 / 缺失"]
     FACT["dwd.fact_trip<br/>(run_id, trip_key) PK<br/>(run_id, ride_id_identity) UNIQUE<br/>起终时间 / 两端角色键<br/>trip_count=1 / duration_us<br/>代表源行 / 坐标质量"]
-    DATE -->|"1:N start_date_key"| FACT
-    DATE -->|"1:N end_date_key"| FACT
-    HOUR -->|"1:N start_hour_key"| FACT
-    HOUR -->|"1:N end_hour_key"| FACT
-    STATION -->|"1:N (run_id, start_station_key)"| FACT
-    STATION -->|"1:N (run_id, end_station_key)"| FACT
-    BIKE -->|"1:N bike_type_key"| FACT
-    MEMBER -->|"1:N member_type_key"| FACT
+    DATE -->|"出发 / 归还 各 1:N<br/>start_date_key / end_date_key"| FACT
+    HOUR -->|"出发 / 归还 各 1:N<br/>start_hour_key / end_hour_key"| FACT
+    STATION -->|"起点 / 终点 各 1:N 同 run<br/>start_station_key / end_station_key"| FACT
+    BIKE -->|"1:N<br/>bike_type_key"| FACT
+    MEMBER -->|"1:N<br/>member_type_key"| FACT
 ```
 
 可编辑图源：[ star-schema.mmd ](../../diagrams/star-schema.mmd)。
@@ -78,7 +77,7 @@ ID 和标签都保留源非空字符串的精确内容，不转整数、不统�
 <!-- diagram: source-lineage.mmd -->
 
 ```mermaid
-flowchart LR
+flowchart TB
     FILE["meta.source_member<br/>ZIP / CSV 全哈希及成员清单"]
     RUN["meta.load_run + meta.run_source<br/>固定输入 / 版本 / 发布状态"]
     RAW["ods.trip_raw<br/>每条源记录 / 13 列原文"]

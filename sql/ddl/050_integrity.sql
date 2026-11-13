@@ -241,11 +241,14 @@ BEGIN
 END;
 
 GO
-CREATE OR ALTER TRIGGER ods.TR_trip_raw_immutable ON ods.trip_raw AFTER UPDATE,DELETE
+CREATE OR ALTER TRIGGER ods.TR_trip_raw_immutable ON ods.trip_raw AFTER INSERT,UPDATE,DELETE
 AS
 BEGIN
  SET NOCOUNT ON;
  IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;
+ IF EXISTS(SELECT 1 FROM inserted i JOIN meta.run_source s ON s.source_member_id=i.source_member_id
+  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=s.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))
+  THROW 51042,'A source member referenced by a validated/published run cannot receive additional raw rows.',1;
 END;
 
 GO

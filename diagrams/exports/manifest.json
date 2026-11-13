@@ -1,0 +1,77 @@
+{
+  "exported_on": "2026-11-13",
+  "tools": {
+    "mermaid_cli": "11.12.0",
+    "mermaid": "11.17.2",
+    "node": "v24.15.0",
+    "browser": "Local Chrome in headless mode; isolated render, no user profile"
+  },
+  "config": "diagrams/mermaid-config.json",
+  "settings": {
+    "width": 2400,
+    "height": 1600,
+    "scale": 2,
+    "background": "white",
+    "font": "Microsoft YaHei"
+  },
+  "visual_review": "All three final pure-text SVG/PNG exports inspected; no foreignObject or scripts. Chinese labels, boundaries and arrows readable; role pairs combined on labelled star edges.",
+  "files": [
+    {
+      "path": "diagrams/conceptual-model.mmd",
+      "bytes": 586,
+      "sha256": "a17d8623bab88aa1c83062b2e5804e3c0ac800f10e62fba9f3f75bc8e287fc1b"
+    },
+    {
+      "path": "diagrams/exports/conceptual-model.svg",
+      "bytes": 23487,
+      "sha256": "299582ccd10e1ec52b52e3cd21163c066332426f27ff70b89eba0c9ccf399220"
+    },
+    {
+      "path": "diagrams/exports/conceptual-model.png",
+      "bytes": 133075,
+      "sha256": "7d703ae19668e504e05757bd6fdc1a7bba13b66776956fdb73b8b3777607f4ad",
+      "pixels": [
+        1978,
+        914
+      ]
+    },
+    {
+      "path": "diagrams/star-schema.mmd",
+      "bytes": 931,
+      "sha256": "fc4ab88d23725796552c701c0435723712d4a56276550933d9bce955e9c0b552"
+    },
+    {
+      "path": "diagrams/exports/star-schema.svg",
+      "bytes": 27237,
+      "sha256": "2c1444c9e6d7879b0a28da1988ed48c34ba06f60abb7f37780c27776938152fd"
+    },
+    {
+      "path": "diagrams/exports/star-schema.png",
+      "bytes": 219972,
+      "sha256": "aebecdc4264e42107686a7168837e9db77a8f9ac2109fb4c83942ae2f242e465",
+      "pixels": [
+        1908,
+        1348
+      ]
+    },
+    {
+      "path": "diagrams/source-lineage.mmd",
+      "bytes": 864,
+      "sha256": "4dc445701efabb7f9ad080422703555a211d152af962e8143550be18f71be516"
+    },
+    {
+      "path": "diagrams/exports/source-lineage.svg",
+      "bytes": 30120,
+      "sha256": "26956bfc715204a2a81b107bf672304552ce265fe831083cb8d78299f4929d27"
+    },
+    {
+      "path": "diagrams/exports/source-lineage.png",
+      "bytes": 165645,
+      "sha256": "5c4d6afdae5d3297dddfbeab5b6f4e29bfa96a5b80fed2a2021d0459815455bf",
+      "pixels": [
+        2038,
+        1744
+      ]
+    }
+  ]
+}

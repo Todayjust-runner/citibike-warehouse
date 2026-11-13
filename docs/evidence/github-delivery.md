@@ -2,6 +2,14 @@
 
 当前目标：[Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，GitHub 仓库 ID `1455379867`，必须为 private。用户在后续消息提供该地址并确认已创建，授权用此目标完成工程基础发布；取代最初的 klzyd 目标。
 
+## 对话四 B3 最终 B 交付（2026-11-13）
+
+延续 ee2d762 基线与同一main，交付B报告3/4/5章、图源/SVG/PNG、复核矩阵、C/D交接及联合清单。修正已验证/发布来源仍可追加ODS的问题，物理B2-1.1；10 Python+50 SQL通过，业务库未部署，A附件/真实ETL/数值/展示仍未验。B交付版本与核心文件SHA清单见[最终索引](../handoff/b-delivery-v1.0.md)。
+
+发布前GitHub连接器账户读目标返回404；沿用用户已明确指定目标及前阶段核实的本机Git认证，不更换所有者。API再次核实Todayjust-runner账户ID241897350、仓库ID1455379867、private=true、push权限及main=ee2d7620ddd450ec1207a1debdbe163f80f73bd7，与本地/追踪分支一致。认证只在进程内使用，无令牌输出或写盘，未改全局代理/身份。文件检查范围见[本轮检查](submission-check.md)。
+
+发布采用普通提交/推送；最终复核以本文件所在提交的HEAD、远程main和完整Git树/所有blob一致、工作区干净为门槛。最新提交号用Git读取，不在提交内部自引用自身哈希。旧B0/B1/B2数量与结果保留各自时点含义，不代表当前文件总量。PNG/SVG是精选模型插图，未上传实际骑行数据或课程原件。
+
 ## 对话三 B2 物理与结构交付
 
 本次继续同一工程/main，交付物理字典/编译清单、编号 DDL、受保护入口、配置示例、真实目录与合成行为证据，并更新阶段计划和 B3 交接。测试库实际为 CitibikeDW_B_Test；业务库未创建。10 个 Python 测试与 47 个 SQL 用例通过；默认部署无清空/重建，选定标记数据重跑保留，测试夹具不作为真实数据。见 [B2 验证](b2-validation.md)。发布前检查文件及 private/基线，发布后核对 HEAD/树/文件哈希；旧 28/45 文件数量分别是 B0/B1 历史快照，不是当前文件总量。

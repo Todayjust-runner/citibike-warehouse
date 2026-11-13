@@ -5,7 +5,7 @@
 - 仅在 `D:\数据仓库\期末大作业\citibike-warehouse` 接续，先检查现有文件、Git 状态、远程和未提交修改；不得重复建工程或覆盖他人工作。
 - 先读 `STATUS.md`、`docs/review/a-delivery-review.md`、`inputs/README.md`、决定记录及下一阶段交接。
 - B 负责三级设计、DDL、建表验证和接口契约；完整 ETL 由 C 负责，页面与录屏由 D 负责。不得因目录已存在而宣称实现完成。
-- 用户已授权继续对话三（B2）：物理设计、DDL 和独立测试库验证。本次目标仅 CitibikeDW_B_Test，业务库 CitibikeDW 不默认部署；完整 ETL/页面仍由 C/D 完成。
+- 用户已授权继续对话四（B3），已完成独立复核、报告 3/4/5 章与 B 最终交接。下一步按 docs/handoff/next-stage.md 接续 C/D 实施及联合验收；完整 ETL/页面仍由 C/D 完成，不能把本次“继续”无限扩展到新职责。
 - 详细阶段状态唯一来源为 `docs/planning/STATUS.md`，根目录 STATUS 只作导航；四阶段计划见 `docs/planning/b-four-conversations.md`。用户后续授权优先于旧阶段限制。
 
 ## 证据纪律
@@ -32,7 +32,8 @@
 - M01-M04 用出发时间，M05 用结束时间；M06 两侧先聚合再按同粒度全外连接。M03 分母仅已知 member/casual，另报覆盖率；空分母 NULL。均值和比例从分子分母重算。
 - DDL 必须提供安全的新建/已存在对象处理方案，不随脚本默认删除数据库、表或既有业务数据。先确认目标实例与数据库。
 - 受保护入口为 scripts/warehouse.py，只有两个固定项目数据库在白名单内；业务库需 --allow-target，测试夹具只允许测试库。拒绝现有未标记/有漂移数据库，无 reset/default DROP。
-- 当前物理清单 docs/design/physical-model.json 对应 B2-1.0；132 字段含 5 个服务器生成的持久化身份。C 不写计算列，先核验原始字节长/精度再绑定；datetime2(7)+微秒对齐 CHECK 不能发现客户端预先舍入。
+- 当前物理清单 docs/design/physical-model.json 对应 B2-1.1；132 字段含 5 个服务器生成的持久化身份。C 不写计算列，先核验原始字节长/精度再绑定；datetime2(7)+微秒对齐 CHECK 不能发现客户端预先舍入。
+- B2-1.1 拒绝向 VALIDATED/PUBLISHED 运行引用的来源追加 ODS；旧 B2-1.0 不能只改标记升级。本机仅对确认旧清单一致、非种子表为空的测试库受控改过一个触发器，见 B3 复核。
 - 不把测试夹具中的 SYNTHETIC-B2 来源/计数当真实数据。已验证结构与角色/发布行为不等于 A 数值通过；后续更改先写有区分力的失败用例，再修正与重跑受影响检查。
 
 ## 验证与提交

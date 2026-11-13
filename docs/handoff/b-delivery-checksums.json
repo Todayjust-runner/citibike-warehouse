@@ -1,0 +1,284 @@
+{
+  "delivery_version": "B-v1.0",
+  "created_on": "2026-11-13",
+  "physical_version": "B2-1.1",
+  "scope": "Selected B design, report, diagrams, SQL, runner/tests, input metadata, final review/evidence and handoff; self, status/planning and publication records excluded. Git identifies the complete repository tree.",
+  "algorithm": "SHA-256 of repository file bytes (LF text)",
+  "files": [
+    {
+      "path": "diagrams/README.md",
+      "bytes": 2174,
+      "sha256": "1102f6465c4dcfbe761705ec0716dec0f65dc17a290208b7481a03f02be2fd0a"
+    },
+    {
+      "path": "diagrams/conceptual-model.mmd",
+      "bytes": 586,
+      "sha256": "a17d8623bab88aa1c83062b2e5804e3c0ac800f10e62fba9f3f75bc8e287fc1b"
+    },
+    {
+      "path": "diagrams/exports/conceptual-model.png",
+      "bytes": 133075,
+      "sha256": "7d703ae19668e504e05757bd6fdc1a7bba13b66776956fdb73b8b3777607f4ad"
+    },
+    {
+      "path": "diagrams/exports/conceptual-model.svg",
+      "bytes": 23487,
+      "sha256": "299582ccd10e1ec52b52e3cd21163c066332426f27ff70b89eba0c9ccf399220"
+    },
+    {
+      "path": "diagrams/exports/manifest.json",
+      "bytes": 2273,
+      "sha256": "b3bea002bb32d4970b74c62e6cb0ad289646f0085031dda239f9a20f1af73891"
+    },
+    {
+      "path": "diagrams/exports/source-lineage.png",
+      "bytes": 165645,
+      "sha256": "5c4d6afdae5d3297dddfbeab5b6f4e29bfa96a5b80fed2a2021d0459815455bf"
+    },
+    {
+      "path": "diagrams/exports/source-lineage.svg",
+      "bytes": 30120,
+      "sha256": "26956bfc715204a2a81b107bf672304552ce265fe831083cb8d78299f4929d27"
+    },
+    {
+      "path": "diagrams/exports/star-schema.png",
+      "bytes": 219972,
+      "sha256": "aebecdc4264e42107686a7168837e9db77a8f9ac2109fb4c83942ae2f242e465"
+    },
+    {
+      "path": "diagrams/exports/star-schema.svg",
+      "bytes": 27237,
+      "sha256": "2c1444c9e6d7879b0a28da1988ed48c34ba06f60abb7f37780c27776938152fd"
+    },
+    {
+      "path": "diagrams/mermaid-config.json",
+      "bytes": 499,
+      "sha256": "9d610db9f4b6c7bc24925be531fc02819646141b43ba3565bf226f6c0e4c66ac"
+    },
+    {
+      "path": "diagrams/source-lineage.mmd",
+      "bytes": 864,
+      "sha256": "4dc445701efabb7f9ad080422703555a211d152af962e8143550be18f71be516"
+    },
+    {
+      "path": "diagrams/star-schema.mmd",
+      "bytes": 931,
+      "sha256": "fc4ab88d23725796552c701c0435723712d4a56276550933d9bce955e9c0b552"
+    },
+    {
+      "path": "docs/contracts/b-c-d-contract.md",
+      "bytes": 6860,
+      "sha256": "ca9b7c7181835c120a7dec68de0b0fb5e8b72c82f3cb3e7f24b116dac911f2c0"
+    },
+    {
+      "path": "docs/contracts/b-to-c-model-contract.md",
+      "bytes": 6640,
+      "sha256": "529346f25302a93b77de586b2ffe04b9676d7b394fb36250b8daa913fc274a0c"
+    },
+    {
+      "path": "docs/contracts/c-to-d-query-contract.md",
+      "bytes": 9805,
+      "sha256": "426c95035d9e3010643c96fc6370bbe2dc6e72e7ec41c3731720a15d20f0e1a4"
+    },
+    {
+      "path": "docs/design/README.md",
+      "bytes": 1827,
+      "sha256": "b4d8b5b13db86cb9e5bf2305b111267012129335d48ec4623d68fe64f244188d"
+    },
+    {
+      "path": "docs/design/conceptual-design.md",
+      "bytes": 4111,
+      "sha256": "92460d71a5ec8546c2e57bbcc997a31c27d20dd1878fcc812d06ea6d5c176965"
+    },
+    {
+      "path": "docs/design/data-dictionary.md",
+      "bytes": 18934,
+      "sha256": "4496686bff132c385a9b1ce303a253a0f2ba9641428cb7d77d791cd29ff96243"
+    },
+    {
+      "path": "docs/design/logical-design.md",
+      "bytes": 9758,
+      "sha256": "977d6242a75d89dcc5576b00b75fe261b464282a0600d6b56f3609d0eeca2f47"
+    },
+    {
+      "path": "docs/design/logical-model.json",
+      "bytes": 38553,
+      "sha256": "6b73058b310f1b7f0c2ad21681dfca3477c4c654ce27564acbc1e861a7c8d155"
+    },
+    {
+      "path": "docs/design/metric-model-mapping.md",
+      "bytes": 5398,
+      "sha256": "c945e7d52d3ede0a0ad06f9a78a9215144a758b71ee6f052eec82f42e3b526b8"
+    },
+    {
+      "path": "docs/design/open-attributes.md",
+      "bytes": 2723,
+      "sha256": "3346cf2bd2f4fc0eca37c832e96e3b6a9ca578f67557d792d126989c44d7cf0e"
+    },
+    {
+      "path": "docs/design/physical-data-dictionary.md",
+      "bytes": 11999,
+      "sha256": "03aa1b0cd6c6e5fcf739d8db4efd6340b39c930172f09667648e85545cabd611"
+    },
+    {
+      "path": "docs/design/physical-design.md",
+      "bytes": 8192,
+      "sha256": "43edc7faf8618772d650b501c0514045f052ecac9e5dca0102c7b071629e112c"
+    },
+    {
+      "path": "docs/design/physical-model.json",
+      "bytes": 135729,
+      "sha256": "9fc9af9d320c12eda2c568ab023bc8a994e98d9f030647c0fdf50544dc6383d8"
+    },
+    {
+      "path": "docs/design/source-to-target.md",
+      "bytes": 7802,
+      "sha256": "87f137eb409a04230bc585c9592d4105088e8f556c069f7cdf16859c142a9095"
+    },
+    {
+      "path": "docs/evidence/b3-catalog.json",
+      "bytes": 98392,
+      "sha256": "f3917c3a8f2d17f3634da45a4b0616374c3f4dcc4d81b71a5f6a63623910b7dc"
+    },
+    {
+      "path": "docs/evidence/b3-execution-summary.json",
+      "bytes": 10189,
+      "sha256": "6604ab2a86eb32bea23e440e11e5692ba3305f2d222fb52be28420a73926ecca"
+    },
+    {
+      "path": "docs/handoff/acceptance-checklist.md",
+      "bytes": 5545,
+      "sha256": "dbb7dd24ec204a15b871deb873213994ffbd2b0f071f1673b3b3bb57446a06f0"
+    },
+    {
+      "path": "docs/handoff/b-delivery-v1.0.md",
+      "bytes": 2693,
+      "sha256": "944e907c500362c3b3ad13316bd12a7e31d85c9207f0ef358f3321b191f5745c"
+    },
+    {
+      "path": "docs/handoff/b-to-c-final.md",
+      "bytes": 7041,
+      "sha256": "d5523fee283532848f879709158979ad44fb74b2e42a4588968383b2de5ab70e"
+    },
+    {
+      "path": "docs/handoff/b-to-d-final.md",
+      "bytes": 4595,
+      "sha256": "16f72854b8edbec23e69a455a79c379935d8319bcbc0b9fa1caa672084d7adf2"
+    },
+    {
+      "path": "docs/report/03-conceptual-design.md",
+      "bytes": 5798,
+      "sha256": "f4906dcadd155bbcd20f3533f1d4d1f84cc227cadf2f08bf60906f3367cde9ad"
+    },
+    {
+      "path": "docs/report/04-logical-design.md",
+      "bytes": 8704,
+      "sha256": "f3aa775a038883c202620e8f43c8dce74c5c937ff60cf7469a34dfbc7142f22c"
+    },
+    {
+      "path": "docs/report/05-physical-design.md",
+      "bytes": 8801,
+      "sha256": "9099e3a7cc21d47cacefc8018fbfeee68da305f98a6efb3a014a222761d4b7f9"
+    },
+    {
+      "path": "docs/report/README.md",
+      "bytes": 1684,
+      "sha256": "b9a6f6720dbfde5df992353f51925aabb3d7b144451de83d525bd44d0f0d322d"
+    },
+    {
+      "path": "docs/review/b3-final-review.md",
+      "bytes": 7254,
+      "sha256": "d5a8167eaebf6cb974d4005e4a5c1e6a7e6778634c813b1eb6c85b1eb6b17003"
+    },
+    {
+      "path": "inputs/README.md",
+      "bytes": 1767,
+      "sha256": "827124f806d3f23b5a2978a07a8b14720516a878bfbdffe4e687702cab80d72f"
+    },
+    {
+      "path": "inputs/a-claimed-baselines.json",
+      "bytes": 2827,
+      "sha256": "587e9b8cb1ad831ceec85cd83ce5edd5bb4d3a64dace93420d7dd206d6641ae8"
+    },
+    {
+      "path": "inputs/local-materials.json",
+      "bytes": 4080,
+      "sha256": "0fed39d56ae97ededcfdd727f2f477b136a9b95c193c175f4ebc7c9bc4c60ab3"
+    },
+    {
+      "path": "inputs/required-inputs.csv",
+      "bytes": 1962,
+      "sha256": "025409f4f1b14ade0900e6888323185cd1eb553f41d1b3d1c2aadf7364e1c9da"
+    },
+    {
+      "path": "scripts/README.md",
+      "bytes": 2293,
+      "sha256": "11a2b53c3db0157ec9061e7efcf411fe23c538d5be267ce32e028ae92a499db2"
+    },
+    {
+      "path": "scripts/warehouse.py",
+      "bytes": 11321,
+      "sha256": "2ed16b53abefdf1beb7efe9703eeda8ef9a91eba1057c63522ad06ba552041bf"
+    },
+    {
+      "path": "sql/ddl/010_schemas.sql",
+      "bytes": 747,
+      "sha256": "ad1979235e677e4b9a654a582af4c070fffae5652a1a690676e62c5754339989"
+    },
+    {
+      "path": "sql/ddl/020_tables.sql",
+      "bytes": 19650,
+      "sha256": "4d2501a460f3cf17974bc45191f392490b60f8f8f5bf59433f21d7a6947abd8a"
+    },
+    {
+      "path": "sql/ddl/030_foreign_keys.sql",
+      "bytes": 6965,
+      "sha256": "6e47da5411b0d5c07e02554f224f990ce158b19a2ae978c205920658888e99fe"
+    },
+    {
+      "path": "sql/ddl/040_indexes.sql",
+      "bytes": 1356,
+      "sha256": "0a94108ee5cb1a56cfebdb42c77aaf97ff9a68ce061d08d77e05062b7ba475b0"
+    },
+    {
+      "path": "sql/ddl/050_integrity.sql",
+      "bytes": 17366,
+      "sha256": "a642424d295213cf65ef57ce011305e158c6f90e9c56d1bdc70dba4664f1d77f"
+    },
+    {
+      "path": "sql/ddl/060_seeds.sql",
+      "bytes": 1227,
+      "sha256": "b7c44dbf373ff8bc8802ad04a03c3f2d5d56a470d8dc92dd3a518a46767c9381"
+    },
+    {
+      "path": "sql/ddl/README.md",
+      "bytes": 1533,
+      "sha256": "af24bd3074902bb4e216142ffbff8628e644b31178442d601e540de9f75def69"
+    },
+    {
+      "path": "sql/validation/010_catalog.sql",
+      "bytes": 4759,
+      "sha256": "480437e098ac4ef432d449b3e7557069e8700500acddf5a1bbd985bcf6dd0216"
+    },
+    {
+      "path": "sql/validation/README.md",
+      "bytes": 908,
+      "sha256": "402ad72a930c59478be00524c5ea85f35af37d5344f1efd8c582012820360922"
+    },
+    {
+      "path": "tests/README.md",
+      "bytes": 1368,
+      "sha256": "02c34430403e462199d535f19eb9e577d23c19d7b640ba0ec63136343cc37f2f"
+    },
+    {
+      "path": "tests/sql/boundary_cases.sql",
+      "bytes": 18470,
+      "sha256": "12112b4c0d59882b0e10f14c72ad3d0680319f8e6750e014dfff88b45dbcabde"
+    },
+    {
+      "path": "tests/test_b2.py",
+      "bytes": 8121,
+      "sha256": "0120b7846b21b59c17b6c7a8d6b8a45ccfb8dfb52c1aec49a3899a05de89f687"
+    }
+  ]
+}

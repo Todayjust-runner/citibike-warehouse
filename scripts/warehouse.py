@@ -11,7 +11,7 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = 'citibike-warehouse'
-VERSION = 'B2-1.0'
+VERSION = 'B2-1.1'
 TEST_DATABASE = 'CitibikeDW_B_Test'
 TARGET_DATABASE = 'CitibikeDW'
 SETTINGS = """SET NOCOUNT ON; SET ANSI_NULLS ON; SET QUOTED_IDENTIFIER ON;

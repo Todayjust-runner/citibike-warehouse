@@ -1,15 +1,12 @@
-flowchart TB
+flowchart LR
     DATE["dim.date<br/>date_key PK<br/>年 / 季 / 月 / 日 / 星期"]
     HOUR["dim.hour<br/>hour_key PK<br/>0..23"]
     STATION["dim.station<br/>(run_id, station_key) PK<br/>同运行观察快照 / 未知 key=0"]
     BIKE["dim.bike_type<br/>bike_type_key PK<br/>原标签 / 已识别标志"]
     MEMBER["dim.member_type<br/>member_type_key PK<br/>member / casual / 其他 / 缺失"]
     FACT["dwd.fact_trip<br/>(run_id, trip_key) PK<br/>(run_id, ride_id_identity) UNIQUE<br/>起终时间 / 两端角色键<br/>trip_count=1 / duration_us<br/>代表源行 / 坐标质量"]
-    DATE -->|"1:N start_date_key"| FACT
-    DATE -->|"1:N end_date_key"| FACT
-    HOUR -->|"1:N start_hour_key"| FACT
-    HOUR -->|"1:N end_hour_key"| FACT
-    STATION -->|"1:N (run_id, start_station_key)"| FACT
-    STATION -->|"1:N (run_id, end_station_key)"| FACT
-    BIKE -->|"1:N bike_type_key"| FACT
-    MEMBER -->|"1:N member_type_key"| FACT
+    DATE -->|"出发 / 归还 各 1:N<br/>start_date_key / end_date_key"| FACT
+    HOUR -->|"出发 / 归还 各 1:N<br/>start_hour_key / end_hour_key"| FACT
+    STATION -->|"起点 / 终点 各 1:N 同 run<br/>start_station_key / end_station_key"| FACT
+    BIKE -->|"1:N<br/>bike_type_key"| FACT
+    MEMBER -->|"1:N<br/>member_type_key"| FACT

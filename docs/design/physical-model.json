@@ -1,5 +1,5 @@
 {
-  "physical_version": "B2-1.0",
+  "physical_version": "B2-1.1",
   "logical_version": "1.0",
   "schemas": [
     {
@@ -3933,7 +3933,7 @@
       {
         "name": "ods.TR_trip_raw_immutable",
         "type": "TR",
-        "definition": "CREATE   TRIGGER ods.TR_trip_raw_immutable ON ods.trip_raw AFTER UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\nEND;\n\n",
+        "definition": "CREATE OR ALTER TRIGGER ods.TR_trip_raw_immutable ON ods.trip_raw AFTER INSERT,UPDATE,DELETE\nAS\nBEGIN\n SET NOCOUNT ON;\n IF EXISTS(SELECT 1 FROM deleted) THROW 51042,'Source rows and global dimension identities are immutable.',1;\n IF EXISTS(SELECT 1 FROM inserted i JOIN meta.run_source s ON s.source_member_id=i.source_member_id\n  JOIN meta.load_run r WITH(UPDLOCK,HOLDLOCK) ON r.run_id=s.run_id WHERE r.status IN('VALIDATED','PUBLISHED'))\n  THROW 51042,'A source member referenced by a validated/published run cannot receive additional raw rows.',1;\nEND;\n",
         "is_disabled": false
       },
       {
@@ -3979,9 +3979,9 @@
     "sql/ddl/020_tables.sql": "4d2501a460f3cf17974bc45191f392490b60f8f8f5bf59433f21d7a6947abd8a",
     "sql/ddl/030_foreign_keys.sql": "6e47da5411b0d5c07e02554f224f990ce158b19a2ae978c205920658888e99fe",
     "sql/ddl/040_indexes.sql": "0a94108ee5cb1a56cfebdb42c77aaf97ff9a68ce061d08d77e05062b7ba475b0",
-    "sql/ddl/050_integrity.sql": "35fb7bd99686c84365f695672d6bf178bb6d17ad51bd57fc65cb4b7810121e88",
+    "sql/ddl/050_integrity.sql": "a642424d295213cf65ef57ce011305e158c6f90e9c56d1bdc70dba4664f1d77f",
     "sql/ddl/060_seeds.sql": "b7c44dbf373ff8bc8802ad04a03c3f2d5d56a470d8dc92dd3a518a46767c9381"
   },
   "compiled_baseline_note": "SQL Server 2019 compiled metadata, reconciled with declared types/keys and independent rollback behavior fixtures; not real source-data acceptance.",
-  "manifest_sha256": "d5ebe5806422b4cce71fb243e7fc2064f59abba242ff5dfa0f545bfb46c3f564"
+  "manifest_sha256": "c37c68a4823206fcab42bee7b59675d3d9ee9138696a6f747b7e9cb8d34eb480"
 }

@@ -1,0 +1,453 @@
+{
+  "checked_on": "2026-11-13",
+  "timezone": "Asia/Shanghai",
+  "stage": "B3",
+  "physical_version": "B2-1.1",
+  "red": {
+    "phase": "RED",
+    "checked_on": "2026-11-13",
+    "exit": 2,
+    "kind": "sql_error",
+    "cases": 50,
+    "failed": [
+      {
+        "name": "published_source_rejects_raw_append",
+        "passed": false,
+        "actual_error": 0,
+        "detail": "Action completed"
+      },
+      {
+        "name": "validated_source_rejects_raw_append",
+        "passed": false,
+        "actual_error": 0,
+        "detail": "Action completed"
+      }
+    ],
+    "positive_new_source": {
+      "name": "new_source_remains_appendable_after_publish",
+      "passed": true,
+      "actual_error": 0,
+      "detail": "Action completed"
+    }
+  },
+  "patch": {
+    "checked_on": "2026-11-13",
+    "database": "CitibikeDW_B_Test",
+    "previous_version": "B2-1.0",
+    "physical_version": "B2-1.1",
+    "previous_fingerprint": "d5ebe5806422b4cce71fb243e7fc2064f59abba242ff5dfa0f545bfb46c3f564",
+    "manifest_sha256": "c37c68a4823206fcab42bee7b59675d3d9ee9138696a6f747b7e9cb8d34eb480",
+    "preconditions": {
+      "old_catalog_matched": true,
+      "nonseed_tables_empty": true
+    },
+    "default_deploy_refused_old_version": "schema_drift",
+    "controlled_patch": "Existing ODS trigger altered; two version properties updated in one transaction; no table/data rebuild.",
+    "changed_catalog_sections": [
+      "modules"
+    ],
+    "changed_modules": [
+      "ods.TR_trip_raw_immutable"
+    ],
+    "row_counts_before": [
+      {
+        "table_name": "dim.bike_type",
+        "n": 3
+      },
+      {
+        "table_name": "dim.date",
+        "n": 0
+      },
+      {
+        "table_name": "dim.hour",
+        "n": 24
+      },
+      {
+        "table_name": "dim.member_type",
+        "n": 3
+      },
+      {
+        "table_name": "dim.station",
+        "n": 0
+      },
+      {
+        "table_name": "dwd.fact_trip",
+        "n": 0
+      },
+      {
+        "table_name": "dws.station_hourly",
+        "n": 0
+      },
+      {
+        "table_name": "dws.trip_hourly",
+        "n": 0
+      },
+      {
+        "table_name": "meta.coverage",
+        "n": 0
+      },
+      {
+        "table_name": "meta.load_run",
+        "n": 0
+      },
+      {
+        "table_name": "meta.row_disposition",
+        "n": 0
+      },
+      {
+        "table_name": "meta.run_source",
+        "n": 0
+      },
+      {
+        "table_name": "meta.source_member",
+        "n": 0
+      },
+      {
+        "table_name": "ods.trip_raw",
+        "n": 0
+      }
+    ],
+    "verify_after": {
+      "ok": true,
+      "database": "CitibikeDW_B_Test",
+      "tables": 14,
+      "columns": 132,
+      "foreign_keys": 31,
+      "drift": []
+    }
+  },
+  "python_tests": {
+    "run": 10,
+    "failed": 0,
+    "result": "OK"
+  },
+  "sql_tests": {
+    "cases": 50,
+    "failed": [],
+    "results": [
+      {
+        "name": "accepted_requires_nonnull_representative",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "adjacent_coverage_allowed",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "below_60s_one_microsecond",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "case_and_trailing_space_are_distinct",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "complete_fixture_can_publish",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "coverage_overlap_rejected",
+        "passed": true,
+        "actual_error": 51030
+      },
+      {
+        "name": "coverage_precision_is_microsecond_aligned",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "coverage_proof_required",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "cross_month_events_remain_in_fact",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "current_requires_published",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "date_role_must_match_timestamp",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "duplicate_disposition_locator",
+        "passed": true,
+        "actual_error": 2627
+      },
+      {
+        "name": "duplicate_ride_identity_rejected",
+        "passed": true,
+        "actual_error": 2627
+      },
+      {
+        "name": "duration_must_equal_timestamps",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "exact_24h_is_valid",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "exact_label_duplicate_rejected",
+        "passed": true,
+        "actual_error": 2627
+      },
+      {
+        "name": "failed_publish_preserves_current",
+        "passed": true,
+        "actual_error": 51044
+      },
+      {
+        "name": "header_shape_is_a_publication_gate",
+        "passed": true,
+        "actual_error": 51040
+      },
+      {
+        "name": "hour_role_must_match_timestamp",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "invalid_coordinate_pair",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "invalid_latitude",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "iso_weekday_is_not_session_dependent",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "long_label_fails_without_truncation",
+        "passed": true,
+        "actual_error": 2628
+      },
+      {
+        "name": "millisecond_and_microsecond_preserved",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "missing_coordinate_not_zero",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "missing_source_fk_rejected",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "missing_station_still_counts",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "negative_aggregate_rejected",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "new_source_remains_appendable_after_publish",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "null_raw_cell_prevents_validation",
+        "passed": true,
+        "actual_error": 51040
+      },
+      {
+        "name": "only_one_current_run",
+        "passed": true,
+        "actual_error": 2601
+      },
+      {
+        "name": "over_24h_one_microsecond",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "publish_procedure_switches_current",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "published_source_rejects_raw_append",
+        "passed": true,
+        "actual_error": 51042
+      },
+      {
+        "name": "raw_rows_are_immutable",
+        "passed": true,
+        "actual_error": 51042
+      },
+      {
+        "name": "recognized_flag_is_exact",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "rejected_disposition_has_no_fact",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "ride_count_is_one",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "ride_trailing_space_identity_is_distinct",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "sixty_seconds_is_valid",
+        "passed": true,
+        "actual_error": 0
+      },
+      {
+        "name": "station_fk_cannot_cross_run",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "sub_microsecond_is_rejected",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "unknown_label_cannot_be_recognized",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "unknown_station_identity_is_null",
+        "passed": true,
+        "actual_error": 547
+      },
+      {
+        "name": "validated_fact_is_frozen",
+        "passed": true,
+        "actual_error": 51041
+      },
+      {
+        "name": "validated_metadata_is_frozen",
+        "passed": true,
+        "actual_error": 51043
+      },
+      {
+        "name": "validated_requires_all_source_rows",
+        "passed": true,
+        "actual_error": 51040
+      },
+      {
+        "name": "validated_requires_exact_rollups",
+        "passed": true,
+        "actual_error": 51040
+      },
+      {
+        "name": "validated_source_rejects_raw_append",
+        "passed": true,
+        "actual_error": 51042
+      },
+      {
+        "name": "zero_zero_is_valid_coordinate",
+        "passed": true,
+        "actual_error": 0
+      }
+    ]
+  },
+  "verify": {
+    "ok": true,
+    "database": "CitibikeDW_B_Test",
+    "tables": 14,
+    "columns": 132,
+    "foreign_keys": 31,
+    "drift": []
+  },
+  "row_counts_after": [
+    {
+      "table_name": "dim.bike_type",
+      "n": 3
+    },
+    {
+      "table_name": "dim.date",
+      "n": 0
+    },
+    {
+      "table_name": "dim.hour",
+      "n": 24
+    },
+    {
+      "table_name": "dim.member_type",
+      "n": 3
+    },
+    {
+      "table_name": "dim.station",
+      "n": 0
+    },
+    {
+      "table_name": "dwd.fact_trip",
+      "n": 0
+    },
+    {
+      "table_name": "dws.station_hourly",
+      "n": 0
+    },
+    {
+      "table_name": "dws.trip_hourly",
+      "n": 0
+    },
+    {
+      "table_name": "meta.coverage",
+      "n": 0
+    },
+    {
+      "table_name": "meta.load_run",
+      "n": 0
+    },
+    {
+      "table_name": "meta.row_disposition",
+      "n": 0
+    },
+    {
+      "table_name": "meta.run_source",
+      "n": 0
+    },
+    {
+      "table_name": "meta.source_member",
+      "n": 0
+    },
+    {
+      "table_name": "ods.trip_raw",
+      "n": 0
+    }
+  ],
+  "counts_unchanged": true,
+  "business_database_exists": false,
+  "real_input_validation": "not_performed_missing_A_attachments",
+  "limits": [
+    "Synthetic fixtures rolled back; no business metrics reproduced.",
+    "One test database; no second clean deployment, concurrency stress or performance benchmark."
+  ]
+}

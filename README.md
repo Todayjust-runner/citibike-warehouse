@@ -1,6 +1,6 @@
 # 共享单车骑行运营分析数仓系统的设计与实现
 
-本仓库是课程共享单车数仓项目工程。当前已完成 **B0 工程基础、B1 概念/逻辑/契约及 B2 物理设计与测试库建表验证**；完整 ETL、真实指标验收和展示仍未完成。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
+本仓库是课程共享单车数仓项目工程。当前已完成 **B0—B3：工程基础、三级设计、DDL/结构验证、独立复核、报告与 B 最终交接**；完整 ETL、真实指标验收和展示仍未完成。详细状态以 [阶段 STATUS](docs/planning/STATUS.md) 为准。
 
 工程基础已发布到用户指定的私有仓库 [Todayjust-runner/citibike-warehouse](https://github.com/Todayjust-runner/citibike-warehouse)，默认分支 `main`。
 
@@ -13,14 +13,15 @@
 3. [输入清单](inputs/README.md)：原位材料、所需附件与尚未复现的 A 基准。
 4. [设计入口](docs/design/README.md)、[六指标映射](docs/design/metric-model-mapping.md)、[B/C/D 契约](docs/contracts/b-c-d-contract.md)。
 5. [物理设计](docs/design/physical-design.md)、[B2 验证](docs/evidence/b2-validation.md)及[执行入口](scripts/README.md)。
-6. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[B3 交接](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
+6. [B 最终交付](docs/handoff/b-delivery-v1.0.md)、[报告正文](docs/report/README.md)、[B3 复核](docs/review/b3-final-review.md)。
+7. [四阶段计划](docs/planning/b-four-conversations.md)、[决定记录](docs/decisions/README.md)、[C/D 下一步](docs/handoff/next-stage.md) 和 [AGENTS.md](AGENTS.md)。
 
 ## 角色与阶段
 
 | 角色 | 交付职责 | 当前状态 |
 |---|---|---|
 | A | 立项、需求、来源、指标定义与源核算依据 | 收到 PDF；附件未收到 |
-| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B2 已在独立测试库验证；B3 复核/报告待做 |
+| B | 概念/逻辑/物理设计、DDL、环境方案、建表验证及交接契约 | B 交付 v1.0 完成，物理 B2-1.1；外部签收/真实联合验收待做 |
 | C | 原始导入、清洗、维度/事实装载、汇总查询、质量与重跑 | 待实施 |
 | D | 接入真实查询的展示、筛选、多维分析、录屏 | 待实施 |
 
@@ -30,13 +31,14 @@
 
 ```text
 inputs/                    原位材料哈希、缺失输入与 A 声明值
-docs/review/               A 交付审查、课程要求映射
+docs/review/               A/课程审查与 B3 独立复核
+docs/report/               可合入报告的第 3/4/5 章 Markdown
 docs/sources/              官方来源与字段核对
 docs/decisions/            决定与开放问题
 docs/planning/             四阶段计划和唯一详细 STATUS
 docs/contracts/            B→C 建模与 C→D 查询契约
 docs/design/               概念/逻辑模型、字段字典、映射与待核实属性
-diagrams/                  可编辑 Mermaid 概念/星型/血缘图
+diagrams/                  可编辑 Mermaid、配置及 SVG/PNG 导出
 docs/evidence/             有范围说明的核验证据与提交检查
 docs/handoff/              下一阶段执行顺序与验收门槛
 docs/superpowers/plans/    本阶段实施记录
@@ -53,7 +55,7 @@ data/                      本地数据说明；实际数据被忽略
 
 ## 环境与接续
 
-目标为 **SQL Server 2019，T-SQL，数据库兼容级别 150**。本机 `localhost` 版本 `15.0.2000.5`，Developer Edition。已新建并验证 `CitibikeDW_B_Test`；`CitibikeDW` 未创建，课程库未被本阶段写入。[B2 证据](docs/evidence/b2-validation.md) 区分结构、合成行为与真实数据验收。
+目标为 **SQL Server 2019，T-SQL，数据库兼容级别 150**。本机 `localhost` 版本 `15.0.2000.5`，Developer Edition。已新建并验证 `CitibikeDW_B_Test`；`CitibikeDW` 未创建，课程库未被本阶段写入。[B3 证据](docs/evidence/b3-execution-summary.json)记录 10 Python + 50 SQL 通过、目录无漂移、测试前后计数一致；B2 历史仍保留。B2-1.1 修正验证/发布来源仍可追加 ODS 的漏洞，结构/合成行为与真实数据验收分别记录。
 
 在现有根目录接续：
 
