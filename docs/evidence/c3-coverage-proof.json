@@ -1,0 +1,33 @@
+{
+ "run_id": "1c38d12f-0cbd-4a50-a347-9bf316cd47a1",
+ "check": "每行 ended_at 月份 == ZIP 包月份（全成员全行扫描）",
+ "per_member": [
+  {
+   "zip_month_label": "202406",
+   "n": 111115,
+   "matched": 111115
+  },
+  {
+   "zip_month_label": "202407",
+   "n": 112443,
+   "matched": 112443
+  },
+  {
+   "zip_month_label": "202408",
+   "n": 106451,
+   "matched": 106451
+  },
+  {
+   "zip_month_label": "202409",
+   "n": 115558,
+   "matched": 115558
+  },
+  {
+   "zip_month_label": "202410",
+   "n": 118307,
+   "matched": 118307
+  }
+ ],
+ "all_matched": true,
+ "conclusion": "结束记录覆盖 [2024-06-01,2024-11-01)；出发窗口 [2024-07-01,2024-10-01) 的充分条件（结束覆盖至 U+24h）成立"
+}
