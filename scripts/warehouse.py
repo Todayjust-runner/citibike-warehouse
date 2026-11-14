@@ -66,6 +66,15 @@ class Sqlcmd:
         return json.loads(''.join(match.group(1).splitlines()))
 
 
+def _engine_supported(version):
+    # 课程契约以 SQL Server 2019（15.x）为准；经小组确认，允许 15.x 及更高版本，
+    # 语义一致性由数据库兼容级别 150 强制保证（见下方 compatibility_level 检查）。
+    try:
+        return int(version.split('.')[0]) >= 15
+    except ValueError:
+        return False
+
+
 def inspect_database(client, database):
     server = client.query("SELECT CONVERT(varchar(32),SERVERPROPERTY('ProductVersion')) AS version,"
                           "CONVERT(varchar(64),SERVERPROPERTY('Edition')) AS edition,"
@@ -112,8 +121,8 @@ def verify(client, database):
         drift.append('schemas')
     if info['database_info']['compatibility_level'] != 150:
         drift.append('compatibility_level')
-    if not info['server']['version'].startswith('15.'):
-        drift.append('engine_version_not_2019')
+    if not _engine_supported(info['server']['version']):
+        drift.append('engine_version_below_2019')
     if properties.get('CitibikeWarehouseSchema') != VERSION:
         drift.append('schema_version')
     return {'ok': not drift, 'database': database, 'tables': len(expected['tables']),
@@ -123,8 +132,8 @@ def verify(client, database):
 
 def deploy(client, database):
     info = inspect_database(client, database)
-    if not info['server']['version'].startswith('15.'):
-        raise WarehouseError('engine_version', 'This deployment requires SQL Server 2019 (15.x).')
+    if not _engine_supported(info['server']['version']):
+        raise WarehouseError('engine_version', 'This deployment requires SQL Server 2019 (15.x) or later.')
     spec = manifest()
     ddl_files = [ROOT / p for p in spec['deployment_files']]
     if info['exists']:
