@@ -26,6 +26,8 @@ class Client:
         if 'FROM dim.bike_type' in sql:
             return [dict(bike_type_key=1,bike_type_code='classic_bike',is_unknown=False,is_recognized=True),
                     dict(bike_type_key=2,bike_type_code='electric_bike',is_unknown=False,is_recognized=True)]
+        if 'FROM dim.station' in sql:
+            return [dict(station_key=0,station_id=None,station_name='unknown',is_unknown=True,reference_lat=None,reference_lng=None)]
         if 'FROM dim.member_type' in sql:
             return [dict(member_type_key=1,member_type_code='member',is_unknown=False,is_recognized=True)]
         if 'AS mk' in sql:
@@ -82,6 +84,15 @@ class QueryTests(unittest.TestCase):
         w=self.wh(station_filter=[0])
         result=q.station_flow(w,'day')
         self.assertEqual(result['metadata']['filter']['station_filter'],[0])
+    def test_station_empty_buckets_include_selected_station(self):
+        w=self.wh(start='2024-07-01',end='2024-07-02',station_filter=[0],include_empty_buckets=True)
+        rows=q.station_flow(w,'day')['data']
+        self.assertEqual(len(rows),1)
+        self.assertEqual((rows[0]['departures'],rows[0]['arrivals']),('0','0'))
+    def test_cli_invalid_numeric_filter_returns_json(self):
+        r=subprocess.run([sys.executable,'-X','utf8','etl/query_results.py','--result','ride_overview','--bike-filter','bad'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8')
+        import json
+        self.assertEqual(json.loads(r.stdout)['metadata']['result_status'],'invalid_request')
     def test_full_snapshot_produces_both_coverage_roles(self):
         rows=[dict(zip_month_label=m,ended_at_raw=m[:4]+'-'+m[4:]+'-15 00:00:00') for m in ['202406','202407','202408','202409','202410']]
         result=facts.coverage_declarations(rows)

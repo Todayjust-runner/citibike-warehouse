@@ -308,6 +308,11 @@ def station_flow(wh, granularity):
     stations = {r['station_key']: r for r in wh.client.query(
         "SELECT station_key,station_id,station_name,is_unknown,reference_lat,reference_lng "
         "FROM dim.station WHERE run_id='" + wh.run_id + "'", wh.db)}
+    if wh.params.get('include_empty_buckets') and all(
+            wh.coverage.get(role) == 'complete' for role in ('departure', 'arrival')):
+        for bucket in fill_buckets([], wh, granularity, []):
+            for station in (station_filter if station_filter is not None else stations):
+                merged.setdefault((bucket['time_bucket'], station), [0, 0])
     data = []
     for (b, s), (d, a) in sorted(merged.items()):
         st = stations.get(s, {})
@@ -417,8 +422,8 @@ def main():
         result = get_result(args.result, params, args.server, database)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
-    except EtlError as error:
-        kind = error.kind if error.kind in ('run_unavailable', 'invalid_request') \
+    except (EtlError, ValueError) as error:
+        kind = error.kind if getattr(error, 'kind', None) in ('run_unavailable', 'invalid_request') \
             else 'invalid_request'
         print(json.dumps({'metadata': {'result_status': kind, 'warnings': [str(error)]},
                           'data': []}, ensure_ascii=False, indent=2))
