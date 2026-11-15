@@ -20,9 +20,9 @@ class CAcceptance(unittest.TestCase):
     def setUpClass(cls):
         cls.client = Sqlcmd('localhost')
         cls.overview = get_result('ride_overview')
-        cls.run = cls.overview['metadata']['run_id']
+        cls.run_id = cls.overview['metadata']['run_id']
     def result(self, name, **params):
-        return get_result(name, dict(run_id=self.run, **params))
+        return get_result(name, dict(run_id=self.run_id, **params))
     def test_six_metrics_match_source(self):
         row = self.overview['data'][0]
         self.assertEqual(row['ride_count'], '334332')
@@ -64,7 +64,7 @@ class CAcceptance(unittest.TestCase):
         self.assertTrue(all(r['bike_type_key']=='2' for r in types))
     def test_partial_hour_window_uses_exact_events(self):
         p=dict(start='2024-07-01 00:15:00',end='2024-07-01 01:45:00')
-        expected=self.client.query("SELECT COUNT_BIG(*) AS n, CONVERT(varchar(40),SUM(duration_us)) AS us FROM dwd.fact_trip WHERE run_id='"+self.run+"' AND started_at>='2024-07-01 00:15:00' AND started_at<'2024-07-01 01:45:00'",DB)[0]
+        expected=self.client.query("SELECT COUNT_BIG(*) AS n, CONVERT(varchar(40),SUM(duration_us)) AS us FROM dwd.fact_trip WHERE run_id='"+self.run_id+"' AND started_at>='2024-07-01 00:15:00' AND started_at<'2024-07-01 01:45:00'",DB)[0]
         rows=self.result('trip_trend',granularity='hour',**p)['data']
         self.assertEqual(sum(int(r['ride_count']) for r in rows),expected['n'])
         self.assertEqual(sum(int(r['duration_us']) for r in rows),int(expected['us'] or 0))
@@ -97,9 +97,9 @@ class CAcceptance(unittest.TestCase):
         self.assertEqual(len(rows),92)
         self.assertEqual(rows[0]['time_bucket'],'2024-07-01')
     def test_run_conservation_and_unique_rides(self):
-        r=self.client.query("SELECT COUNT_BIG(*) AS n, COUNT_BIG(DISTINCT ride_id_identity) AS unique_n FROM dwd.fact_trip WHERE run_id='"+self.run+"'",DB)[0]
+        r=self.client.query("SELECT COUNT_BIG(*) AS n, COUNT_BIG(DISTINCT ride_id_identity) AS unique_n FROM dwd.fact_trip WHERE run_id='"+self.run_id+"'",DB)[0]
         self.assertEqual((r['n'],r['unique_n']),(563668,563668))
-        rows=self.client.query("SELECT outcome,COUNT_BIG(*) AS n FROM meta.row_disposition WHERE run_id='"+self.run+"' GROUP BY outcome",DB)
+        rows=self.client.query("SELECT outcome,COUNT_BIG(*) AS n FROM meta.row_disposition WHERE run_id='"+self.run_id+"' GROUP BY outcome",DB)
         self.assertEqual({r['outcome']:r['n'] for r in rows},{'ACCEPTED':563668,'REJECTED':206})
 
 if __name__=='__main__': unittest.main(verbosity=2)
