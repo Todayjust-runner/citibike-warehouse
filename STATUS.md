@@ -1,5 +1,5 @@
 # STATUS
 
-当前：C成果已接入`integration/c-etl`并保留原作者提交，待修复查询接入问题和联合验收；main继续保留B基线。
+当前：B设计与C的ETL/查询已完成，已通过完整运行与重跑验收；下一步D接入展示。
 
-详细进度见[阶段STATUS](docs/planning/STATUS.md)，问题与检查结果见[C整合记录](docs/review/c-integration.md)。
+见[验收报告](docs/review/c-acceptance.md)、[运行入口](etl/README.md)、[阶段进度](docs/planning/STATUS.md)。

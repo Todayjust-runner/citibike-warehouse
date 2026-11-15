@@ -1,6 +1,6 @@
 # C → D：查询结果契约
 
-C提供数据，D负责展示；业务口径见[需求说明](../requirements.md)。以下是结果约定；C已提供查询脚本和JSON样例，接入及验收问题见[整合记录](../review/c-integration.md)。
+C提供数据，D负责展示；业务口径见[需求说明](../requirements.md)。以下是结果约定；C的查询脚本已通过本机实测，结论见[验收报告](../review/c-acceptance.md)。
 
 ## 请求参数
 
