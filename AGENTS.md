@@ -11,3 +11,4 @@
 - README讲当前项目，STATUS讲当前进度，next-stage讲下一步；需求以docs/requirements.md为统一入口。
 - 课程原件保留原位；密钥、备份、日志、临时SQLite和未列入数据目录的文件不入Git。
 - 远程固定为Todayjust-runner/citibike-warehouse，按用户2026-11-15确认保留public；不改全局Git身份，不代发组员消息。
+- 固定快照上的B/C阶段验收不等同于期末项目完成；整体改进方向见docs/planning/final-improvement-plan.md。

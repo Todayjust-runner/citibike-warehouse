@@ -89,3 +89,8 @@ obj/
 Thumbs.db
 Desktop.ini
 ~$*
+
+# Reviewed project presentation; keep other course originals and exports ignored.
+!/presentations/midterm/共享单车数仓_中期检查汇报.pptx
+# Presentation packaging intermediates.
+/.chart-data-*/
