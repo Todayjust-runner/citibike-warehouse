@@ -10,4 +10,4 @@
 - 更改代码运行相关测试；文档更改检查链接和事实即可，不为文案新增测试。不再维护交付版本副本、DDL文件指纹或重复的发布SHA清单，Git保留历史。
 - README讲当前项目，STATUS讲当前进度，next-stage讲下一步；需求以docs/requirements.md为统一入口。
 - 课程原件保留原位；密钥、备份、日志、临时SQLite和未列入数据目录的文件不入Git。
-- 远程固定为Todayjust-runner/citibike-warehouse，保持private；不改全局Git身份，不代发组员消息。
+- 远程固定为Todayjust-runner/citibike-warehouse，按用户2026-11-15确认保留public；不改全局Git身份，不代发组员消息。

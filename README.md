@@ -2,7 +2,7 @@
 
 使用Citi Bike官方JC历史数据，分析骑行时段、站点借还和会员/车型差异。采用SQL Server 2019（兼容级别150）。
 
-**当前：数据和B的设计/建表已完成，下一步由C实现ETL与查询，再由D接入展示。**
+**当前：B交付已完成；C的ETL、查询与样例已接入`integration/c-etl`，待修复接入问题并联合验收。main仍保留原稳定基线。**
 
 ## 从这里开始
 
@@ -30,8 +30,8 @@ python -X utf8 scripts/warehouse.py verify
 python -X utf8 scripts/audit_public_source.py
 ```
 
-详细参数和测试命令见[运行说明](scripts/README.md)。完整ETL和页面尚未实现。
+详细参数和测试命令见[运行说明](scripts/README.md)。C的执行顺序见[ETL说明](etl/README.md)，验收状态见[整合记录](docs/review/c-integration.md)。页面尚未实现。
 
 ## 数据与结果
 
-默认分析2024年第三季度；源文件取2024年6—10月以覆盖跨期。五包共563874行，38项A数值已在固定公开快照上匹配；数仓加载后的结果仍需C对账。数据、代码和说明均在既有[私有仓库](https://github.com/Todayjust-runner/citibike-warehouse)管理，课程原件保留原位。
+默认分析2024年第三季度；源文件取2024年6—10月以覆盖跨期。五包共563874行，38项A数值已在固定公开快照上匹配；C已提供数仓脚本和结果样例，本机全链路及重跑仍待验收。数据、代码和说明均在既有[公开仓库](https://github.com/Todayjust-runner/citibike-warehouse)管理，课程原件保留原位。
