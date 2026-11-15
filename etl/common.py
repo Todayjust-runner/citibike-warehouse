@@ -91,12 +91,25 @@ def sql_int(value):
 
 
 def batch_insert(client, database, table, columns, rows, chunk=500):
-    """分批多行 INSERT。VALUES 单语句上限 1000 行，这里取 500 留余量。"""
+    """将现有调用方的标量字面量转为JSON批量写入，避免大量VALUES的编译开销。"""
+    def value(token):
+        if token == 'NULL':
+            return None
+        if token.startswith("N'"):
+            return token[2:-1].replace("''", "'")
+        if token.startswith("'"):
+            return token[1:-1].replace("''", "'")
+        return token
+
     total = 0
     cols = ', '.join(columns)
+    fields = ', '.join("[{}] nvarchar(max) '$[{}]'".format(col, i)
+                       for i, col in enumerate(columns))
     for start in range(0, len(rows), chunk):
         part = rows[start:start + chunk]
-        values = ',\n'.join('(' + ', '.join(row) + ')' for row in part)
-        client.execute("INSERT INTO " + table + " (" + cols + ") VALUES\n" + values + ";", database)
+        payload = json.dumps([[value(token) for token in row] for row in part],
+                             ensure_ascii=True, separators=(',', ':'))
+        client.execute("INSERT INTO " + table + " (" + cols + ") SELECT " + cols
+                       + " FROM OPENJSON(" + sql_nstr(payload) + ") WITH (" + fields + ");", database)
         total += len(part)
     return total

@@ -83,6 +83,13 @@ class CAcceptance(unittest.TestCase):
         self.assertEqual(r['metadata']['filter']['station_filter'],[0])
         self.assertTrue(all(x['unknown_station_flag'] for x in r['data']))
         self.assertEqual(r['summary']['arrivals_total'],'1026')
+    def test_empty_second_inside_coverage_has_zero_counts(self):
+        r=self.result('ride_overview',start='2024-07-01 00:00:00',end='2024-07-01 00:00:01')
+        self.assertEqual(r['metadata']['result_status'],'empty')
+        row=r['data'][0]
+        self.assertEqual((row['ride_count'],row['member_count'],row['duration_us']),('0','0','0'))
+        self.assertIsNone(row['avg_duration_minutes'])
+        self.assertIsNone(row['member_share'])
     def test_cli_default_granularity_is_day(self):
         p=subprocess.run([sys.executable,'-X','utf8','etl/query_results.py','--result','trip_trend'],cwd=ROOT,capture_output=True,text=True,encoding='utf-8')
         self.assertEqual(p.returncode,0,p.stderr)
