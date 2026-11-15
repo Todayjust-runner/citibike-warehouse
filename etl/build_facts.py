@@ -23,8 +23,12 @@ import re
 import sys
 import zipfile
 
-from common import (ROOT, EtlError, Sqlcmd, batch_insert, sql_int, sql_nstr,
-                    sql_str, validate_database)
+if __package__:
+    from .common import (ROOT, EtlError, Sqlcmd, batch_insert, sql_int, sql_nstr,
+                         sql_str, validate_database)
+else:
+    from common import (ROOT, EtlError, Sqlcmd, batch_insert, sql_int, sql_nstr,
+                        sql_str, validate_database)
 
 RAW_DIR = ROOT / 'data/raw/citibike_jc/snapshot_20261113'
 EVIDENCE_DIR = ROOT / 'docs/evidence'
@@ -47,8 +51,11 @@ def parse_time_us(text):
     frac = m.group(7) or ''
     if len(frac) > 6 and int(frac[6:]) != 0:
         return 'submicro'  # 亚微秒不可无损表达：运行错误，不静默舍入
-    base = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)),
-                    int(m.group(4)), int(m.group(5)), int(m.group(6)))
+    try:
+        base = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)),
+                        int(m.group(4)), int(m.group(5)), int(m.group(6)))
+    except ValueError:
+        return None
     micros = int((frac + '000000')[:6]) if frac else 0
     return base, micros
 
@@ -83,10 +90,12 @@ def date_key(base):
     return base.year * 10000 + base.month * 100 + base.day
 
 
-def load_ods_rows(client, database):
+def load_ods_rows(client, database, run_id):
     """从 ODS 取回全部源行（按成员分块），附 zip 哈希用于代表行排序。"""
     members = client.query(
-        'SELECT source_member_id, zip_sha256, member_path FROM meta.source_member', database)
+        'SELECT sm.source_member_id, sm.zip_sha256, sm.member_path, sm.zip_month_label '
+        'FROM meta.source_member sm JOIN meta.run_source rs '
+        'ON rs.source_member_id=sm.source_member_id WHERE rs.run_id=' + sql_str(run_id), database)
     rows = []
     for member in members:
         part = client.query(
@@ -98,8 +107,25 @@ def load_ods_rows(client, database):
         for r in part:
             r['zip_sha256'] = member['zip_sha256']
             r['member_path'] = member['member_path']
+            r['zip_month_label'] = member['zip_month_label']
         rows.extend(part)
     return members, rows
+
+
+def coverage_declarations(rows):
+    """固定五包按归还月分包；全行吻合且月份齐备时可保证Q3双角色覆盖。"""
+    months = {r['zip_month_label'] for r in rows}
+    complete = months == {'202406', '202407', '202408', '202409', '202410'}
+    if complete:
+        for row in rows:
+            parsed = parse_time_us(row['ended_at_raw'])
+            if parsed is None or parsed == 'submicro' or parsed[0].strftime('%Y%m') != row['zip_month_label']:
+                complete = False
+                break
+    return [dict(time_role=role, coverage_start='2024-07-01',
+                 coverage_end_exclusive='2024-10-01',
+                 coverage_status='complete' if complete else 'unknown')
+            for role in ('departure', 'arrival')]
 
 
 def judge(rows):
@@ -216,7 +242,7 @@ def main():
         if not run or run[0]['status'] not in ('RUNNING',):
             raise EtlError('run_state', 'run 不存在或状态不是 RUNNING：' + run_id)
 
-        members, rows = load_ods_rows(client, database)
+        members, rows = load_ods_rows(client, database, run_id)
         dispositions, accepted = judge(rows)
         n_acc = sum(1 for d in dispositions.values() if d[0] == 'ACCEPTED')
         n_dup = sum(1 for d in dispositions.values() if d[0] == 'DUPLICATE_EXACT')
@@ -338,6 +364,17 @@ def main():
                          ['run_id', 'source_row_id', 'outcome', 'primary_reason',
                           'trip_key', 'representative_source_row_id', 'warning_codes'],
                          drows, chunk=400)
+
+            # Q3出发的最长24小时骑行也落在已完整读取的归还月份内。
+            for declaration in coverage_declarations(rows):
+                client.execute(
+                    "INSERT INTO meta.coverage (run_id,time_role,coverage_start,"
+                    "coverage_end_exclusive,coverage_status,proof_ref) VALUES ("
+                    + sql_str(run_id) + ',' + sql_str(declaration['time_role']) + ','
+                    + sql_str(declaration['coverage_start']) + ','
+                    + sql_str(declaration['coverage_end_exclusive']) + ','
+                    + sql_str(declaration['coverage_status']) + ','
+                    + sql_nstr('inputs/public-source-snapshot.json; all source ended_at months scanned; max valid duration 24h') + ');', database)
         except EtlError:
             client.execute("UPDATE meta.load_run SET status='FAILED', finished_at_utc='"
                            + datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')

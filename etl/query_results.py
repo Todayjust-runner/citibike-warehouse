@@ -23,7 +23,10 @@ import json
 import re
 import sys
 
-from common import EtlError, Sqlcmd, validate_database
+if __package__:
+    from .common import EtlError, Sqlcmd, validate_database
+else:
+    from common import EtlError, Sqlcmd, validate_database
 
 DEFAULT_START, DEFAULT_END = '2024-07-01', '2024-10-01'
 GRANULARITIES = ('hour', 'day', 'month')
@@ -50,6 +53,7 @@ class Warehouse:
 
     def __init__(self, client, database, params):
         self.client, self.db = client, database
+        self.params = params
         run_id = params.get('run_id')
         if run_id:
             rows = client.query("SELECT run_id,status,is_current,input_set_sha256,"
@@ -61,7 +65,7 @@ class Warehouse:
                                 "model_version,metric_rule_version,processing_policy_version,"
                                 "code_revision FROM meta.load_run "
                                 "WHERE is_current=1 AND status='PUBLISHED'", database)
-        if not rows:
+        if not rows or rows[0]['status'] != 'PUBLISHED':
             raise EtlError('run_unavailable', '没有可用的已发布运行')
         self.run = rows[0]
         self.run_id = str(self.run['run_id'])
@@ -70,17 +74,34 @@ class Warehouse:
         for label, value in (('start', self.start), ('end', self.end)):
             if not TIME_RE.match(value):
                 raise EtlError('invalid_request', f'时间参数格式错误：{label}={value}')
-        if self.start >= self.end:
+        try:
+            start, end = datetime.fromisoformat(self.start), datetime.fromisoformat(self.end)
+        except ValueError as error:
+            raise EtlError('invalid_request', '日期或时间不存在') from error
+        if start >= end:
             raise EtlError('invalid_request', 'filter_start 必须早于 filter_end_exclusive')
+        self.start, self.end = start.isoformat(sep=' '), end.isoformat(sep=' ')
         self.bike_filter = params.get('bike_filter')  # None 或键列表
         if self.bike_filter is not None:
             known = {r['bike_type_key'] for r in client.query(
                 'SELECT bike_type_key FROM dim.bike_type', database)}
             if not self.bike_filter or not set(self.bike_filter) <= known:
                 raise EtlError('invalid_request', 'bike_filter 须为当前字典中的非空键列表')
-        self.coverage = {r['time_role']: r['coverage_status'] for r in client.query(
-            "SELECT time_role,coverage_status FROM meta.coverage WHERE run_id='"
-            + self.run_id + "'", database)}
+        intervals = client.query(
+            "SELECT time_role,coverage_status,coverage_start,coverage_end_exclusive "
+            "FROM meta.coverage WHERE run_id='" + self.run_id + "' ORDER BY coverage_start", database)
+        self.coverage = {}
+        for role in ('departure', 'arrival'):
+            cursor = datetime.fromisoformat(self.start)
+            end = datetime.fromisoformat(self.end)
+            for interval in intervals:
+                if interval['time_role'] != role or interval['coverage_status'] != 'complete':
+                    continue
+                left = datetime.fromisoformat(interval['coverage_start'])
+                right = datetime.fromisoformat(interval['coverage_end_exclusive'])
+                if left <= cursor < right:
+                    cursor = right
+            self.coverage[role] = 'complete' if cursor >= end else 'unknown'
 
     def w_start(self, alias='f'):
         return ("{a}.started_at>='{s}' AND {a}.started_at<'{e}'"
@@ -101,7 +122,8 @@ class Warehouse:
                 'run_id': self.run_id,
                 'source_hashes': {'input_set_sha256': self.run['input_set_sha256']},
                 'filter': {'start': self.start, 'end_exclusive': self.end,
-                           'bike_filter': self.bike_filter},
+                           'bike_filter': self.bike_filter,
+                           'station_filter': self.params.get('station_filter')},
                 'time_role': time_role,
                 'coverage': self.coverage,
                 'versions': {'model': self.run['model_version'],
@@ -134,11 +156,11 @@ def ride_overview(wh):
     data = [] if status == 'insufficient_coverage' else [{
         'ride_count': str(n), 'duration_us': str(us),
         'avg_duration_minutes': avg_minutes(us, n),
-        'member_count': str(r['mem']),
-        'known_member_type_count': str(r['known']),
+        'member_count': str(r['mem'] or 0),
+        'known_member_type_count': str(r['known'] or 0),
         'member_share': ratio_text(r['mem'], r['known']),
         'member_type_coverage': ratio_text(r['known'], n) if n else None,
-        'unknown_member_type_count': str(r['unknown'])}]
+        'unknown_member_type_count': str(r['unknown'] or 0)}]
     return {'metadata': wh.metadata('ride_overview', status, time_role='departure'),
             'data': data}
 
@@ -187,9 +209,12 @@ def fill_buckets(rows, wh, granularity, keys):
     out = list(rows)
     b = wh.start[:13] if granularity == 'hour' else (
         wh.start[:10] if granularity == 'day' else wh.start[:7])
-    while b < wh.end:
+    end = datetime.fromisoformat(wh.end)
+    fmt = {'hour': '%Y-%m-%d %H', 'day': '%Y-%m-%d', 'month': '%Y-%m'}[granularity]
+    while datetime.strptime(b, fmt) < end:
         if b not in existing:
-            zero = {k: ('0' if k in ('ride_count', 'duration_us') else None)
+            zero = {k: ('0' if k in ('ride_count', 'duration_us', 'member_count',
+                                     'known_member_type_count') else None)
                     for k in keys}
             zero['time_bucket'] = b
             zero['bucket_end_exclusive'] = bucket_end(b, granularity)
@@ -307,17 +332,19 @@ def station_flow(wh, granularity):
     if not cov_ok:
         data = []
     return {'metadata': wh.metadata('station_flow', status, time_role='both'),
-            'summary': {'departures_total': str(total_d), 'arrivals_total': str(total_a),
-                        'unknown_departures': str(unk_d), 'unknown_arrivals': str(unk_a),
-                        'start_station_id_coverage': ratio_text(total_d - unk_d, total_d),
-                        'end_station_id_coverage': ratio_text(total_a - unk_a, total_a)},
+            'summary': {'departures_total': str(total_d) if cov_ok else None,
+                        'arrivals_total': str(total_a) if cov_ok else None,
+                        'unknown_departures': str(unk_d) if cov_ok else None,
+                        'unknown_arrivals': str(unk_a) if cov_ok else None,
+                        'start_station_id_coverage': ratio_text(total_d - unk_d, total_d) if cov_ok else None,
+                        'end_station_id_coverage': ratio_text(total_a - unk_a, total_a) if cov_ok else None},
             'data': data}
 
 
 # ---------- ⑤ 会员×车型对比 ----------
 
 def type_comparison(wh):
-    where = "f.run_id='{}' AND {}".format(wh.run_id, wh.w_start())
+    where = "f.run_id='{}' AND {} AND {}".format(wh.run_id, wh.w_start(), wh.w_bike())
     rows = wh.client.query(
         "SELECT f.member_type_key AS mk, f.bike_type_key AS bk, COUNT_BIG(*) AS n,"
         "CONVERT(varchar(40),SUM(duration_us)) AS us "
@@ -347,9 +374,9 @@ def type_comparison(wh):
 
 
 RESULTS = {'ride_overview': lambda wh, p: ride_overview(wh),
-           'trip_trend': lambda wh, p: trip_trend(wh, p.get('granularity', 'day')),
+           'trip_trend': lambda wh, p: trip_trend(wh, p.get('granularity') or 'day'),
            'weekday_hour': lambda wh, p: weekday_hour(wh),
-           'station_flow': lambda wh, p: station_flow(wh, p.get('granularity', 'day')),
+           'station_flow': lambda wh, p: station_flow(wh, p.get('granularity') or 'day'),
            'type_comparison': lambda wh, p: type_comparison(wh)}
 
 
