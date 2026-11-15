@@ -1,0 +1,294 @@
+{
+  "date": "2026-11-15",
+  "result": "passed",
+  "environment": {
+    "engine_version": "15.0.2000.5",
+    "compatibility_level": 150
+  },
+  "database": "CitibikeDW_B_Test",
+  "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829",
+  "schema": {
+    "tables": 14,
+    "columns": 132,
+    "foreign_keys": 31,
+    "drift": []
+  },
+  "tests": {
+    "schema_python": 10,
+    "sql_rollback_cases": 50,
+    "source_python": 9,
+    "c_regression_python": 17,
+    "batch_roundtrip_python": 1,
+    "published_query_python": 11,
+    "python_total": 48
+  },
+  "runs": [
+    {
+      "run_id": "ad47fba9-358f-4d43-9369-70bc78c6d2bf",
+      "checks": [
+        {
+          "check": "M01_ride_count",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "M02_duration_us",
+          "expected": 216990044333000,
+          "got": 216990044333000,
+          "pass": true
+        },
+        {
+          "check": "M02_avg_minutes",
+          "expected": 10.82,
+          "got": 10.82,
+          "pass": true
+        },
+        {
+          "check": "M03_member_count",
+          "expected": 242927,
+          "got": 242927,
+          "pass": true
+        },
+        {
+          "check": "M03_share_pct",
+          "expected": 72.66,
+          "got": 72.66,
+          "pass": true
+        },
+        {
+          "check": "M04_departures",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "M05_arrivals",
+          "expected": 334331,
+          "got": 334331,
+          "pass": true
+        },
+        {
+          "check": "M06_net_total",
+          "expected": 1,
+          "got": 1,
+          "pass": true
+        },
+        {
+          "check": "cross_in",
+          "expected": 10,
+          "got": 10,
+          "pass": true
+        },
+        {
+          "check": "cross_out",
+          "expected": 11,
+          "got": 11,
+          "pass": true
+        },
+        {
+          "check": "unknown_arrivals",
+          "expected": 1026,
+          "got": 1026,
+          "pass": true
+        },
+        {
+          "check": "M01_from_dws_equals_fact",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "monthly_csv_aligned",
+          "expected": "0 差异",
+          "got": "0 差异",
+          "pass": true
+        },
+        {
+          "check": "station_flow_csv_aligned",
+          "expected": "0 差异",
+          "got": "0 差异",
+          "pass": true
+        },
+        {
+          "check": "conservation",
+          "expected": "563874=563668+0+206",
+          "got": {
+            "ACCEPTED": 563668,
+            "REJECTED": 206
+          },
+          "pass": true
+        }
+      ],
+      "published": {
+        "status": "PUBLISHED",
+        "is_current": true
+      }
+    },
+    {
+      "run_id": "187efbe3-4421-4c64-8bc4-b02ca123bc3b",
+      "checks": [
+        {
+          "check": "M01_ride_count",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "M02_duration_us",
+          "expected": 216990044333000,
+          "got": 216990044333000,
+          "pass": true
+        },
+        {
+          "check": "M02_avg_minutes",
+          "expected": 10.82,
+          "got": 10.82,
+          "pass": true
+        },
+        {
+          "check": "M03_member_count",
+          "expected": 242927,
+          "got": 242927,
+          "pass": true
+        },
+        {
+          "check": "M03_share_pct",
+          "expected": 72.66,
+          "got": 72.66,
+          "pass": true
+        },
+        {
+          "check": "M04_departures",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "M05_arrivals",
+          "expected": 334331,
+          "got": 334331,
+          "pass": true
+        },
+        {
+          "check": "M06_net_total",
+          "expected": 1,
+          "got": 1,
+          "pass": true
+        },
+        {
+          "check": "cross_in",
+          "expected": 10,
+          "got": 10,
+          "pass": true
+        },
+        {
+          "check": "cross_out",
+          "expected": 11,
+          "got": 11,
+          "pass": true
+        },
+        {
+          "check": "unknown_arrivals",
+          "expected": 1026,
+          "got": 1026,
+          "pass": true
+        },
+        {
+          "check": "M01_from_dws_equals_fact",
+          "expected": 334332,
+          "got": 334332,
+          "pass": true
+        },
+        {
+          "check": "monthly_csv_aligned",
+          "expected": "0 差异",
+          "got": "0 差异",
+          "pass": true
+        },
+        {
+          "check": "station_flow_csv_aligned",
+          "expected": "0 差异",
+          "got": "0 差异",
+          "pass": true
+        },
+        {
+          "check": "conservation",
+          "expected": "563874=563668+0+206",
+          "got": {
+            "REJECTED": 206,
+            "ACCEPTED": 563668
+          },
+          "pass": true
+        }
+      ],
+      "published": {
+        "status": "PUBLISHED",
+        "is_current": true
+      }
+    }
+  ],
+  "facts": {
+    "ok": true,
+    "run_id": "187efbe3-4421-4c64-8bc4-b02ca123bc3b",
+    "raw": 563874,
+    "accepted": 563668,
+    "duplicate_exact": 0,
+    "rejected": 206,
+    "stations": 428,
+    "facts": 563668,
+    "conservation_ok": true
+  },
+  "dws": {
+    "ok": true,
+    "run_id": "187efbe3-4421-4c64-8bc4-b02ca123bc3b",
+    "trip_hourly_rows": 14151,
+    "station_hourly_rows": 338652,
+    "fact_rows": 563668,
+    "trip_hourly_total_rides": "563668",
+    "station_hourly_total_departures": "563668",
+    "station_hourly_total_arrivals": "563668",
+    "consistent": true
+  },
+  "rerun": {
+    "dwd.fact_trip": {
+      "differences": 0
+    },
+    "dim.station": {
+      "differences": 0
+    },
+    "dws.trip_hourly": {
+      "differences": 0
+    },
+    "dws.station_hourly": {
+      "differences": 0
+    },
+    "runs": [
+      {
+        "run_id": "BE36A3D8-B758-4EA2-A9BD-51827447236A",
+        "status": "FAILED",
+        "is_current": false,
+        "code_revision": "31dbfd8"
+      },
+      {
+        "run_id": "AD47FBA9-358F-4D43-9369-70BC78C6D2BF",
+        "status": "PUBLISHED",
+        "is_current": false,
+        "code_revision": "c60fe8b"
+      },
+      {
+        "run_id": "187EFBE3-4421-4C64-8BC4-B02CA123BC3B",
+        "status": "PUBLISHED",
+        "is_current": true,
+        "code_revision": "7d49962"
+      }
+    ],
+    "source": {
+      "ods_rows": 563874,
+      "source_members": 5
+    },
+    "current_run": "187efbe3-4421-4c64-8bc4-b02ca123bc3b"
+  },
+  "scope": "Fixed five JC archives; Q3 complete coverage; D dashboard not yet implemented",
+  "stopped_run": "Initial slow VALUES run retained FAILED and never published; subsequent two complete runs passed."
+}

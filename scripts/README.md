@@ -27,7 +27,8 @@ python -X utf8 scripts/audit_public_source.py
 ## 测试
 
 ```powershell
-python -X utf8 -m unittest discover -s tests -v
+python -X utf8 -m unittest discover -s tests -p "test_c_*.py" -v
+python -X utf8 tests/c_acceptance.py
 ```
 
-含10项建表行为、9项源核算测试；建表测试调用50个SQL回滚用例，仅用独立测试库。测试库已有ETL数据时先安排独立测试环境。一般文档编辑只检查链接，无需重跑全部数据。
+第一条不写库，检查C加工和查询回归；第二条只读检查已发布的真实数据。源核算与装载前的建表测试见[测试入口](../tests/README.md)，结论见[验收报告](../docs/review/c-acceptance.md)。

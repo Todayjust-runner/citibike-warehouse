@@ -1,0 +1,1206 @@
+{
+ "metadata": {
+  "result_name": "weekday_hour",
+  "result_status": "ok",
+  "run_id": "1C38D12F-0CBD-4A50-A347-9BF316CD47A1",
+  "source_hashes": {
+   "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829"
+  },
+  "filter": {
+   "start": "2024-07-01",
+   "end_exclusive": "2024-10-01",
+   "bike_filter": null
+  },
+  "time_role": "departure",
+  "coverage": {
+   "departure": "complete",
+   "arrival": "complete"
+  },
+  "versions": {
+   "model": "1.0",
+   "metric_rule": "A-1.0",
+   "processing_policy": "B1-1.0",
+   "code_revision": "d7a6d6c-dirty"
+  },
+  "generated_at_utc": "2026-11-14T08:19:23.717791+00:00",
+  "warnings": []
+ },
+ "data": [
+  {
+   "iso_weekday": "1",
+   "hour_key": "0",
+   "ride_count": "423",
+   "duration_us": "407663777000",
+   "avg_duration_minutes": "16.06"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "1",
+   "ride_count": "197",
+   "duration_us": "191506956000",
+   "avg_duration_minutes": "16.20"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "2",
+   "ride_count": "115",
+   "duration_us": "80460409000",
+   "avg_duration_minutes": "11.66"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "3",
+   "ride_count": "59",
+   "duration_us": "31849240000",
+   "avg_duration_minutes": "9.00"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "4",
+   "ride_count": "123",
+   "duration_us": "53523792000",
+   "avg_duration_minutes": "7.25"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "5",
+   "ride_count": "455",
+   "duration_us": "154904213000",
+   "avg_duration_minutes": "5.67"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "6",
+   "ride_count": "1482",
+   "duration_us": "581973950000",
+   "avg_duration_minutes": "6.54"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "7",
+   "ride_count": "3176",
+   "duration_us": "1516669494000",
+   "avg_duration_minutes": "7.96"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "8",
+   "ride_count": "3678",
+   "duration_us": "1641134470000",
+   "avg_duration_minutes": "7.44"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "9",
+   "ride_count": "2067",
+   "duration_us": "1094431365000",
+   "avg_duration_minutes": "8.82"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "10",
+   "ride_count": "1665",
+   "duration_us": "1055178687000",
+   "avg_duration_minutes": "10.56"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "11",
+   "ride_count": "1891",
+   "duration_us": "1157701281000",
+   "avg_duration_minutes": "10.20"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "12",
+   "ride_count": "2196",
+   "duration_us": "1420620699000",
+   "avg_duration_minutes": "10.78"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "13",
+   "ride_count": "2070",
+   "duration_us": "1332910248000",
+   "avg_duration_minutes": "10.73"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "14",
+   "ride_count": "2281",
+   "duration_us": "1590018528000",
+   "avg_duration_minutes": "11.62"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "15",
+   "ride_count": "2550",
+   "duration_us": "1743200798000",
+   "avg_duration_minutes": "11.39"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "16",
+   "ride_count": "3400",
+   "duration_us": "2104049867000",
+   "avg_duration_minutes": "10.31"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "17",
+   "ride_count": "5562",
+   "duration_us": "3311818321000",
+   "avg_duration_minutes": "9.92"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "18",
+   "ride_count": "5773",
+   "duration_us": "3322712239000",
+   "avg_duration_minutes": "9.59"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "19",
+   "ride_count": "4229",
+   "duration_us": "2762505127000",
+   "avg_duration_minutes": "10.89"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "20",
+   "ride_count": "2942",
+   "duration_us": "2030709243000",
+   "avg_duration_minutes": "11.50"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "21",
+   "ride_count": "1813",
+   "duration_us": "1154838601000",
+   "avg_duration_minutes": "10.62"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "22",
+   "ride_count": "1076",
+   "duration_us": "680731685000",
+   "avg_duration_minutes": "10.54"
+  },
+  {
+   "iso_weekday": "1",
+   "hour_key": "23",
+   "ride_count": "633",
+   "duration_us": "445313451000",
+   "avg_duration_minutes": "11.72"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "0",
+   "ride_count": "305",
+   "duration_us": "265272822000",
+   "avg_duration_minutes": "14.50"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "1",
+   "ride_count": "150",
+   "duration_us": "115347969000",
+   "avg_duration_minutes": "12.82"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "2",
+   "ride_count": "75",
+   "duration_us": "60916000000",
+   "avg_duration_minutes": "13.54"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "3",
+   "ride_count": "58",
+   "duration_us": "39386509000",
+   "avg_duration_minutes": "11.32"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "4",
+   "ride_count": "143",
+   "duration_us": "85892956000",
+   "avg_duration_minutes": "10.01"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "5",
+   "ride_count": "547",
+   "duration_us": "208191822000",
+   "avg_duration_minutes": "6.34"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "6",
+   "ride_count": "1740",
+   "duration_us": "647635376000",
+   "avg_duration_minutes": "6.20"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "7",
+   "ride_count": "3791",
+   "duration_us": "1626066651000",
+   "avg_duration_minutes": "7.15"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "8",
+   "ride_count": "4419",
+   "duration_us": "2184770237000",
+   "avg_duration_minutes": "8.24"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "9",
+   "ride_count": "1985",
+   "duration_us": "1117038116000",
+   "avg_duration_minutes": "9.38"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "10",
+   "ride_count": "1361",
+   "duration_us": "875705696000",
+   "avg_duration_minutes": "10.72"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "11",
+   "ride_count": "1600",
+   "duration_us": "999326230000",
+   "avg_duration_minutes": "10.41"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "12",
+   "ride_count": "1812",
+   "duration_us": "1037895828000",
+   "avg_duration_minutes": "9.55"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "13",
+   "ride_count": "1884",
+   "duration_us": "1226946959000",
+   "avg_duration_minutes": "10.85"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "14",
+   "ride_count": "1948",
+   "duration_us": "1073790785000",
+   "avg_duration_minutes": "9.19"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "15",
+   "ride_count": "2481",
+   "duration_us": "1402593466000",
+   "avg_duration_minutes": "9.42"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "16",
+   "ride_count": "3258",
+   "duration_us": "1845426181000",
+   "avg_duration_minutes": "9.44"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "17",
+   "ride_count": "5912",
+   "duration_us": "3179915348000",
+   "avg_duration_minutes": "8.96"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "18",
+   "ride_count": "5519",
+   "duration_us": "3099716943000",
+   "avg_duration_minutes": "9.36"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "19",
+   "ride_count": "4222",
+   "duration_us": "2569386610000",
+   "avg_duration_minutes": "10.14"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "20",
+   "ride_count": "2683",
+   "duration_us": "1705209931000",
+   "avg_duration_minutes": "10.59"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "21",
+   "ride_count": "1814",
+   "duration_us": "1196785053000",
+   "avg_duration_minutes": "11.00"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "22",
+   "ride_count": "1129",
+   "duration_us": "679517245000",
+   "avg_duration_minutes": "10.03"
+  },
+  {
+   "iso_weekday": "2",
+   "hour_key": "23",
+   "ride_count": "625",
+   "duration_us": "408615242000",
+   "avg_duration_minutes": "10.90"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "0",
+   "ride_count": "331",
+   "duration_us": "230957741000",
+   "avg_duration_minutes": "11.63"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "1",
+   "ride_count": "153",
+   "duration_us": "113231307000",
+   "avg_duration_minutes": "12.33"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "2",
+   "ride_count": "86",
+   "duration_us": "63882845000",
+   "avg_duration_minutes": "12.38"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "3",
+   "ride_count": "58",
+   "duration_us": "85560051000",
+   "avg_duration_minutes": "24.59"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "4",
+   "ride_count": "112",
+   "duration_us": "49083873000",
+   "avg_duration_minutes": "7.30"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "5",
+   "ride_count": "508",
+   "duration_us": "199600502000",
+   "avg_duration_minutes": "6.55"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "6",
+   "ride_count": "1699",
+   "duration_us": "667827702000",
+   "avg_duration_minutes": "6.55"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "7",
+   "ride_count": "3433",
+   "duration_us": "1421443041000",
+   "avg_duration_minutes": "6.90"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "8",
+   "ride_count": "4203",
+   "duration_us": "1844906350000",
+   "avg_duration_minutes": "7.32"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "9",
+   "ride_count": "2062",
+   "duration_us": "1048066067000",
+   "avg_duration_minutes": "8.47"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "10",
+   "ride_count": "1543",
+   "duration_us": "895618446000",
+   "avg_duration_minutes": "9.67"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "11",
+   "ride_count": "1660",
+   "duration_us": "1012568113000",
+   "avg_duration_minutes": "10.17"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "12",
+   "ride_count": "1797",
+   "duration_us": "1045976044000",
+   "avg_duration_minutes": "9.70"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "13",
+   "ride_count": "1943",
+   "duration_us": "1117870036000",
+   "avg_duration_minutes": "9.59"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "14",
+   "ride_count": "2012",
+   "duration_us": "1194543861000",
+   "avg_duration_minutes": "9.90"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "15",
+   "ride_count": "2499",
+   "duration_us": "1466873529000",
+   "avg_duration_minutes": "9.78"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "16",
+   "ride_count": "3315",
+   "duration_us": "1717305883000",
+   "avg_duration_minutes": "8.63"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "17",
+   "ride_count": "5460",
+   "duration_us": "2784164300000",
+   "avg_duration_minutes": "8.50"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "18",
+   "ride_count": "5579",
+   "duration_us": "3147512274000",
+   "avg_duration_minutes": "9.40"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "19",
+   "ride_count": "4228",
+   "duration_us": "2721757894000",
+   "avg_duration_minutes": "10.73"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "20",
+   "ride_count": "2968",
+   "duration_us": "2050167185000",
+   "avg_duration_minutes": "11.51"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "21",
+   "ride_count": "1815",
+   "duration_us": "1204123830000",
+   "avg_duration_minutes": "11.06"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "22",
+   "ride_count": "1248",
+   "duration_us": "911806354000",
+   "avg_duration_minutes": "12.18"
+  },
+  {
+   "iso_weekday": "3",
+   "hour_key": "23",
+   "ride_count": "707",
+   "duration_us": "526839458000",
+   "avg_duration_minutes": "12.42"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "0",
+   "ride_count": "411",
+   "duration_us": "341438499000",
+   "avg_duration_minutes": "13.85"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "1",
+   "ride_count": "182",
+   "duration_us": "171741701000",
+   "avg_duration_minutes": "15.73"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "2",
+   "ride_count": "120",
+   "duration_us": "115775762000",
+   "avg_duration_minutes": "16.08"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "3",
+   "ride_count": "67",
+   "duration_us": "34474247000",
+   "avg_duration_minutes": "8.58"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "4",
+   "ride_count": "144",
+   "duration_us": "66862415000",
+   "avg_duration_minutes": "7.74"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "5",
+   "ride_count": "420",
+   "duration_us": "150035657000",
+   "avg_duration_minutes": "5.95"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "6",
+   "ride_count": "1376",
+   "duration_us": "538878019000",
+   "avg_duration_minutes": "6.53"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "7",
+   "ride_count": "3113",
+   "duration_us": "1251099817000",
+   "avg_duration_minutes": "6.70"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "8",
+   "ride_count": "4330",
+   "duration_us": "1943728258000",
+   "avg_duration_minutes": "7.48"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "9",
+   "ride_count": "2195",
+   "duration_us": "1138175784000",
+   "avg_duration_minutes": "8.64"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "10",
+   "ride_count": "1571",
+   "duration_us": "956241920000",
+   "avg_duration_minutes": "10.14"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "11",
+   "ride_count": "1670",
+   "duration_us": "1138090638000",
+   "avg_duration_minutes": "11.36"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "12",
+   "ride_count": "1950",
+   "duration_us": "1339946692000",
+   "avg_duration_minutes": "11.45"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "13",
+   "ride_count": "1895",
+   "duration_us": "1300118761000",
+   "avg_duration_minutes": "11.43"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "14",
+   "ride_count": "1909",
+   "duration_us": "1420877020000",
+   "avg_duration_minutes": "12.41"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "15",
+   "ride_count": "2512",
+   "duration_us": "1569864800000",
+   "avg_duration_minutes": "10.42"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "16",
+   "ride_count": "3305",
+   "duration_us": "2302550544000",
+   "avg_duration_minutes": "11.61"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "17",
+   "ride_count": "5319",
+   "duration_us": "3000267307000",
+   "avg_duration_minutes": "9.40"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "18",
+   "ride_count": "5606",
+   "duration_us": "3473143761000",
+   "avg_duration_minutes": "10.33"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "19",
+   "ride_count": "4175",
+   "duration_us": "2686441913000",
+   "avg_duration_minutes": "10.72"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "20",
+   "ride_count": "3128",
+   "duration_us": "2298215753000",
+   "avg_duration_minutes": "12.25"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "21",
+   "ride_count": "2107",
+   "duration_us": "1684508549000",
+   "avg_duration_minutes": "13.32"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "22",
+   "ride_count": "1874",
+   "duration_us": "1667997487000",
+   "avg_duration_minutes": "14.83"
+  },
+  {
+   "iso_weekday": "4",
+   "hour_key": "23",
+   "ride_count": "1075",
+   "duration_us": "872781180000",
+   "avg_duration_minutes": "13.53"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "0",
+   "ride_count": "710",
+   "duration_us": "519959212000",
+   "avg_duration_minutes": "12.21"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "1",
+   "ride_count": "336",
+   "duration_us": "285425788000",
+   "avg_duration_minutes": "14.16"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "2",
+   "ride_count": "176",
+   "duration_us": "140497268000",
+   "avg_duration_minutes": "13.30"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "3",
+   "ride_count": "99",
+   "duration_us": "106514583000",
+   "avg_duration_minutes": "17.93"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "4",
+   "ride_count": "134",
+   "duration_us": "63463172000",
+   "avg_duration_minutes": "7.89"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "5",
+   "ride_count": "426",
+   "duration_us": "213278000000",
+   "avg_duration_minutes": "8.34"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "6",
+   "ride_count": "1190",
+   "duration_us": "449902737000",
+   "avg_duration_minutes": "6.30"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "7",
+   "ride_count": "2411",
+   "duration_us": "1063152725000",
+   "avg_duration_minutes": "7.35"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "8",
+   "ride_count": "2862",
+   "duration_us": "1309418838000",
+   "avg_duration_minutes": "7.63"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "9",
+   "ride_count": "2123",
+   "duration_us": "1051694534000",
+   "avg_duration_minutes": "8.26"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "10",
+   "ride_count": "1757",
+   "duration_us": "971848706000",
+   "avg_duration_minutes": "9.22"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "11",
+   "ride_count": "2078",
+   "duration_us": "1257046996000",
+   "avg_duration_minutes": "10.08"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "12",
+   "ride_count": "2471",
+   "duration_us": "1495419085000",
+   "avg_duration_minutes": "10.09"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "13",
+   "ride_count": "2656",
+   "duration_us": "1543409304000",
+   "avg_duration_minutes": "9.69"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "14",
+   "ride_count": "2727",
+   "duration_us": "1576506934000",
+   "avg_duration_minutes": "9.64"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "15",
+   "ride_count": "3187",
+   "duration_us": "2054098487000",
+   "avg_duration_minutes": "10.74"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "16",
+   "ride_count": "3748",
+   "duration_us": "2544016566000",
+   "avg_duration_minutes": "11.31"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "17",
+   "ride_count": "4976",
+   "duration_us": "3422842748000",
+   "avg_duration_minutes": "11.46"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "18",
+   "ride_count": "4422",
+   "duration_us": "2836596694000",
+   "avg_duration_minutes": "10.69"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "19",
+   "ride_count": "3336",
+   "duration_us": "2448415883000",
+   "avg_duration_minutes": "12.23"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "20",
+   "ride_count": "2331",
+   "duration_us": "1661930196000",
+   "avg_duration_minutes": "11.88"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "21",
+   "ride_count": "1843",
+   "duration_us": "1225242778000",
+   "avg_duration_minutes": "11.08"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "22",
+   "ride_count": "1624",
+   "duration_us": "1078860506000",
+   "avg_duration_minutes": "11.07"
+  },
+  {
+   "iso_weekday": "5",
+   "hour_key": "23",
+   "ride_count": "1385",
+   "duration_us": "1023128633000",
+   "avg_duration_minutes": "12.31"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "0",
+   "ride_count": "1066",
+   "duration_us": "993411149000",
+   "avg_duration_minutes": "15.53"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "1",
+   "ride_count": "702",
+   "duration_us": "494113354000",
+   "avg_duration_minutes": "11.73"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "2",
+   "ride_count": "451",
+   "duration_us": "357559025000",
+   "avg_duration_minutes": "13.21"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "3",
+   "ride_count": "325",
+   "duration_us": "275988433000",
+   "avg_duration_minutes": "14.15"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "4",
+   "ride_count": "155",
+   "duration_us": "139431111000",
+   "avg_duration_minutes": "14.99"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "5",
+   "ride_count": "193",
+   "duration_us": "136815998000",
+   "avg_duration_minutes": "11.81"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "6",
+   "ride_count": "387",
+   "duration_us": "200321313000",
+   "avg_duration_minutes": "8.63"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "7",
+   "ride_count": "866",
+   "duration_us": "529584154000",
+   "avg_duration_minutes": "10.19"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "8",
+   "ride_count": "1510",
+   "duration_us": "922499923000",
+   "avg_duration_minutes": "10.18"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "9",
+   "ride_count": "2349",
+   "duration_us": "1536171396000",
+   "avg_duration_minutes": "10.90"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "10",
+   "ride_count": "2953",
+   "duration_us": "2094971252000",
+   "avg_duration_minutes": "11.82"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "11",
+   "ride_count": "3276",
+   "duration_us": "2322455302000",
+   "avg_duration_minutes": "11.82"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "12",
+   "ride_count": "3372",
+   "duration_us": "2714638995000",
+   "avg_duration_minutes": "13.42"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "13",
+   "ride_count": "3260",
+   "duration_us": "2586107361000",
+   "avg_duration_minutes": "13.22"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "14",
+   "ride_count": "3164",
+   "duration_us": "2563299272000",
+   "avg_duration_minutes": "13.50"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "15",
+   "ride_count": "3089",
+   "duration_us": "2451184467000",
+   "avg_duration_minutes": "13.23"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "16",
+   "ride_count": "2921",
+   "duration_us": "2252820326000",
+   "avg_duration_minutes": "12.85"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "17",
+   "ride_count": "2912",
+   "duration_us": "2456806215000",
+   "avg_duration_minutes": "14.06"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "18",
+   "ride_count": "2865",
+   "duration_us": "2442384878000",
+   "avg_duration_minutes": "14.21"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "19",
+   "ride_count": "2661",
+   "duration_us": "2291702405000",
+   "avg_duration_minutes": "14.35"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "20",
+   "ride_count": "2053",
+   "duration_us": "1754805195000",
+   "avg_duration_minutes": "14.25"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "21",
+   "ride_count": "1680",
+   "duration_us": "1429880257000",
+   "avg_duration_minutes": "14.19"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "22",
+   "ride_count": "1512",
+   "duration_us": "1524237910000",
+   "avg_duration_minutes": "16.80"
+  },
+  {
+   "iso_weekday": "6",
+   "hour_key": "23",
+   "ride_count": "1297",
+   "duration_us": "1041033189000",
+   "avg_duration_minutes": "13.38"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "0",
+   "ride_count": "1037",
+   "duration_us": "850669955000",
+   "avg_duration_minutes": "13.67"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "1",
+   "ride_count": "727",
+   "duration_us": "562580350000",
+   "avg_duration_minutes": "12.90"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "2",
+   "ride_count": "509",
+   "duration_us": "627902483000",
+   "avg_duration_minutes": "20.56"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "3",
+   "ride_count": "305",
+   "duration_us": "352291757000",
+   "avg_duration_minutes": "19.25"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "4",
+   "ride_count": "185",
+   "duration_us": "173911115000",
+   "avg_duration_minutes": "15.67"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "5",
+   "ride_count": "180",
+   "duration_us": "141593904000",
+   "avg_duration_minutes": "13.11"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "6",
+   "ride_count": "331",
+   "duration_us": "246360568000",
+   "avg_duration_minutes": "12.40"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "7",
+   "ride_count": "629",
+   "duration_us": "397285941000",
+   "avg_duration_minutes": "10.53"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "8",
+   "ride_count": "1128",
+   "duration_us": "801313929000",
+   "avg_duration_minutes": "11.84"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "9",
+   "ride_count": "1820",
+   "duration_us": "1358481858000",
+   "avg_duration_minutes": "12.44"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "10",
+   "ride_count": "2467",
+   "duration_us": "1864266177000",
+   "avg_duration_minutes": "12.59"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "11",
+   "ride_count": "2838",
+   "duration_us": "2179596634000",
+   "avg_duration_minutes": "12.80"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "12",
+   "ride_count": "3206",
+   "duration_us": "2508809869000",
+   "avg_duration_minutes": "13.04"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "13",
+   "ride_count": "3149",
+   "duration_us": "2962881837000",
+   "avg_duration_minutes": "15.68"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "14",
+   "ride_count": "3063",
+   "duration_us": "2606026441000",
+   "avg_duration_minutes": "14.18"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "15",
+   "ride_count": "3050",
+   "duration_us": "2608154486000",
+   "avg_duration_minutes": "14.25"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "16",
+   "ride_count": "2930",
+   "duration_us": "2661113073000",
+   "avg_duration_minutes": "15.14"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "17",
+   "ride_count": "3030",
+   "duration_us": "2719179748000",
+   "avg_duration_minutes": "14.96"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "18",
+   "ride_count": "2966",
+   "duration_us": "2499718848000",
+   "avg_duration_minutes": "14.05"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "19",
+   "ride_count": "2509",
+   "duration_us": "2224195335000",
+   "avg_duration_minutes": "14.77"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "20",
+   "ride_count": "2045",
+   "duration_us": "1702660062000",
+   "avg_duration_minutes": "13.88"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "21",
+   "ride_count": "1440",
+   "duration_us": "1255020649000",
+   "avg_duration_minutes": "14.53"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "22",
+   "ride_count": "956",
+   "duration_us": "887259567000",
+   "avg_duration_minutes": "15.47"
+  },
+  {
+   "iso_weekday": "7",
+   "hour_key": "23",
+   "ride_count": "615",
+   "duration_us": "441156908000",
+   "avg_duration_minutes": "11.96"
+  }
+ ]
+}

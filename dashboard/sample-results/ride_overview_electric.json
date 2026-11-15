@@ -1,0 +1,42 @@
+{
+ "metadata": {
+  "result_name": "ride_overview",
+  "result_status": "ok",
+  "run_id": "1C38D12F-0CBD-4A50-A347-9BF316CD47A1",
+  "source_hashes": {
+   "input_set_sha256": "0d4336292a1cf262c39cce13cce5a5bd93aef45c50f9163245b563a5391e7829"
+  },
+  "filter": {
+   "start": "2024-07-01",
+   "end_exclusive": "2024-10-01",
+   "bike_filter": [
+    2
+   ]
+  },
+  "time_role": "departure",
+  "coverage": {
+   "departure": "complete",
+   "arrival": "complete"
+  },
+  "versions": {
+   "model": "1.0",
+   "metric_rule": "A-1.0",
+   "processing_policy": "B1-1.0",
+   "code_revision": "d7a6d6c-dirty"
+  },
+  "generated_at_utc": "2026-11-14T08:19:25.441312+00:00",
+  "warnings": []
+ },
+ "data": [
+  {
+   "ride_count": "199150",
+   "duration_us": "120704411636000",
+   "avg_duration_minutes": "10.10",
+   "member_count": "135661",
+   "known_member_type_count": "199150",
+   "member_share": "0.681200100427",
+   "member_type_coverage": "1.000000000000",
+   "unknown_member_type_count": "0"
+  }
+ ]
+}
